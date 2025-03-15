@@ -1,0 +1,37 @@
+@let form = form$ | ngrxPush;
+
+@if (form) {
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col" colspan="4"><h4>Contact information</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" class="w-25">First name</th>
+        <td class="w-75">{{ form.contact.firstName }}</td>
+      </tr>
+      @if (form.contact.middleName) {
+        <tr>
+          <th scope="row" class="w-25">Middle name</th>
+          <td class="w-75">{{ form.contact.middleName }}</td>
+        </tr>
+      }
+      <tr>
+        <th scope="row" class="w-25">Last name</th>
+        <td class="w-75">{{ form.contact.lastName }}</td>
+      </tr>
+      <tr>
+        <th scope="row" class="w-25">Subscribed</th>
+        <td class="w-75">{{ form.contact.subscribe ? 'Yes' : 'No' }}</td>
+      </tr>
+      @if (form.contact.subscribe) {
+        <tr>
+          <th scope="row" class="w-25">Email address</th>
+          <td class="w-75">{{ form.contact.email }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

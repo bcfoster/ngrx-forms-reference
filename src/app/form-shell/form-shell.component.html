@@ -1,0 +1,57 @@
+@let drafts = drafts$ | ngrxPush;
+
+@if (drafts) {
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="col">Date created</th>
+        <th scope="col" class="col">Last edited</th>
+        <th scope="col" class="col">Progress</th>
+        <th scope="col" class="col-auto"></th>
+      </tr>
+    </thead>
+    @if (drafts.length > 0) {
+      <tbody>
+        @for (form of drafts; track form.id) {
+          <tr>
+            <td>{{ form.createdDate | date:'medium' }}</td>
+            <td>{{ (form.editedDate | date:'medium') ?? '--' }}</td>
+            <td>{{ form.percentComplete | percent }}</td>
+            <td>
+              <button
+                class="btn btn-primary btn-sm mx-1"
+                [hidden]="form.percentComplete < 1"
+                routerLink="form/summary"
+                (click)="submit(form.id)"
+              >
+                Submit
+              </button>
+              <button
+                class="btn btn-sm mx-1"
+                [class.btn-primary]="form.percentComplete < 1"
+                [class.btn-outline-primary]="form.percentComplete === 1"
+                routerLink="form"
+                (click)="continue(form.id)"
+              >
+                Continue
+              </button>
+              <button class="btn btn-outline-danger btn-sm mx-1" (click)="remove(form.id)">
+                Remove
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    } @else {
+      <caption class="text-center">
+        No reports have been started
+      </caption>
+    }
+  </table>
+}
+
+<div class="row g-2 my-2">
+  <div class="col-auto">
+    <button class="btn btn-primary" routerLink="form" (click)="start()">Start a new report</button>
+  </div>
+</div>
