@@ -71,4 +71,8 @@ export const reducer = createReducer(
       },
     );
   }),
+  on(formActions.submit, (state, action) => ({
+    ...state,
+    activeDraftId: action.id,
+  })),
 );

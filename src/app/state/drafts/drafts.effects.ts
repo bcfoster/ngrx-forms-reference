@@ -34,7 +34,7 @@ export class DraftsEffects {
 
     this.loadDraft$ = createEffect(() =>
       actions$.pipe(
-        ofType(formActions.continue),
+        ofType(formActions.continue, formActions.submit),
         withLatestFrom(this.store.select(draftSelectors.selectActiveDraftFormJson)),
         filter(([, form]) => !!form),
         map(([, form]) => draftActions.draftLoaded({ form: JSON.parse(form!) })),
