@@ -4,6 +4,7 @@ import {
   FormGroupState,
   isArrayState,
   isGroupState,
+  KeyValue,
   onNgrxForms,
   onNgrxFormsAction,
   ResetAction,
@@ -76,21 +77,43 @@ const rawReducer = createReducer(
   })),
 );
 
-const evaluateCompletion = (state: FormGroupState<Form>) =>
+export const evaluateCompletion = <T extends KeyValue>(state: FormGroupState<T>) =>
   updateRecursive(state, (control) => {
     if (isArrayState(control) || isGroupState(control)) {
-      const validatedControls = Object.values(control.controls).filter(
-        (c) => isGroupState(c) || c.userDefinedProperties['mandatory'],
+      const mandatoryControls: number[] = [];
+      const validControls: number[] = [];
+
+      Object.values(control.controls).forEach((c) => {
+        if ('mandatory' in c.userDefinedProperties) {
+          mandatoryControls.push((c.userDefinedProperties['mandatory'] as number) ?? 1);
+
+          if ('valid' in c.userDefinedProperties) {
+            validControls.push((c.userDefinedProperties['valid'] as number) ?? 1);
+          } else if (c.isValid) {
+            validControls.push(1);
+          }
+        }
+      });
+
+      const mandatory = mandatoryControls.reduce((total, value) => total + value, 0);
+      const valid = validControls.reduce((total, value) => total + value, 0);
+      const setMandatory = setUserDefinedProperty(
+        control,
+        'mandatory',
+        Math.max(control.userDefinedProperties['mandatory'] ?? 0, mandatory),
       );
-      const validControls = validatedControls.filter((c) => c.isValid);
-      const percent = validControls.length / validatedControls.length;
-      return setUserDefinedProperty(control, 'percentComplete', percent);
+      const setValid = setUserDefinedProperty(
+        setMandatory,
+        'valid',
+        Math.max(setMandatory.isValid ? 1 : 0, valid),
+      );
+      return setValid;
     }
 
     return control;
   });
 
-const validate = updateGroup<Form>({
+export const validate = updateGroup<Form>({
   contact: fromContact.validator,
 });
 

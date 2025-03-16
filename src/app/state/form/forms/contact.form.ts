@@ -41,14 +41,14 @@ export const initialFormValue: Form = {
 
 export const validator = updateGroup<Form>(
   {
-    firstName: setUserDefinedProperty('mandatory', true),
-    lastName: setUserDefinedProperty('mandatory', true),
+    firstName: setUserDefinedProperty('mandatory', 1),
+    lastName: setUserDefinedProperty('mandatory', 1),
     email: (c, f) =>
       f.value.subscribe
-        ? setUserDefinedProperty(c, 'mandatory', true) // TODO: mandatory
+        ? setUserDefinedProperty(c, 'mandatory', 1) // TODO: mandatory
         : setUserDefinedProperty(c, 'mandatory', undefined), // TODO: not mandatory
     checkboxes: updateGroup<Checkboxes>({
-      selected: setUserDefinedProperty('mandatory', true),
+      selected: setUserDefinedProperty('mandatory', 1),
     }),
   },
   {
@@ -63,8 +63,9 @@ export const validator = updateGroup<Form>(
     lastName: validate(required),
     // TODO: is there an alternative to setErrors? maybe I should create a helper
     email: (c) =>
-      c.userDefinedProperties['mandatory'] ? validate(c, required, email) : setErrors(c, {}),
+      'mandatory' in c.userDefinedProperties ? validate(c, required, email) : setErrors(c, {}),
     checkboxes: updateGroup<Checkboxes>({
+      // TODO: use updateRecursive to validate? check out the example provided with updateRecursive in the ngrx-forms docs
       selected: validate(required),
     }),
   },
