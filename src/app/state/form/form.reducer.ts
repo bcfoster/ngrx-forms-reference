@@ -80,15 +80,16 @@ const rawReducer = createReducer(
 export const evaluateCompletion = <T extends KeyValue>(state: FormGroupState<T>) =>
   updateRecursive(state, (control) => {
     if (isArrayState(control) || isGroupState(control)) {
+      // TODO: would this be cleaner if arrays and groups were handled separately?
       const mandatoryControls: number[] = [];
       const validControls: number[] = [];
 
       Object.values(control.controls).forEach((c) => {
         if ('mandatory' in c.userDefinedProperties) {
-          mandatoryControls.push((c.userDefinedProperties['mandatory'] as number) ?? 1);
+          mandatoryControls.push(c.userDefinedProperties['mandatory'] as number);
 
           if ('valid' in c.userDefinedProperties) {
-            validControls.push((c.userDefinedProperties['valid'] as number) ?? 1);
+            validControls.push(c.userDefinedProperties['valid'] as number);
           } else if (c.isValid) {
             validControls.push(1);
           }
@@ -97,17 +98,18 @@ export const evaluateCompletion = <T extends KeyValue>(state: FormGroupState<T>)
 
       const mandatory = mandatoryControls.reduce((total, value) => total + value, 0);
       const valid = validControls.reduce((total, value) => total + value, 0);
-      const setMandatory = setUserDefinedProperty(
+
+      let updatedControl = setUserDefinedProperty(
         control,
         'mandatory',
         Math.max(control.userDefinedProperties['mandatory'] ?? 0, mandatory),
       );
-      const setValid = setUserDefinedProperty(
-        setMandatory,
+      updatedControl = setUserDefinedProperty(
+        updatedControl,
         'valid',
-        Math.max(setMandatory.isValid ? 1 : 0, valid),
+        Math.max(updatedControl.isValid ? 1 : 0, valid),
       );
-      return setValid;
+      return updatedControl;
     }
 
     return control;

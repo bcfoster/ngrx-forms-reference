@@ -14,13 +14,13 @@ export const selectCheckboxesForm = createSelector(
 );
 
 export const selectFormPercentComplete = createSelector(selectForm, (form) => {
-  const controls = Object.values(form.controls);
-  const percentages = controls.map((c) => c.userDefinedProperties['percentComplete'] ?? 0);
-  const percentSum = percentages.reduce((prev, curr) => prev + curr, 0);
-  return percentSum / controls.length;
+  const mandatory = form.userDefinedProperties['mandatory'] ?? 0;
+  const valid = form.userDefinedProperties['valid'] ?? 0;
+  return mandatory > 0 ? valid / mandatory : 0;
 });
 
-export const selectContactFormPercentComplete = createSelector(
-  selectContactForm,
-  (form) => form.userDefinedProperties['percentComplete'] ?? 0,
-);
+export const selectContactFormPercentComplete = createSelector(selectContactForm, (form) => {
+  const mandatory = form.userDefinedProperties['mandatory'] ?? 0;
+  const valid = form.userDefinedProperties['valid'] ?? 0;
+  return mandatory > 0 ? valid / mandatory : 0;
+});
