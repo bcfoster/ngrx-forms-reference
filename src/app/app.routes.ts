@@ -3,7 +3,6 @@ import { CanActivateFn, Router, Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
-import { ContactFormComponent } from './forms/contact-form/contact-form.component';
 import { FormRootComponent } from './form-root/form-root.component';
 import { FormShellComponent } from './form-shell/form-shell.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
@@ -27,10 +26,6 @@ export const routes: Routes = [
       {
         path: '',
         component: FormRootComponent,
-      },
-      {
-        path: 'contact',
-        component: ContactFormComponent,
       },
       {
         path: 'personal-and-contact-info',

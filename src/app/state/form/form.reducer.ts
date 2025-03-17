@@ -18,19 +18,16 @@ import {
 
 import { draftActions } from '../drafts/drafts.actions';
 import { formActions } from './form.actions';
-import * as contactForm from './forms/contact.form';
 import * as personalAndContactInfoForm from './forms/personal-and-contact-info.form';
 
 export const FORM_ID = 'form';
 export const VERSION = 2;
 
 export interface Form {
-  contact: contactForm.Form;
   personalAndContactInfo: personalAndContactInfoForm.Form;
 }
 
 export const initialFormValue: Form = {
-  contact: contactForm.initialFormValue,
   personalAndContactInfo: personalAndContactInfoForm.initialFormValue,
 };
 
@@ -50,12 +47,12 @@ const rawReducer = createReducer(
   initialState,
   onNgrxForms(),
   onNgrxFormsAction(ResetAction, (state, action) => {
-    if (action.controlId == state.form.controls.contact.id) {
+    if (action.controlId == state.form.controls.personalAndContactInfo.id) {
       return {
         ...state,
-        form: updateGroup(state.form, {
-          contact: setValue(contactForm.initialFormValue),
-        }),
+        // form: updateGroup(state.form, {
+        //   contact: setValue(contactForm.initialFormValue),
+        // }),
         lastEditedDate: new Date().toISOString(),
       };
     }
@@ -119,7 +116,6 @@ export const evaluateCompletion = <T extends KeyValue>(state: FormGroupState<T>)
   });
 
 export const validate = updateGroup<Form>({
-  contact: contactForm.validator,
   personalAndContactInfo: personalAndContactInfoForm.validator,
 });
 
