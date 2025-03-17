@@ -1,6 +1,6 @@
 <h5>Your personal information</h5>
 
-<form *ngIf="form" autocomplete="off" [ngrxFormState]="form">
+@if (form) {
   <fieldset [disabled]="form.isDisabled">
     <legend class="fs-6 fw-bold">
       Have you already received a WorkSafeBC claim number for the incident you are reporting today?
@@ -39,4 +39,4 @@
       />
     </fieldset>
   }
-</form>
+}

@@ -1,0 +1,13 @@
+<h5>Representative information</h5>
+
+@if (form) {
+  <fieldset>
+    <legend class="fs-6 fw-bold">First name</legend>
+    <input
+      type="text"
+      class="form-control"
+      id="first-name"
+      [ngrxFormControlState]="form.controls.firstName"
+    />
+  </fieldset>
+}

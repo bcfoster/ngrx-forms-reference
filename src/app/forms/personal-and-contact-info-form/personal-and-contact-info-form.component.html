@@ -9,7 +9,7 @@
         name="is-injured-worker"
         id="is-injured-worker-yes"
         class="form-check-input"
-        [(ngModel)]="isInjuredWorker"
+        [ngrxFormControlState]="form.controls.isInjuredWorker"
         [value]="true"
       />
       <label for="is-injured-worker-yes" class="form-check-label"
@@ -22,7 +22,7 @@
         name="is-injured-worker"
         id="is-injured-worker-no"
         class="form-check-input"
-        [(ngModel)]="isInjuredWorker"
+        [ngrxFormControlState]="form.controls.isInjuredWorker"
         [value]="false"
       />
       <label for="is-injured-worker-no" class="form-check-label">
@@ -31,9 +31,11 @@
     </div>
   </fieldset>
 
-  @if (isInjuredWorker) {
-    <personal-info-form [form]="form.controls.personalInfo"></personal-info-form>
+  @if (form.value.isInjuredWorker) {
+    <representative-info-form [form]="form.controls.representativeInfo"></representative-info-form>
   }
+
+  <personal-info-form [form]="form.controls.personalInfo"></personal-info-form>
 
   <div class="row g-2 my-3">
     <div class="col-auto">

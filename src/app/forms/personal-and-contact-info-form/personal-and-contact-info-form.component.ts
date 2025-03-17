@@ -9,16 +9,23 @@ import { Observable } from 'rxjs';
 import * as form from '../../state/form/forms/personal-and-contact-info.form';
 import * as formSelectors from '../../state/form/form.selectors';
 import { PersonalInfoFormComponent } from './personal-info-form/personal-info-form.component';
+import { RepresentativeInfoFormComponent } from './representative-info-form/representative-info-form.component';
 
 @Component({
   selector: 'app-personal-and-contact-info-form',
-  imports: [FormsModule, NgrxFormsModule, LetDirective, RouterLink, PersonalInfoFormComponent],
+  imports: [
+    FormsModule,
+    NgrxFormsModule,
+    LetDirective,
+    RouterLink,
+    PersonalInfoFormComponent,
+    RepresentativeInfoFormComponent,
+  ],
   templateUrl: 'personal-and-contact-info-form.component.html',
   styles: ``,
 })
 export class PersonalAndContactInfoFormComponent {
   form$: Observable<FormGroupState<form.Form>>;
-  isInjuredWorker: boolean | null = null;
 
   constructor(private readonly store: Store) {
     this.form$ = this.store.select(formSelectors.selectPersonalAndContactInfoForm);
