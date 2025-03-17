@@ -27,7 +27,13 @@ export const validator = updateGroup<Form>(
       relationshipToWorkerDescription: setUserDefinedProperty('mandatory', 1),
     }),
     personalInfo: updateGroup<personalInfo.PersonalInfoForm>({
+      hasClaimNumber: setUserDefinedProperty('mandatory', 1),
       claimNumber: setUserDefinedProperty('mandatory', 1),
+      legalFirstName: setUserDefinedProperty('mandatory', 1),
+      preferredFirstName: setUserDefinedProperty('mandatory', 1),
+      middleName: setUserDefinedProperty('mandatory', 1),
+      lastName: setUserDefinedProperty('mandatory', 1),
+      dateOfBirth: setUserDefinedProperty('mandatory', 1),
     }),
   },
   {
@@ -40,7 +46,13 @@ export const validator = updateGroup<Form>(
       relationshipToWorkerDescription: validate(required),
     }),
     personalInfo: updateGroup<personalInfo.PersonalInfoForm>({
+      hasClaimNumber: validate(required),
       claimNumber: validate(required),
+      legalFirstName: validate(required),
+      preferredFirstName: validate(required),
+      middleName: validate(required),
+      lastName: validate(required),
+      dateOfBirth: validate(required),
     }),
   },
 );
