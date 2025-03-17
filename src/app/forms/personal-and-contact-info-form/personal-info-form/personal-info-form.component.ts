@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroupState, NgrxFormsModule } from 'ngrx-forms';
+import { NgbDate, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { FormGroupState, NgrxFormsModule, SetValueAction } from 'ngrx-forms';
 
+import * as formReducer from '../../../state/form/form.reducer';
 import * as personalInfo from '../../../state/form/forms/personal-and-contact-info/personal-info.form';
 
 @Component({
@@ -14,4 +16,15 @@ import * as personalInfo from '../../../state/form/forms/personal-and-contact-in
 })
 export class PersonalInfoFormComponent {
   @Input() form: FormGroupState<personalInfo.PersonalInfoForm> | null = null;
+
+  constructor(private readonly store: Store) {}
+
+  setDateOfBirth(date: NgbDate) {
+    this.store.dispatch(
+      new SetValueAction(
+        formReducer.initialFormState.controls.personalAndContactInfo.controls.personalInfo.controls.dateOfBirth.id,
+        new Date(date.year, date.month - 1, date.day).toISOString(),
+      ),
+    );
+  }
 }

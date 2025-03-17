@@ -42,6 +42,6 @@
 
   <fieldset>
     <legend class="fs-6 fw-bold">Date of birth</legend>
-    <ngb-datepicker #dp />
+    <ngb-datepicker #dp (dateSelect)="setDateOfBirth($event)" />
   </fieldset>
 }
