@@ -21,6 +21,10 @@ export const validator = updateGroup<Form>(
     isInjuredWorker: setUserDefinedProperty('mandatory', 1),
     representativeInfo: updateGroup<representativeInfo.RepresentativeInfoForm>({
       firstName: setUserDefinedProperty('mandatory', 1),
+      lastName: setUserDefinedProperty('mandatory', 1),
+      phoneNumber: setUserDefinedProperty('mandatory', 1),
+      relationshipToWorker: setUserDefinedProperty('mandatory', 1),
+      relationshipToWorkerDescription: setUserDefinedProperty('mandatory', 1),
     }),
     personalInfo: updateGroup<personalInfo.PersonalInfoForm>({
       claimNumber: setUserDefinedProperty('mandatory', 1),
@@ -30,6 +34,10 @@ export const validator = updateGroup<Form>(
     isInjuredWorker: validate(required),
     representativeInfo: updateGroup<representativeInfo.RepresentativeInfoForm>({
       firstName: validate(required),
+      lastName: validate(required),
+      phoneNumber: validate(required),
+      relationshipToWorker: validate(required),
+      relationshipToWorkerDescription: validate(required),
     }),
     personalInfo: updateGroup<personalInfo.PersonalInfoForm>({
       claimNumber: validate(required),

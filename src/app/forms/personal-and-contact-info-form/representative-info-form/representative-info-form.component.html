@@ -9,5 +9,45 @@
       id="first-name"
       [ngrxFormControlState]="form.controls.firstName"
     />
+
+    <legend class="fs-6 fw-bold">Last name</legend>
+    <input
+      type="text"
+      class="form-control"
+      id="last-name"
+      [ngrxFormControlState]="form.controls.lastName"
+    />
+
+    <legend class="fs-6 fw-bold">Phone number</legend>
+    <input
+      type="text"
+      class="form-control"
+      id="phone-number"
+      [ngrxFormControlState]="form.controls.phoneNumber"
+    />
+
+    <legend class="fs-6 fw-bold">Relationship to the injured worker</legend>
+    <select
+      class="form-select"
+      aria-label=""
+      [ngrxFormControlState]="form.controls.relationshipToWorker"
+    >
+      <option value="">Choose a relationship</option>
+      <option value="coworker">Coworker</option>
+      <option value="spouse">Spouse</option>
+      <option value="family">Family</option>
+      <option value="union">Union</option>
+      <option value="other">Other</option>
+    </select>
+
+    @if (form.value.relationshipToWorker === 'other') {
+      <legend class="fs-6 fw-bold">What is your relationship with the worker?</legend>
+      <input
+        type="text"
+        class="form-control"
+        id="relationship-to-worker-description"
+        [ngrxFormControlState]="form.controls.relationshipToWorkerDescription"
+      />
+    }
   </fieldset>
 }
