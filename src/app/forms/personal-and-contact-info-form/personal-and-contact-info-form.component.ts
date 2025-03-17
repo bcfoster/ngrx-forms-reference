@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
@@ -7,15 +8,17 @@ import { Observable } from 'rxjs';
 
 import * as form from '../../state/form/forms/personal-and-contact-info.form';
 import * as formSelectors from '../../state/form/form.selectors';
+import { PersonalInfoFormComponent } from './personal-info-form/personal-info-form.component';
 
 @Component({
   selector: 'app-personal-and-contact-info-form',
-  imports: [NgrxFormsModule, LetDirective, RouterLink],
+  imports: [FormsModule, NgrxFormsModule, LetDirective, RouterLink, PersonalInfoFormComponent],
   templateUrl: 'personal-and-contact-info-form.component.html',
   styles: ``,
 })
 export class PersonalAndContactInfoFormComponent {
   form$: Observable<FormGroupState<form.Form>>;
+  isInjuredWorker: boolean | null = null;
 
   constructor(private readonly store: Store) {
     this.form$ = this.store.select(formSelectors.selectPersonalAndContactInfoForm);

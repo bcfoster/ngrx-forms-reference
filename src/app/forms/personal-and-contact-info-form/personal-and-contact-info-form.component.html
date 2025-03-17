@@ -1,27 +1,39 @@
+<h4>Personal and contact information</h4>
+
 <form *ngrxLet="form$ as form" [ngrxFormState]="form">
-  <div class="form-check">
-    <input
-      class="form-check-input"
-      type="radio"
-      name="is-injured-worker"
-      id="is-injured-worker-yes"
-    />
-    <label class="form-check-label" for="is-injured-worker-yes">
-      Yes, I am the injured worker
-    </label>
-  </div>
-  <div class="form-check">
-    <input
-      class="form-check-input"
-      type="radio"
-      name="is-injured-worker"
-      id="is-injured-worker-no"
-      checked
-    />
-    <label class="form-check-label" for="is-injured-worker-no">
-      No, I am reporting on behalf of the injured worker
-    </label>
-  </div>
+  <fieldset [disabled]="form.isDisabled">
+    <legend class="fs-6 fw-bold">Are you the person who was injured?</legend>
+    <div class="form-check">
+      <input
+        type="radio"
+        name="is-injured-worker"
+        id="is-injured-worker-yes"
+        class="form-check-input"
+        [(ngModel)]="isInjuredWorker"
+        [value]="true"
+      />
+      <label for="is-injured-worker-yes" class="form-check-label"
+        >Yes, I am the injured worker</label
+      >
+    </div>
+    <div class="form-check">
+      <input
+        type="radio"
+        name="is-injured-worker"
+        id="is-injured-worker-no"
+        class="form-check-input"
+        [(ngModel)]="isInjuredWorker"
+        [value]="false"
+      />
+      <label for="is-injured-worker-no" class="form-check-label">
+        No, I am reporting on behalf of the injured worker
+      </label>
+    </div>
+  </fieldset>
+
+  @if (isInjuredWorker) {
+    <personal-info-form [form]="form.controls.personalInfo"></personal-info-form>
+  }
 
   <div class="row g-2 my-3">
     <div class="col-auto">

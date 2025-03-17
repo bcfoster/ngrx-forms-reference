@@ -1,4 +1,7 @@
 export interface PersonalInfoForm {
-  hasReceivedClaimNumber: boolean | null;
   claimNumber: string;
 }
+
+export const initialFormValue: PersonalInfoForm = {
+  claimNumber: '',
+};

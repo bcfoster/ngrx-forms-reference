@@ -1,0 +1,42 @@
+<h5>Your personal information</h5>
+
+<form *ngIf="form" autocomplete="off" [ngrxFormState]="form">
+  <fieldset [disabled]="form.isDisabled">
+    <legend class="fs-6 fw-bold">
+      Have you already received a WorkSafeBC claim number for the incident you are reporting today?
+    </legend>
+    <legend class="fs-6">You may have received a claim number from us or your employer.</legend>
+    <div class="btn-group" role="group" aria-label="">
+      <input
+        type="radio"
+        class="btn-check"
+        name="has-received-claim-number"
+        id="has-received-claim-number-yes"
+        [(ngModel)]="hasClaimNumber"
+        [value]="true"
+      />
+      <label class="btn btn-outline-primary" for="has-received-claim-number-yes">Yes</label>
+      <input
+        type="radio"
+        class="btn-check"
+        name="has-received-claim-number"
+        id="has-received-claim-number-no"
+        [(ngModel)]="hasClaimNumber"
+        [value]="false"
+      />
+      <label class="btn btn-outline-primary" for="has-received-claim-number-no">No</label>
+    </div>
+  </fieldset>
+
+  @if (hasClaimNumber) {
+    <fieldset>
+      <legend class="fs-6 fw-bold">WorkSafeBC claim number</legend>
+      <input
+        type="text"
+        class="form-control"
+        id="claim-number"
+        [ngrxFormControlState]="form.controls.claimNumber"
+      />
+    </fieldset>
+  }
+</form>
