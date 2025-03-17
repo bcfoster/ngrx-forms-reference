@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Personal and contact information</h4>
+    <p class="card-text">Tell us about yourself and how you'd like us to communicate with you.</p>
+    <a
+      routerLink="personal-and-contact-info"
+      class="btn btn-primary stretched-link"
+      >{{ (isInProgress$ | ngrxPush) ? 'Continue' : 'Start' }}</a
+    >
+  </div>
+  <div class="card-footer text-center text-muted">
+    {{ percentComplete$ | ngrxPush | percent }} complete
+  </div>
+</div>

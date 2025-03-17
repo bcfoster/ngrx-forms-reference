@@ -7,6 +7,8 @@ import { ContactFormComponent } from './forms/contact-form/contact-form.componen
 import { FormRootComponent } from './form-root/form-root.component';
 import { FormShellComponent } from './form-shell/form-shell.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
+import { PersonalAndContactInfoFormComponent } from './forms/personal-and-contact-info-form/personal-and-contact-info-form.component';
+
 import * as draftSelectors from './state/drafts/drafts.selectors';
 
 export const isFormActive: CanActivateFn = () => {
@@ -29,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'contact',
         component: ContactFormComponent,
+      },
+      {
+        path: 'personal-and-contact-info',
+        component: PersonalAndContactInfoFormComponent,
       },
       {
         path: 'summary',

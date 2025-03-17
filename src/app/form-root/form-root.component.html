@@ -1,71 +1,33 @@
 @let form = form$ | ngrxPush;
-@let inProgress = inProgress$ | ngrxPush;
 
 <div class="row row-cols-1 row-cols-md-2 g-2 my-2">
   <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Contact information</h4>
-        <p class="card-text">
-          Tell us about yourself and how you'd like us to communicate with you.
-        </p>
-        <a
-          routerLink="contact"
-          class="btn btn-primary stretched-link"
-          >{{ inProgress ? 'Continue' : 'Start' }}</a
-        >
-      </div>
-      <div class="card-footer text-center text-muted">
-        {{ contactPercentComplete$ | ngrxPush | percent }} complete
-      </div>
-    </div>
+    <personal-and-contact-info-form-card></personal-and-contact-info-form-card>
   </div>
+</div>
 
-  <!-- <div class="col">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Injury details</h4>
-        <p class="card-text">
-          Tell us about your injury, including how, where, and when it occurred.
-        </p>
-        <a
-          [routerLink]="['./contact']"
-          class="btn btn-primary stretched-link"
-          >{{ inProgress ? 'Continue' : 'Start' }}</a
-        >
-      </div>
-      <div class="card-footer text-center text-muted">
-        {{ percentComplete$ | ngrxPush }}% complete
-      </div>
-    </div>
+<div class="row g-2 my-2">
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-primary"
+      routerLink="summary"
+      [disabled]="form?.isInvalid ?? true"
+    >
+      Submit
+    </button>
   </div>
-</div> -->
-
-  <div class="col"></div>
-
-  <div class="row g-2 my-2">
-    <div class="col-auto">
-      <button
-        type="button"
-        class="btn btn-primary"
-        routerLink="summary"
-        [disabled]="form?.isInvalid ?? true"
-      >
-        Submit
-      </button>
-    </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="save()">
-        Save
-      </button>
-    </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="exit()">
-        Exit
-      </button>
-    </div>
-    <div class="col-auto">
-      <button class="btn btn-outline-danger" (click)="reset()">Reset</button>
-    </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="save()">
+      Save
+    </button>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="exit()">
+      Exit
+    </button>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-danger" (click)="reset()">Reset</button>
   </div>
 </div>

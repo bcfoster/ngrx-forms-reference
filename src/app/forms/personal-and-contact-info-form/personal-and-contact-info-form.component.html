@@ -1,0 +1,34 @@
+<form *ngrxLet="form$ as form" [ngrxFormState]="form">
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="is-injured-worker"
+      id="is-injured-worker-yes"
+    />
+    <label class="form-check-label" for="is-injured-worker-yes">
+      Yes, I am the injured worker
+    </label>
+  </div>
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="is-injured-worker"
+      id="is-injured-worker-no"
+      checked
+    />
+    <label class="form-check-label" for="is-injured-worker-no">
+      No, I am reporting on behalf of the injured worker
+    </label>
+  </div>
+
+  <div class="row g-2 my-3">
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary" [routerLink]="['..']">Save</button>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-danger" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</form>
