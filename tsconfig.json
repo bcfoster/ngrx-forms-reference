@@ -17,9 +17,14 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-"paths": {
-  "@store/form/*": ["./app/store/form/*"]
-}
+    "paths": {
+      "@store/form/*": [
+        "./app/store/form/*"
+      ]
+    },
+    "types": [
+      "@angular/localize"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
