@@ -11,5 +11,5 @@ import * as representativeInfo from '../../../state/form/forms/personal-and-cont
   styles: ``,
 })
 export class RepresentativeInfoFormComponent {
-  @Input() form: FormGroupState<representativeInfo.RepresentativeInfoForm> | null = null;
+  @Input() form: FormGroupState<representativeInfo.Form> | null = null;
 }

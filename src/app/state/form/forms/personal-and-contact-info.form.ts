@@ -1,32 +1,40 @@
 import { setUserDefinedProperty, updateGroup, validate } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
 
+import * as contactInfo from './personal-and-contact-info/contact-info.form';
+import * as emailConsent from './personal-and-contact-info/email-consent.form';
 import * as personalInfo from './personal-and-contact-info/personal-info.form';
 import * as representativeInfo from './personal-and-contact-info/representative-info.form';
 
 export interface Form {
   isInjuredWorker: boolean | null;
-  representativeInfo: representativeInfo.RepresentativeInfoForm;
-  personalInfo: personalInfo.PersonalInfoForm;
+  personalInformation: personalInfo.Form;
+  representativeInformation: representativeInfo.Form;
+  contactInformation: contactInfo.Form;
+  emailConsent: emailConsent.Form;
+  additionalInformation: string;
 }
 
 export const initialFormValue: Form = {
   isInjuredWorker: null,
-  representativeInfo: representativeInfo.initialFormValue,
-  personalInfo: personalInfo.initialFormValue,
+  personalInformation: personalInfo.initialFormValue,
+  representativeInformation: representativeInfo.initialFormValue,
+  contactInformation: contactInfo.initialFormValue,
+  emailConsent: emailConsent.initialFormValue,
+  additionalInformation: '',
 };
 
 export const validator = updateGroup<Form>(
   {
     isInjuredWorker: setUserDefinedProperty('mandatory', 1),
-    representativeInfo: updateGroup<representativeInfo.RepresentativeInfoForm>({
+    representativeInformation: updateGroup<representativeInfo.Form>({
       firstName: setUserDefinedProperty('mandatory', 1),
       lastName: setUserDefinedProperty('mandatory', 1),
       phoneNumber: setUserDefinedProperty('mandatory', 1),
       relationshipToWorker: setUserDefinedProperty('mandatory', 1),
       relationshipToWorkerDescription: setUserDefinedProperty('mandatory', 1),
     }),
-    personalInfo: updateGroup<personalInfo.PersonalInfoForm>({
+    personalInformation: updateGroup<personalInfo.Form>({
       hasClaimNumber: setUserDefinedProperty('mandatory', 1),
       claimNumber: setUserDefinedProperty('mandatory', 1),
       legalFirstName: setUserDefinedProperty('mandatory', 1),
@@ -38,14 +46,14 @@ export const validator = updateGroup<Form>(
   },
   {
     isInjuredWorker: validate(required),
-    representativeInfo: updateGroup<representativeInfo.RepresentativeInfoForm>({
+    representativeInformation: updateGroup<representativeInfo.Form>({
       firstName: validate(required),
       lastName: validate(required),
       phoneNumber: validate(required),
       relationshipToWorker: validate(required),
       relationshipToWorkerDescription: validate(required),
     }),
-    personalInfo: updateGroup<personalInfo.PersonalInfoForm>({
+    personalInformation: updateGroup<personalInfo.Form>({
       hasClaimNumber: validate(required),
       claimNumber: validate(required),
       legalFirstName: validate(required),

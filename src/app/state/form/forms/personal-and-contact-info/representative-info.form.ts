@@ -1,12 +1,12 @@
-export interface RepresentativeInfoForm {
+export interface Form {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  relationshipToWorker: 'coworker' | 'spouse' | 'family' | 'union' | 'other' | '';
+  relationshipToWorker: string;
   relationshipToWorkerDescription: string;
 }
 
-export const initialFormValue: RepresentativeInfoForm = {
+export const initialFormValue: Form = {
   firstName: '',
   lastName: '',
   phoneNumber: '',

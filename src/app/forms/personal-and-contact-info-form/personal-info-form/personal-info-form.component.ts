@@ -15,14 +15,14 @@ import * as personalInfo from '../../../state/form/forms/personal-and-contact-in
   styles: ``,
 })
 export class PersonalInfoFormComponent {
-  @Input() form: FormGroupState<personalInfo.PersonalInfoForm> | null = null;
+  @Input() form: FormGroupState<personalInfo.Form> | null = null;
 
   constructor(private readonly store: Store) {}
 
   setDateOfBirth(date: NgbDate) {
     this.store.dispatch(
       new SetValueAction(
-        formReducer.initialFormState.controls.personalAndContactInfo.controls.personalInfo.controls.dateOfBirth.id,
+        formReducer.initialFormState.controls.personalAndContactInfo.controls.personalInformation.controls.dateOfBirth.id,
         new Date(date.year, date.month - 1, date.day).toISOString(),
       ),
     );

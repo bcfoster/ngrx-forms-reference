@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PushPipe } from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -8,7 +8,7 @@ import * as formSelectors from '../state/form/form.selectors';
 
 @Component({
   selector: 'form-summary',
-  imports: [PushPipe],
+  imports: [LetDirective],
   templateUrl: 'form-summary.component.html',
 })
 export class FormSummaryComponent {

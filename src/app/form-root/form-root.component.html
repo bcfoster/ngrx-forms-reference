@@ -1,4 +1,6 @@
 @let form = form$ | ngrxPush;
+@let formState = formState$ | ngrxPush;
+@let state = state$ | ngrxPush;
 
 <div class="row row-cols-1 row-cols-md-2 g-2 my-2">
   <div class="col">
@@ -29,5 +31,11 @@
   </div>
   <div class="col-auto">
     <button class="btn btn-outline-danger" (click)="reset()">Reset</button>
+  </div>
+</div>
+
+<div class="row g-2 my-2">
+  <div class="col">
+    <pre>{{ state?.debug ? (formState ?? '' | json) : form?.value | json }}</pre>
   </div>
 </div>

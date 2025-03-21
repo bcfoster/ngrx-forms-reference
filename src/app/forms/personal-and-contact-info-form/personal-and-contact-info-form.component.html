@@ -32,10 +32,12 @@
   </fieldset>
 
   @if (form.value.isInjuredWorker) {
-    <representative-info-form [form]="form.controls.representativeInfo"></representative-info-form>
+    <representative-info-form
+      [form]="form.controls.representativeInformation"
+    ></representative-info-form>
   }
 
-  <personal-info-form [form]="form.controls.personalInfo"></personal-info-form>
+  <personal-info-form [form]="form.controls.personalInformation"></personal-info-form>
 
   <div class="row g-2 my-3">
     <div class="col-auto">
