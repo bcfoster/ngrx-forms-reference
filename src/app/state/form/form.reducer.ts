@@ -50,9 +50,9 @@ const rawReducer = createReducer(
     if (action.controlId == state.form.controls.personalAndContactInfo.id) {
       return {
         ...state,
-        // form: updateGroup(state.form, {
-        //   contact: setValue(contactForm.initialFormValue),
-        // }),
+        form: updateGroup(state.form, {
+          personalAndContactInfo: setValue(personalAndContactInfoForm.initialFormValue),
+        }),
         lastEditedDate: new Date().toISOString(),
       };
     }
@@ -69,11 +69,11 @@ const rawReducer = createReducer(
   })),
   on(formActions.reset, (state) => ({
     ...state,
-    form: initialState.form,
+    form: initialFormState,
   })),
   on(formActions.start, (state) => ({
     ...state,
-    form: initialState.form,
+    form: initialFormState,
   })),
 );
 
@@ -109,6 +109,7 @@ export const evaluateCompletion = <T extends KeyValue>(state: FormGroupState<T>)
         'valid',
         Math.max(updatedControl.isValid ? 1 : 0, valid),
       );
+
       return updatedControl;
     }
 
