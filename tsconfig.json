@@ -23,7 +23,8 @@
       ]
     },
     "types": [
-      "@angular/localize"
+      "@angular/localize",
+      "@types/jest"
     ]
   },
   "angularCompilerOptions": {
