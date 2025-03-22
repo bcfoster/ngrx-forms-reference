@@ -9,7 +9,7 @@
         name="is-injured-worker"
         id="is-injured-worker-yes"
         class="form-check-input"
-        [ngrxFormControlState]="form.controls.isInjuredWorker"
+        [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
         [value]="true"
       />
       <label for="is-injured-worker-yes" class="form-check-label"
@@ -22,7 +22,7 @@
         name="is-injured-worker"
         id="is-injured-worker-no"
         class="form-check-input"
-        [ngrxFormControlState]="form.controls.isInjuredWorker"
+        [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
         [value]="false"
       />
       <label for="is-injured-worker-no" class="form-check-label">
@@ -31,7 +31,7 @@
     </div>
   </fieldset>
 
-  @if (form.value.isInjuredWorker) {
+  @if (form.value.representativeInformation.reportingForSelf) {
     <representative-info-form
       [form]="form.controls.representativeInformation"
     ></representative-info-form>

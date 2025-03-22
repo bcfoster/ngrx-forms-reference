@@ -1,56 +1,50 @@
 <h5>Representative information</h5>
 
-@if (form) {
-  <fieldset>
-    <legend class="fs-6 fw-bold">First name</legend>
+<fieldset *ngIf="form">
+  <legend class="fs-6 fw-bold">First name</legend>
+  <input
+    type="text"
+    class="form-control"
+    id="first-name"
+    [ngrxFormControlState]="form.controls.firstName"
+  />
+
+  <legend class="fs-6 fw-bold">Last name</legend>
+  <input
+    type="text"
+    class="form-control"
+    id="last-name"
+    [ngrxFormControlState]="form.controls.lastName"
+  />
+
+  <legend class="fs-6 fw-bold">Phone number</legend>
+  <input
+    type="text"
+    class="form-control"
+    id="phone-number"
+    [ngrxFormControlState]="form.controls.phoneNumber"
+  />
+
+  <legend class="fs-6 fw-bold">Relationship to the injured worker</legend>
+  <select class="form-select" aria-label="" [ngrxFormControlState]="form.controls.relationship">
+    <option value="">Choose a relationship</option>
+    <option value="Coworker">Coworker</option>
+    <option value="Spouse">Spouse</option>
+    <option value="OtherFamily">Family</option>
+    <option value="UnionRepresentative">Union</option>
+    <option value="Other">Other</option>
+  </select>
+
+  @if (form.value.relationship === 'Other') {
+    <legend class="fs-6 fw-bold">What is your relationship with the worker?</legend>
     <input
       type="text"
       class="form-control"
-      id="first-name"
-      [ngrxFormControlState]="form.controls.firstName"
+      id="relationship-to-worker-description"
+      [ngrxFormControlState]="form.controls.relationshipOther"
     />
-
-    <legend class="fs-6 fw-bold">Last name</legend>
-    <input
-      type="text"
-      class="form-control"
-      id="last-name"
-      [ngrxFormControlState]="form.controls.lastName"
-    />
-
-    <legend class="fs-6 fw-bold">Phone number</legend>
-    <input
-      type="text"
-      class="form-control"
-      id="phone-number"
-      [ngrxFormControlState]="form.controls.phoneNumber"
-    />
-
-    <legend class="fs-6 fw-bold">Relationship to the injured worker</legend>
-    <select
-      class="form-select"
-      aria-label=""
-      [ngrxFormControlState]="form.controls.relationshipToWorker"
-    >
-      <option value="">Choose a relationship</option>
-      <option value="coworker">Coworker</option>
-      <option value="spouse">Spouse</option>
-      <option value="family">Family</option>
-      <option value="union">Union</option>
-      <option value="other">Other</option>
-    </select>
-
-    @if (form.value.relationshipToWorker === 'other') {
-      <legend class="fs-6 fw-bold">What is your relationship with the worker?</legend>
-      <input
-        type="text"
-        class="form-control"
-        id="relationship-to-worker-description"
-        [ngrxFormControlState]="form.controls.relationshipToWorkerDescription"
-      />
-    }
-  </fieldset>
-}
+  }
+</fieldset>
 
 <ngb-alert [dismissible]="false">
   <h6>Will you be someone else be helping the injured worker with their claim?</h6>

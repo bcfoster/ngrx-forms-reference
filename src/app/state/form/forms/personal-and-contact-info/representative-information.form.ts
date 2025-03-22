@@ -1,13 +1,15 @@
-export interface RepresentativeInformationForm {
+import { RepresentativeRelationshipType } from '../../../../services/wrio-api.service';
+
+export interface Form {
   reportingForSelf: boolean | null;
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  relationship: 'coworker' | 'spouse' | 'family' | 'union' | 'other' | '';
+  relationship: RepresentativeRelationshipType | '';
   relationshipOther: string;
 }
 
-export const initialFormValue: RepresentativeInformationForm = {
+export const initialFormValue: Form = {
   reportingForSelf: null,
   firstName: '',
   lastName: '',

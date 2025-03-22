@@ -11,17 +11,16 @@ export const selectPersonalAndContactInfoForm = createSelector(
   (form) => form.controls.personalAndContactInfo,
 );
 
-export const selectFormPercentComplete = createSelector(selectForm, (form) => {
-  const mandatory = form.userDefinedProperties['mandatory'] ?? 0;
-  const valid = form.userDefinedProperties['valid'] ?? 0;
-  return mandatory > 0 ? valid / mandatory : 0;
-});
+export const selectFormPercentComplete = createSelector(selectForm, (form) =>
+  (form.userDefinedProperties['mandatory'] ?? 0)
+    ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
+    : 1,
+);
 
 export const selectPersonalAndContactInfoFormPercentComplete = createSelector(
   selectPersonalAndContactInfoForm,
-  (form) => {
-    const mandatory = form.userDefinedProperties['mandatory'] ?? 0;
-    const valid = form.userDefinedProperties['valid'] ?? 0;
-    return mandatory > 0 ? valid / mandatory : 0;
-  },
+  (form) =>
+    (form.userDefinedProperties['mandatory'] ?? 0)
+      ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
+      : 1,
 );
