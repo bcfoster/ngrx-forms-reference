@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "api": "npx nswag@14.2.0 run wrio.nswag"
   },
   "private": true,
   "dependencies": {
