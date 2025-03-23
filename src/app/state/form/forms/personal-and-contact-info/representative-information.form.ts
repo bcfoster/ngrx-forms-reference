@@ -1,4 +1,4 @@
-import { updateGroup } from 'ngrx-forms';
+import { FormGroupState, updateGroup } from 'ngrx-forms';
 import { minLength, required } from 'ngrx-forms/validation';
 
 import { optional } from '../../../ngrx-forms/optional';
@@ -23,16 +23,26 @@ export const initialFormValue: Form = {
   relationshipOther: '',
 };
 
-export const validator = updateGroup<Form>({
-  reportingForSelf: validate(required),
-  firstName: (c, f) =>
-    (f.value.reportingForSelf ?? true) ? optional(c) : validate(c, required, minLength(2)),
-  lastName: (c, f) =>
-    (f.value.reportingForSelf ?? true) ? optional(c) : validate(c, required, minLength(2)),
-  phoneNumber: (c, f) =>
-    (f.value.reportingForSelf ?? true) ? optional(c) : validate(c, required, minLength(10)),
-  relationship: (c, f) =>
-    (f.value.reportingForSelf ?? true) ? optional(c) : validate(c, required),
-  relationshipOther: (c, f) =>
-    f.value.relationship == 'Other' ? validate(c, minLength(4)) : optional(c),
-});
+export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
+  updateGroup<Form>(
+    state,
+    {
+      reportingForSelf: validate(required),
+    },
+    state.value.reportingForSelf
+      ? {
+          firstName: (c) => optional(c),
+          lastName: (c) => optional(c),
+          phoneNumber: (c) => optional(c),
+          relationship: (c) => optional(c),
+          relationshipOther: (c) => optional(c),
+        }
+      : {
+          firstName: (c) => validate(c, required, minLength(2)),
+          lastName: (c) => validate(c, required, minLength(2)),
+          phoneNumber: (c) => validate(c, required, minLength(10)),
+          relationship: (c) => validate(c, required),
+          relationshipOther: (c, f) =>
+            f.value.relationship === 'Other' ? validate(c, required, minLength(4)) : optional(c),
+        },
+  );
