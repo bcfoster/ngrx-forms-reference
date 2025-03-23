@@ -31,11 +31,11 @@ export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
     },
     state.value.reportingForSelf
       ? {
-          firstName: (c) => setValue(optional(c), ''),
-          lastName: (c) => setValue(optional(c), ''),
-          phoneNumber: (c) => setValue(optional(c), ''),
-          relationship: (c) => setValue(optional(c), ''),
-          relationshipOther: (c) => setValue(optional(c), ''),
+          firstName: (c) => optional(setValue(c, '')),
+          lastName: (c) => optional(setValue(c, '')),
+          phoneNumber: (c) => optional(setValue(c, '')),
+          relationship: (c) => optional(setValue(c, '')),
+          relationshipOther: (c) => optional(setValue(c, '')),
         }
       : {
           firstName: (c) => validate(c, required, minLength(2)),
@@ -45,6 +45,6 @@ export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
           relationshipOther: (c, f) =>
             f.value.relationship === 'Other'
               ? validate(c, required, minLength(4))
-              : setValue(optional(c), ''),
+              : optional(setValue(c, '')),
         },
   );

@@ -1,4 +1,4 @@
-import { FormGroupState, updateGroup } from 'ngrx-forms';
+import { FormGroupState, setValue, updateGroup } from 'ngrx-forms';
 import { validate } from '../../../ngrx-forms/validate';
 import { maxLength, minLength, required } from 'ngrx-forms/validation';
 import { optional } from '../../../ngrx-forms/optional';
@@ -64,7 +64,9 @@ export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
   updateGroup<Form>(state, {
     haveClaimNumber: validate(required),
     claimNumber: (c, f) =>
-      f.value.haveClaimNumber ? validate(c, required, minLength(8), maxLength(8)) : optional(c),
+      f.value.haveClaimNumber
+        ? validate(c, required, minLength(8), maxLength(8))
+        : optional(setValue(c, '')),
     legalFirstName: validate(required, minLength(2), maxLength(25)),
     preferredFirstName: validate(maxLength(25)),
     middleName: validate(maxLength(10)),
@@ -80,9 +82,12 @@ export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
     dateOfBirth: validate(required),
     havePhn: validate(required),
     phn: (c, f) =>
-      f.value.havePhn ? validate(c, required, minLength(10), maxLength(10)) : optional(c),
+      f.value.havePhn
+        ? validate(c, required, minLength(10), maxLength(10))
+        : optional(setValue(c, '')),
     interpreter: validate(required),
-    preferredLanguage: (c, f) => (f.value.interpreter ? validate(c, required) : optional(c)),
+    preferredLanguage: (c, f) =>
+      f.value.interpreter ? validate(c, required) : optional(setValue(c, '')),
     heightFeet: (c) => optional(c),
     heightInches: (c) => optional(c),
     weight: (c) => optional(c),
