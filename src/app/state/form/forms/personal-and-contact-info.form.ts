@@ -24,5 +24,7 @@ export const initialFormValue: Form = {
 
 export const validator = updateGroup<Form>({
   representativeInformation: representativeInfo.validator,
+  personalInformation: personalInfo.validator,
+  emailConsent: emailConsent.validator,
   additionalInformation: (c) => optional(c),
 });
