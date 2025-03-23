@@ -31,7 +31,7 @@
     </div>
   </fieldset>
 
-  @if (form.value.representativeInformation.reportingForSelf) {
+  @if (!(form.value.representativeInformation.reportingForSelf ?? true)) {
     <representative-info-form
       [form]="form.controls.representativeInformation"
     ></representative-info-form>

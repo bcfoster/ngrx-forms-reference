@@ -1,4 +1,10 @@
-import { FormState, formStateReducer, SetUserDefinedPropertyAction } from 'ngrx-forms';
+import {
+  FormState,
+  formStateReducer,
+  SetErrorsAction,
+  SetUserDefinedPropertyAction,
+  ValidationErrors,
+} from 'ngrx-forms';
 import { AbstractControlState } from 'ngrx-forms/src/state';
 
 /**
@@ -16,6 +22,9 @@ export function optional<TValue>(state: AbstractControlState<TValue>): FormState
 export function optional<TValue>(state: AbstractControlState<TValue>): FormState<TValue>;
 
 export function optional<TValue>(state: FormState<TValue>) {
-  const action = new SetUserDefinedPropertyAction(state.id, 'optional', true);
-  return formStateReducer<TValue>(state, action);
+  const setPropAction = new SetUserDefinedPropertyAction(state.id, 'optional', true);
+  state = formStateReducer<TValue>(state, setPropAction);
+
+  const setErrorsAction = new SetErrorsAction(state.id, {} as ValidationErrors);
+  return formStateReducer<TValue>(state, setErrorsAction);
 }
