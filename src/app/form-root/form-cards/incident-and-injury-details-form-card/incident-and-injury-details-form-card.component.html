@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Incident and injury details</h4>
+    <p class="card-text">Tell us about your injury, including how, where, and when it occurred.</p>
+    <a
+      routerLink="incident-and-injury"
+      class="btn btn-primary stretched-link"
+      >{{ (isInProgress$ | ngrxPush) ? 'Continue' : 'Start' }}</a
+    >
+  </div>
+  <div class="card-footer text-center text-muted">
+    {{ percentComplete$ | ngrxPush | percent }} complete
+  </div>
+</div>

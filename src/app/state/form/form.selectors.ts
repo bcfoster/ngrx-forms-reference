@@ -11,6 +11,11 @@ export const selectPersonalAndContactInfoForm = createSelector(
   (form) => form.controls.personalAndContactInfo,
 );
 
+export const selectIncidentAndInjuryForm = createSelector(
+  selectForm,
+  (form) => form.controls.injuryAndIncident,
+);
+
 export const selectFormPercentComplete = createSelector(selectForm, (form) =>
   (form.userDefinedProperties['mandatory'] ?? 0)
     ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
@@ -19,6 +24,13 @@ export const selectFormPercentComplete = createSelector(selectForm, (form) =>
 
 export const selectPersonalAndContactInfoFormPercentComplete = createSelector(
   selectPersonalAndContactInfoForm,
+  (form) =>
+    (form.userDefinedProperties['mandatory'] ?? 0)
+      ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
+      : 1,
+);
+export const selectIncidentAndInjuryDetailsFormPercentComplete = createSelector(
+  selectIncidentAndInjuryForm,
   (form) =>
     (form.userDefinedProperties['mandatory'] ?? 0)
       ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']

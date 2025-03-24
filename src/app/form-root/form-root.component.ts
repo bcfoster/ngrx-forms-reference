@@ -12,10 +12,17 @@ import { PersonalAndContactInfoFormCardComponent } from './form-cards/personal-a
 import { formActions } from '../state/form/form.actions';
 import * as formReducer from '../state/form/form.reducer';
 import * as formSelectors from '../state/form/form.selectors';
+import { IncidentAndInjuryDetailsFormCardComponent } from './form-cards/incident-and-injury-details-form-card/incident-and-injury-details-form-card.component';
 
 @Component({
   selector: 'form-root',
-  imports: [JsonPipe, PushPipe, RouterLink, PersonalAndContactInfoFormCardComponent],
+  imports: [
+    JsonPipe,
+    PushPipe,
+    RouterLink,
+    PersonalAndContactInfoFormCardComponent,
+    IncidentAndInjuryDetailsFormCardComponent,
+  ],
   templateUrl: 'form-root.component.html',
 })
 export class FormRootComponent {
