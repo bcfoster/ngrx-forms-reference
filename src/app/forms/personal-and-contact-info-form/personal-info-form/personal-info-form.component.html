@@ -12,7 +12,7 @@
         class="btn-check"
         name="has-received-claim-number"
         id="has-received-claim-number-yes"
-        [ngrxFormControlState]="form.controls.hasClaimNumber"
+        [ngrxFormControlState]="form.controls.haveClaimNumber"
         [value]="true"
       />
       <label class="btn btn-outline-primary" for="has-received-claim-number-yes">Yes</label>
@@ -21,14 +21,14 @@
         class="btn-check"
         name="has-received-claim-number"
         id="has-received-claim-number-no"
-        [ngrxFormControlState]="form.controls.hasClaimNumber"
+        [ngrxFormControlState]="form.controls.haveClaimNumber"
         [value]="false"
       />
       <label class="btn btn-outline-primary" for="has-received-claim-number-no">No</label>
     </div>
   </fieldset>
 
-  @if (!!form.value.hasClaimNumber) {
+  @if (!!form.value.haveClaimNumber) {
     <fieldset>
       <legend class="fs-6 fw-bold">WorkSafeBC claim number</legend>
       <input
