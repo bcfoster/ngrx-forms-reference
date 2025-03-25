@@ -92,7 +92,7 @@ export const validate = (form: FormGroupState<Form>) =>
     {
       personalAndContactInfo: personalAndContactInfo.validator,
       injuryAndIncident: injuryAndIncident.validator(form),
-      treatmentDetails: treatmentDetails.validator,
+      treatmentDetails: treatmentDetails.validator(form),
     },
     {
       personalAndContactInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),

@@ -122,6 +122,7 @@ export const validator =
       accidentInvolvedOther: (c) => optional(c),
       injuryDate: validate(
         required,
+        earlierThan(new Date().toISOString()),
         minYear(1900),
         parent.value.treatmentDetails.dateReceivedFirstAid
           ? earlierThan(parent.value.treatmentDetails.dateReceivedFirstAid)
