@@ -86,14 +86,18 @@ const rawReducer = createReducer(
   })),
 );
 
-export const validate = updateGroup<Form>(
-  {
-    personalAndContactInfo: personalAndContactInfo.validator,
-  },
-  {
-    personalAndContactInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-  },
-);
+export const validate = (form: FormGroupState<Form>) =>
+  updateGroup<Form>(
+    form,
+    {
+      personalAndContactInfo: personalAndContactInfo.validator,
+      injuryAndIncident: injuryAndIncident.validator(form),
+    },
+    {
+      personalAndContactInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
+      injuryAndIncident: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
+    },
+  );
 
 export const reducer = wrapReducerWithFormStateUpdate(
   rawReducer,

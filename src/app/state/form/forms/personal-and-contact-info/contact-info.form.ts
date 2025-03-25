@@ -1,4 +1,4 @@
-import { FormGroupState, updateGroup } from 'ngrx-forms';
+import { updateGroup } from 'ngrx-forms';
 import { validate } from '../../../ngrx-forms/validate';
 import { email, maxLength, required } from 'ngrx-forms/validation';
 import { optional } from '../../../ngrx-forms/optional';
@@ -46,25 +46,24 @@ export const initialFormValue: Form = {
   email: '',
 };
 
-export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
-  updateGroup<Form>(state, {
-    address: updateGroup<AddressForm>({
-      addressLine1: validate(required, maxLength(40)),
-      addressLine2: validate(required, maxLength(40)),
-      city: validate(required, maxLength(30)),
-      province: validate(required),
-      country: validate(required),
-      postalCode: (c, f) =>
-        f.value.country === 'CA'
-          ? validate(c, required, postalCode)
-          : validate(c, required, maxLength(10)),
-    }),
-    // TODO: the validation rules for these controls is FUBAR
-    phone: updateGroup<PhoneForm>({
-      homePhone: (c) => optional(c),
-      cellPhone: (c) => optional(c),
-      workPhone: (c) => optional(c),
-      extension: (c) => optional(c),
-    }),
-    email: validate(required, email),
-  });
+export const validator = updateGroup<Form>({
+  address: updateGroup<AddressForm>({
+    addressLine1: validate(required, maxLength(40)),
+    addressLine2: validate(required, maxLength(40)),
+    city: validate(required, maxLength(30)),
+    province: validate(required),
+    country: validate(required),
+    postalCode: (c, f) =>
+      f.value.country === 'CA'
+        ? validate(c, required, postalCode)
+        : validate(c, required, maxLength(10)),
+  }),
+  // TODO: the validation rules for these controls is FUBAR
+  phone: updateGroup<PhoneForm>({
+    homePhone: (c) => optional(c),
+    cellPhone: (c) => optional(c),
+    workPhone: (c) => optional(c),
+    extension: (c) => optional(c),
+  }),
+  email: validate(required, email),
+});

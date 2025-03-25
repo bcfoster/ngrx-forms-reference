@@ -60,35 +60,34 @@ export const initialFormValue: Form = {
   weight: '',
 };
 
-export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
-  updateGroup<Form>(state, {
-    haveClaimNumber: validate(required),
-    claimNumber: (c, f) =>
-      f.value.haveClaimNumber
-        ? validate(c, required, minLength(8), maxLength(8))
-        : optional(setValue(c, '')),
-    legalFirstName: validate(required, minLength(2), maxLength(25)),
-    preferredFirstName: validate(maxLength(25)),
-    middleName: validate(maxLength(10)),
-    lastName: validate(required, minLength(2), maxLength(30)),
-    demographics: updateGroup<DemographicsForm>({
-      sexAtBirth: validate(required),
-      gender: (c) => optional(c),
-      pronouns: (c) => optional(c),
-      indigenousInd: (c) => optional(c),
-      ancestrey: (c) => optional(c),
-      associationNation: (c) => optional(c),
-    }),
-    dateOfBirth: validate(required),
-    havePhn: validate(required),
-    phn: (c, f) =>
-      f.value.havePhn
-        ? validate(c, required, minLength(10), maxLength(10))
-        : optional(setValue(c, '')),
-    interpreter: validate(required),
-    preferredLanguage: (c, f) =>
-      f.value.interpreter ? validate(c, required) : optional(setValue(c, '')),
-    heightFeet: (c) => optional(c),
-    heightInches: (c) => optional(c),
-    weight: (c) => optional(c),
-  });
+export const validator = updateGroup<Form>({
+  haveClaimNumber: validate(required),
+  claimNumber: (c, f) =>
+    f.value.haveClaimNumber
+      ? validate(c, required, minLength(8), maxLength(8))
+      : optional(setValue(c, '')),
+  legalFirstName: validate(required, minLength(2), maxLength(25)),
+  preferredFirstName: validate(maxLength(25)),
+  middleName: validate(maxLength(10)),
+  lastName: validate(required, minLength(2), maxLength(30)),
+  demographics: updateGroup<DemographicsForm>({
+    sexAtBirth: validate(required),
+    gender: (c) => optional(c),
+    pronouns: (c) => optional(c),
+    indigenousInd: (c) => optional(c),
+    ancestrey: (c) => optional(c),
+    associationNation: (c) => optional(c),
+  }),
+  dateOfBirth: validate(required),
+  havePhn: validate(required),
+  phn: (c, f) =>
+    f.value.havePhn
+      ? validate(c, required, minLength(10), maxLength(10))
+      : optional(setValue(c, '')),
+  interpreter: validate(required),
+  preferredLanguage: (c, f) =>
+    f.value.interpreter ? validate(c, required) : optional(setValue(c, '')),
+  heightFeet: (c) => optional(c),
+  heightInches: (c) => optional(c),
+  weight: (c) => optional(c),
+});

@@ -1,6 +1,14 @@
-export interface IncidentDetailsForm {
+import { setValue, updateGroup } from 'ngrx-forms';
+import { validate } from '../../../ngrx-forms/validate';
+import { maxLength, minLength, required } from 'ngrx-forms/validation';
+import { optional } from '../../../ngrx-forms/optional';
+import { minWords } from '../../../ngrx-forms/min-words';
+
+export type IncidentLocation = 'EmployerWorkplace' | 'AuthorizedLocation' | 'Other';
+
+export interface Form {
   occurredInBc: boolean | null;
-  incidentLocation: string;
+  incidentLocation: IncidentLocation | '';
   incidentLocationDetails: string;
   occurredDuringNormalShift: boolean | null;
   shiftAndTimeOfInjuryDetails: string;
@@ -9,19 +17,26 @@ export interface IncidentDetailsForm {
   changesOccurredDueToInjury: string[];
 }
 
-export interface Form {
-  incidentDetails: IncidentDetailsForm;
-}
-
 export const initialFormValue: Form = {
-  incidentDetails: {
-    occurredInBc: null,
-    incidentLocation: '',
-    incidentLocationDetails: '',
-    occurredDuringNormalShift: null,
-    shiftAndTimeOfInjuryDetails: '',
-    activityAtTimeOfInjuryDetails: '',
-    occurredWhilePerformingRegularDuties: null,
-    changesOccurredDueToInjury: [],
-  },
+  occurredInBc: null,
+  incidentLocation: '',
+  incidentLocationDetails: '',
+  occurredDuringNormalShift: null,
+  shiftAndTimeOfInjuryDetails: '',
+  activityAtTimeOfInjuryDetails: '',
+  occurredWhilePerformingRegularDuties: null,
+  changesOccurredDueToInjury: [],
 };
+
+export const validator = updateGroup<Form>({
+  occurredInBc: validate(required),
+  incidentLocation: validate(required),
+  incidentLocationDetails: (c, f) =>
+    !(f.value.occurredInBc ?? true) || f.value.incidentLocation !== 'EmployerWorkplace'
+      ? validate(c, required, minLength(1), minWords(3), maxLength(200))
+      : optional(setValue(c, '')),
+  shiftAndTimeOfInjuryDetails: validate(maxLength(250)),
+  activityAtTimeOfInjuryDetails: validate(maxLength(250)),
+  occurredDuringNormalShift: validate(required),
+  occurredWhilePerformingRegularDuties: validate(required),
+});

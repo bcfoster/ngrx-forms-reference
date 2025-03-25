@@ -3,14 +3,14 @@ import { Boxed, unbox, ValidationErrors } from 'ngrx-forms';
 export const NGRX_FORMS_POSTAL_CODE_VALIDATION_REGEXP =
   /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z] \d[ABCEGHJ-NPRSTV-Z]\d$/;
 
-export interface EmailValidationError {
+export interface PostalCodeValidationError {
   pattern: string;
   actual: string;
 }
 
 declare module 'ngrx-forms' {
   export interface ValidationErrors {
-    postalCode?: EmailValidationError;
+    postalCode?: PostalCodeValidationError;
   }
 }
 

@@ -1,3 +1,7 @@
+import { FormGroupState, updateGroup } from 'ngrx-forms';
+
+import { optional } from '../../ngrx-forms/optional';
+import * as formReducer from '../form.reducer';
 import * as incidentOverview from './injury-and-incident/incident-overview.form';
 import * as injuryDetails from './injury-and-incident/injury-details.form';
 import * as incidentDetails from './injury-and-incident/incident-details.form';
@@ -15,3 +19,11 @@ export const initialFormValue: Form = {
   incidentDetails: incidentDetails.initialFormValue,
   additionalInformation: '',
 };
+
+export const validator = (form: FormGroupState<formReducer.Form>) =>
+  updateGroup<Form>({
+    incidentOverview: incidentOverview.validator(form),
+    injuryDetails: injuryDetails.validator,
+    incidentDetails: incidentDetails.validator,
+    additionalInformation: (c) => optional(c),
+  });
