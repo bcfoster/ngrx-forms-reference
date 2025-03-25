@@ -1,7 +1,21 @@
-import { updateGroup } from 'ngrx-forms';
+import { disable, enable, setValue, updateGroup } from 'ngrx-forms';
+import { maxLength, minLength, required } from 'ngrx-forms/validation';
+
+import { accountNumber } from '../../ngrx-forms/account-number';
+import { earlierThan } from '../../ngrx-forms/earlier-than';
+import { minWords } from '../../ngrx-forms/min-words';
+import { minYear } from '../../ngrx-forms/min-year';
+import { optional } from '../../ngrx-forms/optional';
+import { postalCode } from '../../ngrx-forms/postal-code';
+import { validate } from '../../ngrx-forms/validate';
+import {
+  AttachmentType,
+  EmploymentStatus,
+  EmploymentType,
+} from '../../../services/wrio-api.service';
 
 export interface EmploymentDetailsForm {
-  employmentType: string;
+  employmentType: EmploymentType | '';
   educationalInstitutionAndProgram: string;
   havePurchasedPersonalOptionalProtection: boolean | null;
   purchasedPersonalOptionalProtectionAccountNumber: string;
@@ -14,8 +28,8 @@ export interface EmploymentDetailsForm {
   schoolName: string;
   apprenticeshipProgramName: string;
   apprenticeshipCertificationNumber: string;
-  attachmentType: string;
-  employmentStatus: string;
+  attachmentType: AttachmentType | '';
+  employmentStatus: EmploymentStatus | '';
   workedOver12Months: boolean | null;
   whenDidJobBegin: string | null;
   whenDidJobBeginIsApproximate: boolean | null;
@@ -306,4 +320,58 @@ export const initialFormValue: Form = {
   additionalInformation: '',
 };
 
-export const validator = updateGroup<Form>({});
+export const validator = updateGroup<Form>(
+  {
+    employmentDetails: updateGroup<EmploymentDetailsForm>({
+      employmentType: validate(required),
+      apprenticeshipProgramName: (c, f) =>
+        f.value.employmentType === 'Apprenticeship' ? validate(c, required) : optional(c),
+      educationalInstitutionAndProgram: (c, f) =>
+        f.value.employmentType === 'Student' ? validate(c, required, minWords(3)) : optional(c),
+      havePurchasedPersonalOptionalProtection: (c, f) =>
+        f.value.employmentType === 'Incorporated' || f.value.employmentType === 'Proprietor'
+          ? validate(c, required)
+          : optional(c),
+      purchasedPersonalOptionalProtectionAccountNumber: (c, f) =>
+        f.value.havePurchasedPersonalOptionalProtection
+          ? validate(c, required, accountNumber)
+          : optional(c),
+    }),
+    employerInformation: updateGroup<EmployerInformationForm>({
+      jobTitle: validate(required),
+      name: validate(required, minLength(1), maxLength(100)),
+      employerAddress: updateGroup<EmployerAddressForm>({
+        addressLine1: validate(required, maxLength(40)),
+        // TODO: this is optional, but has validation rules - optional will have to support validators
+        addressLine2: validate(maxLength(40)),
+        city: validate(required, maxLength(30)),
+        // TODO: revisit validation
+        province: validate(required),
+        country: validate(required),
+        postalCode: (c, f) =>
+          f.value.country === 'CA' ? validate(c, required, postalCode) : validate(c, required),
+      }),
+      // TODO: this is optional
+      contactName: validate(maxLength(56)),
+      // TODO: this is optional
+      phoneNumber: validate(minLength(10), maxLength(12)),
+      otherEmployer: validate(required),
+    }),
+    reportingToEmployer: updateGroup<ReportingToEmployerForm>({
+      haveReportedInjury: validate(required),
+      // TODO: some garbage date validation
+      dateReportedInjury: (c, f) =>
+        f.value.haveReportedInjury
+          ? validate(c, required, earlierThan(new Date().toISOString()), minYear(1900))
+          : optional(c),
+      whoReportedInjuryTo: (c, f) =>
+        f.value.haveReportedInjury ? validate(c, required, minWords(2)) : optional(c),
+    }),
+    additionalInformation: (c) => optional(c),
+  },
+  {
+    employerInformation: updateGroup<EmployerInformationForm>({
+      extension: (c, f) => (f.value.phoneNumber.length > 0 ? enable(c) : disable(setValue(c, ''))),
+    }),
+  },
+);

@@ -2,6 +2,15 @@
 @let formState = formState$ | ngrxPush;
 @let state = state$ | ngrxPush;
 
+<h3>Report your injury</h3>
+
+<h5>Injury and other details</h5>
+
+<p>
+  Please complete the following four sections in any order. You will have an opportunity to review
+  your information before submitting.
+</p>
+
 <div class="row row-cols-1 g-3 my-4">
   <div class="col">
     <personal-and-contact-info-form-card></personal-and-contact-info-form-card>
@@ -17,34 +26,54 @@
   </div>
 </div>
 
-<div class="row g-2 my-3">
-  <div class="col-auto">
-    <button
-      type="button"
-      class="btn btn-primary"
-      routerLink="summary"
-      [disabled]="form?.isInvalid ?? true"
-    >
-      Submit
-    </button>
+@if (state?.debug) {
+  <div class="row g-2 my-3">
+    <div class="col-auto">
+      <button
+        type="button"
+        class="btn btn-primary"
+        routerLink="summary"
+        [disabled]="form?.isInvalid ?? true"
+      >
+        Submit
+      </button>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="save()">
+        Save
+      </button>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="exit()">
+        Exit
+      </button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-outline-danger" (click)="reset()">Reset</button>
+    </div>
   </div>
-  <div class="col-auto">
-    <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="save()">
-      Save
-    </button>
-  </div>
-  <div class="col-auto">
-    <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="exit()">
-      Exit
-    </button>
-  </div>
-  <div class="col-auto">
-    <button class="btn btn-outline-danger" (click)="reset()">Reset</button>
-  </div>
-</div>
 
-<div class="row g-2 my-5">
-  <div class="col">
-    <pre>{{ state?.debug ? (formState ?? '' | json) : form?.value | json }}</pre>
+  <div class="row g-2 my-5">
+    <div class="col">
+      <pre>{{ state!.debug ? (formState ?? '' | json) : form?.value | json }}</pre>
+    </div>
   </div>
-</div>
+} @else {
+  <div class="row g-2 my-3">
+    <div class="col-auto">
+      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="save()">
+        Back
+      </button>
+    </div>
+    <div class="col-auto">
+      <button
+        type="button"
+        class="btn btn-primary"
+        routerLink="summary"
+        [disabled]="form?.isInvalid ?? true"
+      >
+        Proceed to review
+      </button>
+    </div>
+  </div>
+}

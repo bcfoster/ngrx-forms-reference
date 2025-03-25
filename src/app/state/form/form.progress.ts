@@ -11,6 +11,7 @@ export function evaluateCompletion<T extends KeyValue>(state: FormGroupState<T>)
   return updateRecursive(state, (control) => {
     if (isArrayState(control) || isGroupState(control)) {
       const arraysAndGroups = Object.values(control.controls)
+        // TODO: the filter and map can be combined, handle all three cases inside map
         .filter((c) => isArrayState(c) || isGroupState(c))
         .map((c) => ({
           mandatory: c.userDefinedProperties['mandatory'] ?? 0,
