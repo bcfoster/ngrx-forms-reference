@@ -32,6 +32,18 @@ export const routes: Routes = [
         component: PersonalAndContactInfoFormComponent,
       },
       {
+        path: 'incident-and-injury',
+        component: PersonalAndContactInfoFormComponent,
+      },
+      {
+        path: 'treatment-details',
+        component: PersonalAndContactInfoFormComponent,
+      },
+      {
+        path: 'employment-and-employer-info',
+        component: PersonalAndContactInfoFormComponent,
+      },
+      {
         path: 'summary',
         component: FormSummaryComponent,
       },

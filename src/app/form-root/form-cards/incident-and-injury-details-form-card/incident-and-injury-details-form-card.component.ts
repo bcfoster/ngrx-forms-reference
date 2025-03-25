@@ -1,17 +1,17 @@
+import { PercentPipe } from '@angular/common';
+import { PushPipe } from '@ngrx/component';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FormGroupState } from 'ngrx-forms';
 import { map, Observable } from 'rxjs';
 
 import * as formReducer from '../../../state/form/form.reducer';
 import * as formSelectors from '../../../state/form/form.selectors';
-import { PushPipe } from '@ngrx/component';
-import { PercentPipe } from '@angular/common';
 
 @Component({
   selector: 'incident-and-injury-details-form-card',
-  imports: [PushPipe, PercentPipe],
+  imports: [PushPipe, PercentPipe, RouterLink],
   templateUrl: 'incident-and-injury-details-form-card.component.html',
   styles: ``,
 })
