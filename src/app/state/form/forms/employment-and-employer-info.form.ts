@@ -1,3 +1,5 @@
+import { updateGroup } from 'ngrx-forms';
+
 export interface EmploymentDetailsForm {
   employmentType: string;
   educationalInstitutionAndProgram: string;
@@ -303,3 +305,5 @@ export const initialFormValue: Form = {
   },
   additionalInformation: '',
 };
+
+export const validator = updateGroup<Form>({});

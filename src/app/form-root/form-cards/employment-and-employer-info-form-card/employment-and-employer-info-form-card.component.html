@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Employment and employer information</h4>
+    <p class="card-text">
+      Tell us about your employer(s), your work, and if your hours and duties have changed.
+    </p>
+    <a
+      routerLink="personal-and-contact-info"
+      class="btn btn-primary stretched-link"
+      >{{ (isInProgress$ | ngrxPush) ? 'Continue' : 'Start' }}</a
+    >
+  </div>
+  <div class="card-footer text-center text-muted">
+    {{ percentComplete$ | ngrxPush | percent }} complete
+  </div>
+</div>

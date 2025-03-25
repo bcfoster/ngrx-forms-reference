@@ -93,11 +93,13 @@ export const validate = (form: FormGroupState<Form>) =>
       personalAndContactInfo: personalAndContactInfo.validator,
       injuryAndIncident: injuryAndIncident.validator(form),
       treatmentDetails: treatmentDetails.validator(form),
+      employmentAndEmployerInfo: employmentAndEmployer.validator,
     },
     {
       personalAndContactInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
       injuryAndIncident: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
       treatmentDetails: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
+      employmentAndEmployerInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
     },
   );
 

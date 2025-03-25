@@ -8,16 +8,18 @@ import { Store } from '@ngrx/store';
 import { FormGroupState } from 'ngrx-forms';
 import { map, Observable } from 'rxjs';
 
+import { EmploymentAndEmployerInfoFormCardComponent } from './form-cards/employment-and-employer-info-form-card/employment-and-employer-info-form-card.component';
+import { IncidentAndInjuryDetailsFormCardComponent } from './form-cards/incident-and-injury-details-form-card/incident-and-injury-details-form-card.component';
 import { PersonalAndContactInfoFormCardComponent } from './form-cards/personal-and-contact-info-form-card/personal-and-contact-info-form-card.component';
+import { TreatmentDetailsFormCardComponent } from './form-cards/treatment-details-form-card/treatment-details-form-card.component';
 import { formActions } from '../state/form/form.actions';
 import * as formReducer from '../state/form/form.reducer';
 import * as formSelectors from '../state/form/form.selectors';
-import { IncidentAndInjuryDetailsFormCardComponent } from './form-cards/incident-and-injury-details-form-card/incident-and-injury-details-form-card.component';
-import { TreatmentDetailsFormCardComponent } from './form-cards/treatment-details-form-card/treatment-details-form-card.component';
 
 @Component({
   selector: 'form-root',
   imports: [
+    EmploymentAndEmployerInfoFormCardComponent,
     IncidentAndInjuryDetailsFormCardComponent,
     JsonPipe,
     PersonalAndContactInfoFormCardComponent,
