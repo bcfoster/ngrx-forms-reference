@@ -1,4 +1,4 @@
-import { FormGroupState, setValue, updateGroup } from 'ngrx-forms';
+import { setValue, updateGroup } from 'ngrx-forms';
 import { validate } from '../../../ngrx-forms/validate';
 import { maxLength, minLength, required } from 'ngrx-forms/validation';
 import { optional } from '../../../ngrx-forms/optional';

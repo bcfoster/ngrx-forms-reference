@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Treatment details</h4>
+    <p class="card-text">
+      Tell us about any medical care you've received or plan to receive for your injury.
+    </p>
+    <a
+      routerLink="personal-and-contact-info"
+      class="btn btn-primary stretched-link"
+      >{{ (isInProgress$ | ngrxPush) ? 'Continue' : 'Start' }}</a
+    >
+  </div>
+  <div class="card-footer text-center text-muted">
+    {{ percentComplete$ | ngrxPush | percent }} complete
+  </div>
+</div>

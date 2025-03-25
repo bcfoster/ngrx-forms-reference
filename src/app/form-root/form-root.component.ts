@@ -13,15 +13,17 @@ import { formActions } from '../state/form/form.actions';
 import * as formReducer from '../state/form/form.reducer';
 import * as formSelectors from '../state/form/form.selectors';
 import { IncidentAndInjuryDetailsFormCardComponent } from './form-cards/incident-and-injury-details-form-card/incident-and-injury-details-form-card.component';
+import { TreatmentDetailsFormCardComponent } from './form-cards/treatment-details-form-card/treatment-details-form-card.component';
 
 @Component({
   selector: 'form-root',
   imports: [
+    IncidentAndInjuryDetailsFormCardComponent,
     JsonPipe,
+    PersonalAndContactInfoFormCardComponent,
     PushPipe,
     RouterLink,
-    PersonalAndContactInfoFormCardComponent,
-    IncidentAndInjuryDetailsFormCardComponent,
+    TreatmentDetailsFormCardComponent,
   ],
   templateUrl: 'form-root.component.html',
 })
