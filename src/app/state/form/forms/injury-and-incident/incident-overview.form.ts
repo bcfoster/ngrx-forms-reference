@@ -123,10 +123,18 @@ export const validator =
       injuryDate: validate(
         required,
         minYear(1900),
-        earlierThan(parent.value.treatmentDetails.medicalCare.dateReceivedFirstAid),
-        earlierThan(parent.value.treatmentDetails.medicalCare.dateReceivedTreatment),
+        parent.value.treatmentDetails.medicalCare.dateReceivedFirstAid
+          ? earlierThan(parent.value.treatmentDetails.medicalCare.dateReceivedFirstAid)
+          : () => ({}),
+        parent.value.treatmentDetails.medicalCare.dateReceivedTreatment
+          ? earlierThan(parent.value.treatmentDetails.medicalCare.dateReceivedTreatment)
+          : () => ({}),
         // TODO: clean up this validation - remove the bang operator
-        earlierThan(parent.value.employmentAndEmployerInfo.reportingToEmployer.dateReportedInjury!),
+        parent.value.employmentAndEmployerInfo.reportingToEmployer.dateReportedInjury
+          ? earlierThan(
+              parent.value.employmentAndEmployerInfo.reportingToEmployer.dateReportedInjury,
+            )
+          : () => ({}),
       ),
       weightLifted: (c, f) =>
         f.value.contributingFactors.some((cf) => cf === 'lifting')
