@@ -54,11 +54,3 @@ export const selectTreatmentDetailsFormPercentComplete = createSelector(
       ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
       : 1,
 );
-
-export const selectEmploymentAndEmployerInfoFormPercentComplete = createSelector(
-  selectEmploymentAndEmployerInfoForm,
-  (form) =>
-    (form.userDefinedProperties['mandatory'] ?? 0)
-      ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
-      : 1,
-);

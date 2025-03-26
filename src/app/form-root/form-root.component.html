@@ -48,7 +48,7 @@
     <div class="flex gap-2">
       <button
         type="button"
-        class="me-2 cursor-pointer rounded-lg bg-blue-700 px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+        class="cursor-pointer rounded-lg border border-blue-700 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-800 hover:text-white focus:ring-4 focus:ring-blue-300 focus:outline-none"
         routerLink=".."
         (click)="save()"
       >
@@ -56,11 +56,12 @@
       </button>
       <button
         type="button"
-        class="me-2 cursor-pointer rounded-lg bg-blue-700 px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+        class="cursor-pointer rounded-lg bg-blue-700 px-3 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
         routerLink="summary"
         [disabled]="form?.isInvalid ?? true"
+        [ngClass]="{ 'cursor-pointer hover:bg-blue-800': form?.isValid ?? false, 'cursor-not-allowed opacity-50': form?.isInvalid ?? true }"
       >
-        Proceed to view
+        Proceed to review
       </button>
     </div>
   }

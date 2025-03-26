@@ -1,4 +1,3 @@
-import { PercentPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
@@ -11,13 +10,13 @@ import * as formSelectors from '../../../state/form/form.selectors';
 
 @Component({
   selector: 'employment-and-employer-info-form-card',
-  imports: [PercentPipe, PushPipe, RouterLink],
+  imports: [PushPipe, RouterLink],
   templateUrl: 'employment-and-employer-info-form-card.component.html',
   styles: ``,
 })
 export class EmploymentAndEmployerInfoFormCardComponent {
   form$: Observable<FormGroupState<formReducer.Form>>;
-  percentComplete$: Observable<number>;
+  remaining$: Observable<number>;
   isInProgress$: Observable<boolean>;
 
   constructor(
@@ -25,9 +24,13 @@ export class EmploymentAndEmployerInfoFormCardComponent {
     protected readonly router: Router,
   ) {
     this.form$ = this.store.select(formSelectors.selectForm);
-    this.percentComplete$ = this.store.select(
-      formSelectors.selectEmploymentAndEmployerInfoFormPercentComplete,
-    );
-    this.isInProgress$ = this.percentComplete$.pipe(map((percent) => percent > 0));
+    this.remaining$ = this.store
+      .select(formSelectors.selectEmploymentAndEmployerInfoForm)
+      .pipe(
+        map(
+          (form) => form.userDefinedProperties['mandatory'] - form.userDefinedProperties['valid'],
+        ),
+      );
+    this.isInProgress$ = this.remaining$.pipe(map((remaining) => remaining !== 0));
   }
 }

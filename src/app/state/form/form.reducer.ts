@@ -49,7 +49,7 @@ export const initialFormState = createFormGroupState<Form>(FORM_ID, initialFormV
 export const initialState: State = {
   form: initialFormState,
   lastEdited: null,
-  debug: true,
+  debug: false,
 };
 
 const rawReducer = createReducer(

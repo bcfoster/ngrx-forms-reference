@@ -1,4 +1,3 @@
-import { PercentPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
@@ -11,13 +10,14 @@ import * as formSelectors from '../../../state/form/form.selectors';
 
 @Component({
   selector: 'personal-and-contact-info-form-card',
-  imports: [PercentPipe, PushPipe, RouterLink],
+  imports: [PushPipe, RouterLink],
   templateUrl: 'personal-and-contact-info-form-card.component.html',
   styles: ``,
 })
 export class PersonalAndContactInfoFormCardComponent {
   form$: Observable<FormGroupState<formReducer.Form>>;
-  percentComplete$: Observable<number>;
+  total$: Observable<number>;
+  completed$: Observable<number>;
   isInProgress$: Observable<boolean>;
 
   constructor(
@@ -25,9 +25,12 @@ export class PersonalAndContactInfoFormCardComponent {
     protected readonly router: Router,
   ) {
     this.form$ = this.store.select(formSelectors.selectForm);
-    this.percentComplete$ = this.store.select(
-      formSelectors.selectPersonalAndContactInfoFormPercentComplete,
-    );
-    this.isInProgress$ = this.percentComplete$.pipe(map((percent) => percent > 0));
+    this.total$ = this.store
+      .select(formSelectors.selectPersonalAndContactInfoForm)
+      .pipe(map((form) => form.userDefinedProperties['mandatory']));
+    this.completed$ = this.store
+      .select(formSelectors.selectPersonalAndContactInfoForm)
+      .pipe(map((form) => form.userDefinedProperties['valid']));
+    this.isInProgress$ = this.completed$.pipe(map((remaining) => remaining > 0));
   }
 }
