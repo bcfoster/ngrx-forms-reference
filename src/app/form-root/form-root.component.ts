@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PushPipe } from '@ngrx/component';
@@ -26,6 +26,7 @@ import * as formSelectors from '../state/form/form.selectors';
     PushPipe,
     RouterLink,
     TreatmentDetailsFormCardComponent,
+    NgClass,
   ],
   templateUrl: 'form-root.component.html',
 })

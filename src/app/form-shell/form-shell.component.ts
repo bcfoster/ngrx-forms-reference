@@ -41,6 +41,4 @@ export class FormShellComponent implements OnInit {
   submit(id: string) {
     this.store.dispatch(formActions.submit({ id }));
   }
-
-  protected readonly last = last;
 }

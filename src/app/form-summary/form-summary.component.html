@@ -3,7 +3,7 @@
 <h4>Your report details</h4>
 <p>Please review the information you've entered and, if it is correct, click Submit below.</p>
 
-<table *ngrxLet="form$ as form" class="table table-sm">
+<table *ngrxLet="form$ as form">
   <thead>
     <tr>
       <th scope="col" colspan="4"><h4>Your contact information</h4></th>
@@ -11,8 +11,8 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row" class="w-25">Legal first name</th>
-      <td class="w-75">{{ form.personalAndContactInfo.representativeInformation}}</td>
+      <th scope="row">Legal first name</th>
+      <td>{{ form.personalAndContactInfo.representativeInformation}}</td>
     </tr>
   </tbody>
 </table>

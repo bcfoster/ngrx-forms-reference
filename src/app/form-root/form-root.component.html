@@ -2,78 +2,66 @@
 @let formState = formState$ | ngrxPush;
 @let state = state$ | ngrxPush;
 
-<h3>Report your injury</h3>
+<div class="mx-auto w-1/2">
+  <h1 class="mb-4 text-2xl leading-none font-bold text-gray-900">Report your injury</h1>
 
-<h5>Injury and other details</h5>
+  <p>Please complete the form sections listed below. Your progress will automatically be saved.</p>
 
-<p>
-  Please complete the following four sections in any order. You will have an opportunity to review
-  your information before submitting.
-</p>
-
-<div class="row row-cols-1 g-3 my-4">
-  <div class="col">
+  <div class="my-6 grid grid-cols-2 gap-3">
     <personal-and-contact-info-form-card></personal-and-contact-info-form-card>
-  </div>
-  <div class="col">
     <incident-and-injury-details-form-card></incident-and-injury-details-form-card>
-  </div>
-  <div class="col">
     <treatment-details-form-card></treatment-details-form-card>
-  </div>
-  <div class="col">
     <employment-and-employer-info-form-card></employment-and-employer-info-form-card>
   </div>
-</div>
 
-@if (state?.debug) {
-  <div class="row g-2 my-3">
-    <div class="col-auto">
+  @if (state?.debug) {
+    <div class="flex gap-2">
       <button
         type="button"
-        class="btn btn-primary"
+        class="rounded-lg bg-blue-700 px-3 py-2 text-sm font-medium text-white focus:ring-4 focus:ring-blue-300 focus:outline-none"
         routerLink="summary"
+        (click)="save()"
         [disabled]="form?.isInvalid ?? true"
+        [ngClass]="{ 'cursor-pointer hover:bg-blue-800': form?.isValid ?? false, 'cursor-not-allowed opacity-50': form?.isInvalid ?? true }"
       >
         Submit
       </button>
-    </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="save()">
-        Save
-      </button>
-    </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="exit()">
-        Exit
-      </button>
-    </div>
-    <div class="col-auto">
-      <button class="btn btn-outline-danger" (click)="reset()">Reset</button>
-    </div>
-  </div>
-
-  <div class="row g-2 my-5">
-    <div class="col">
-      <pre>{{ state!.debug ? (formState ?? '' | json) : form?.value | json }}</pre>
-    </div>
-  </div>
-} @else {
-  <div class="row g-2 my-3">
-    <div class="col-auto">
-      <button type="button" class="btn btn-outline-primary" routerLink=".." (click)="save()">
-        Back
-      </button>
-    </div>
-    <div class="col-auto">
       <button
         type="button"
-        class="btn btn-primary"
+        class="cursor-pointer rounded-lg bg-blue-700 px-3 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+        routerLink=".."
+        (click)="save()"
+      >
+        Save
+      </button>
+      <button
+        class="cursor-pointer rounded-lg border border-red-500 px-3 py-2 text-sm font-medium text-red-500 hover:bg-red-600 hover:text-white focus:ring-4 focus:ring-red-300 focus:outline-none"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+    <div class="my-6 text-xs">
+      <pre>{{ state!.debug ? (formState ?? '' | json) : form?.value | json }}</pre>
+    </div>
+  } @else {
+    <div class="flex gap-2">
+      <button
+        type="button"
+        class="me-2 cursor-pointer rounded-lg bg-blue-700 px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+        routerLink=".."
+        (click)="save()"
+      >
+        Back
+      </button>
+      <button
+        type="button"
+        class="me-2 cursor-pointer rounded-lg bg-blue-700 px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
         routerLink="summary"
         [disabled]="form?.isInvalid ?? true"
       >
-        Proceed to review
+        Proceed to view
       </button>
     </div>
-  </div>
-}
+  }
+</div>
