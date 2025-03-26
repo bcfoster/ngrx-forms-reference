@@ -4,10 +4,16 @@
     <base href="/" />
     <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Form</title>
   </head>
   <body>
-    <app-root></app-root>
+    <div class="flex min-h-screen flex-col">
+      <header class="collapse bg-emerald-100 p-4">Header</header>
+      <main class="flex-grow p-4">
+        <app-root></app-root>
+      </main>
+      <footer class="collapse bg-emerald-100 p-4">Footer</footer>
+    </div>
   </body>
 </html>

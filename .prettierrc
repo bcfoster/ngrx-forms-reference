@@ -7,5 +7,6 @@
   "semi": true,
   "quoteProps": "preserve",
   "bracketSpacing": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
