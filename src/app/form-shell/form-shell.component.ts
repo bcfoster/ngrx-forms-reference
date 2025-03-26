@@ -1,9 +1,9 @@
-import { DatePipe, PercentPipe } from '@angular/common';
+import { DatePipe, NgClass, PercentPipe } from '@angular/common';
 import { PushPipe } from '@ngrx/component';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { last, Observable } from 'rxjs';
 
 import { draftActions } from '../state/drafts/drafts.actions';
 import { formActions } from '../state/form/form.actions';
@@ -12,7 +12,7 @@ import * as draftSelectors from '../state/drafts/drafts.selectors';
 
 @Component({
   selector: 'form-shell',
-  imports: [DatePipe, PercentPipe, PushPipe, RouterLink],
+  imports: [DatePipe, NgClass, PercentPipe, PushPipe, RouterLink],
   templateUrl: './form-shell.component.html',
 })
 export class FormShellComponent implements OnInit {
@@ -41,4 +41,6 @@ export class FormShellComponent implements OnInit {
   submit(id: string) {
     this.store.dispatch(formActions.submit({ id }));
   }
+
+  protected readonly last = last;
 }

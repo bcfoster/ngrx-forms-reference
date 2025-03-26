@@ -1,57 +1,63 @@
-@let drafts = drafts$ | ngrxPush;
+@let drafts = (drafts$ | ngrxPush) ?? [];
 
-@if (drafts) {
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col" class="col">Date created</th>
-        <th scope="col" class="col">Last edited</th>
-        <th scope="col" class="col">Progress</th>
-        <th scope="col" class="col-auto"></th>
-      </tr>
-    </thead>
-    @if (drafts.length > 0) {
+<div class="mx-auto w-1/2">
+  <h1 class="mb-4 text-2xl leading-none font-bold text-gray-900">Your injury reports</h1>
+
+  @if (drafts.length > 0) {
+    <table class="my-6 w-full text-left text-sm text-gray-500 rtl:text-right">
+      <thead class="bg-gray-50 text-xs text-gray-700 uppercase">
+        <tr>
+          <th scope="col" class="px-6 py-3">Date created</th>
+          <th scope="col" class="px-6 py-3">Last edited</th>
+          <th scope="col" class="px-6 py-3">Completed</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
       <tbody>
-        @for (form of drafts; track form.id) {
-          <tr>
-            <td>{{ form.createdDate | date:'medium' }}</td>
-            <td>{{ (form.editedDate | date:'medium') ?? '--' }}</td>
-            <td>{{ form.percentComplete | percent }}</td>
-            <td>
+        @for (form of drafts; track form.id; let last = $last) {
+          <tr class="bg-white" [ngClass]="{'border-b border-gray-200': !last}">
+            <td class="px-6 py-2">{{ form.createdDate | date:'medium' }}</td>
+            <td class="px-6 py-2">{{ (form.editedDate | date:'medium') ?? '--' }}</td>
+            <td class="px-6 py-2">{{ form.percentComplete | percent }}</td>
+            <td class="px-6 py-2">
               <button
-                class="btn btn-primary btn-sm mx-1"
-                [hidden]="form.percentComplete < 1"
+                type="button"
+                class="me-2 rounded-lg bg-blue-700 px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none"
                 routerLink="form/summary"
+                [hidden]="form.percentComplete < 1"
                 (click)="submit(form.id)"
               >
                 Submit
               </button>
               <button
-                class="btn btn-sm mx-1"
-                [class.btn-primary]="form.percentComplete < 1"
-                [class.btn-outline-primary]="form.percentComplete === 1"
-                routerLink="form"
+                class="me-2 rounded-lg px-3 py-2 text-xs font-medium focus:ring-4"
+                [ngClass]="{ 'border-blue-700 text-blue-700 hover:bg-blue-800 hover:text-white': form.percentComplete === 1, 'bg-blue-700 text-white hover:bg-blue-800': form.percentComplete !== 1 }"
+                routerlink="form"
                 (click)="continue(form.id)"
               >
-                Continue
+                {{ form.percentComplete === 1 ? 'Edit' : 'Continue' }}
               </button>
-              <button class="btn btn-outline-danger btn-sm mx-1" (click)="remove(form.id)">
+              <button
+                class="rounded-lg border border-red-700 px-3 py-2 text-xs font-medium text-red-700 hover:bg-red-800 hover:text-white focus:ring-4 focus:ring-red-300 focus:outline-none"
+                routerLink=""
+                (click)="remove(form.id)"
+              >
                 Remove
               </button>
             </td>
           </tr>
         }
       </tbody>
-    } @else {
-      <caption class="text-center">
-        No reports have been started
-      </caption>
-    }
-  </table>
-}
+    </table>
+  } @else {
+    <p class="my-6 text-center text-gray-800/30">Click the button to start a new injury report</p>
+  }
 
-<div class="row g-2 my-2">
-  <div class="col-auto">
-    <button class="btn btn-primary" routerLink="form" (click)="start()">Start a new report</button>
-  </div>
+  <button
+    class="cursor-pointer rounded-lg bg-blue-700 px-3 py-2 text-sm font-medium text-white hover:bg-blue-800 focus:ring-4"
+    routerLink="form"
+    (click)="start()"
+  >
+    Start a new report
+  </button>
 </div>
