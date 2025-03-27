@@ -5,8 +5,8 @@ import { NgbDate, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { FormGroupState, NgrxFormsModule, SetValueAction } from 'ngrx-forms';
 
-import * as formReducer from '../../../state/form/form.reducer';
-import * as personalInfo from '../../../state/form/forms/personal-and-contact-info/personal-info.form';
+import * as formReducer from '../../../../state/form/form.reducer';
+import * as personalInfo from '../../../../state/form/forms/personal-and-contact-info/personal-info.form';
 
 @Component({
   selector: 'personal-info-form',
