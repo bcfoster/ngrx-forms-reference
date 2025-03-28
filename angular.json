@@ -58,6 +58,16 @@
               "src/styles.css"
             ],
             "scripts": [
+              {
+                "input": "node_modules/flowbite/dist/flowbite.min.js",
+                "inject": true,
+                "bundleName": "flowbite.min"
+              },
+              {
+                "input": "node_modules/flowbite-datepicker/dist/js/datepicker-full.min.js",
+                "inject": true,
+                "bundleName": "datepicker.min"
+              }
             ]
           },
           "configurations": {

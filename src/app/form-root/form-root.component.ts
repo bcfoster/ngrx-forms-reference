@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { JsonPipe, NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { PushPipe } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import { FormGroupState } from 'ngrx-forms';
 import { map, Observable } from 'rxjs';
@@ -15,6 +15,7 @@ import { TreatmentDetailsFormCardComponent } from './form-cards/treatment-detail
 import { formActions } from '../state/form/form.actions';
 import * as formReducer from '../state/form/form.reducer';
 import * as formSelectors from '../state/form/form.selectors';
+import { WhoAreYouFormComponent } from './who-are-you-form/who-are-you-form.component';
 
 @Component({
   selector: 'form-root',
@@ -27,6 +28,8 @@ import * as formSelectors from '../state/form/form.selectors';
     RouterLink,
     TreatmentDetailsFormCardComponent,
     NgClass,
+    WhoAreYouFormComponent,
+    LetDirective,
   ],
   templateUrl: 'form-root.component.html',
 })
