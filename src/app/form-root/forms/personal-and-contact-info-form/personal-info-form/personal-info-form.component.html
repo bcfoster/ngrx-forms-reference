@@ -1,47 +1,52 @@
-<h5>Your personal information</h5>
+<h2 class="mb-4 text-xl leading-none font-bold text-yellow-500">Your personal information</h2>
 
 @if (form) {
-  <fieldset [disabled]="form.isDisabled">
-    <legend class="fs-6 fw-bold">
-      Have you already received a WorkSafeBC claim number for the incident you are reporting today?
-    </legend>
-    <legend class="fs-6">You may have received a claim number from us or your employer.</legend>
-    <div class="btn-group" role="group" aria-label="">
-      <input
-        type="radio"
-        class="btn-check"
-        name="has-received-claim-number"
-        id="has-received-claim-number-yes"
-        [ngrxFormControlState]="form.controls.haveClaimNumber"
-        [value]="true"
-      />
-      <label class="btn btn-outline-primary" for="has-received-claim-number-yes">Yes</label>
-      <input
-        type="radio"
-        class="btn-check"
-        name="has-received-claim-number"
-        id="has-received-claim-number-no"
-        [ngrxFormControlState]="form.controls.haveClaimNumber"
-        [value]="false"
-      />
-      <label class="btn btn-outline-primary" for="has-received-claim-number-no">No</label>
+  <div class="flex flex-col gap-y-2">
+    <div>
+      <label for="have-claim-number" class="block text-sm font-semibold text-gray-900">
+        Have you already received a claim number for the incident you are reporting today?
+      </label>
+      <p id="have-claim-number-helper-text" class="text-sm text-gray-500">
+        You may have received a claim number from us.
+      </p>
     </div>
-  </fieldset>
 
-  @if (!!form.value.haveClaimNumber) {
-    <fieldset>
-      <legend class="fs-6 fw-bold">WorkSafeBC claim number</legend>
+    <div class="flex gap-x-3">
+      <input class="hidden" id="have-claim-number" />
+      <div class="flex items-center gap-x-2">
+        <input
+          class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+          id="have-claim-number-yes"
+          name="have-claim-number"
+          [ngrxFormControlState]="form.controls.haveClaimNumber"
+          type="radio"
+          [value]="true"
+        />
+        <label for="have-claim-number-yes" class="text-sm font-medium text-gray-900">Yes</label>
+      </div>
+      <div class="flex items-center gap-x-2">
+        <input
+          class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+          id="have-claim-number-no"
+          name="have-claim-number"
+          [ngrxFormControlState]="form.controls.haveClaimNumber"
+          type="radio"
+          [value]="false"
+        />
+        <label for="have-claim-number-no" class="text-sm font-medium text-gray-900">No</label>
+      </div>
+    </div>
+
+    @if (form.value.haveClaimNumber === true) {
+      <label for="claim-number" class="block text-sm font-semibold text-gray-900"
+        >Claim number</label
+      >
       <input
-        type="text"
-        class="form-control"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
         id="claim-number"
         [ngrxFormControlState]="form.controls.claimNumber"
+        type="text"
       />
-    </fieldset>
-  }
-
-  <fieldset>
-    <legend class="fs-6 fw-bold">Date of birth</legend>
-    <ngb-datepicker #dp (dateSelect)="setDateOfBirth($event)" />
-  </fieldset>
+    }
+  </div>
 }

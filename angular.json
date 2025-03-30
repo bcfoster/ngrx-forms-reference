@@ -125,6 +125,7 @@
     "schematicCollections": [
       "angular-eslint",
       "@ngrx/schematics"
-    ]
+    ],
+    "analytics": false
   }
 }

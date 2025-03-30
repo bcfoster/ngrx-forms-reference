@@ -1,55 +1,56 @@
-<h5>Representative information</h5>
+<h2 class="mb-4 text-xl leading-none font-bold text-yellow-500">Representative information</h2>
 
-<fieldset *ngIf="form">
-  <legend class="fs-6 fw-bold">First name</legend>
-  <input
-    type="text"
-    class="form-control"
-    id="first-name"
-    [ngrxFormControlState]="form.controls.firstName"
-  />
-
-  <legend class="fs-6 fw-bold">Last name</legend>
-  <input
-    type="text"
-    class="form-control"
-    id="last-name"
-    [ngrxFormControlState]="form.controls.lastName"
-  />
-
-  <legend class="fs-6 fw-bold">Phone number</legend>
-  <input
-    type="text"
-    class="form-control"
-    id="phone-number"
-    [ngrxFormControlState]="form.controls.phoneNumber"
-  />
-
-  <legend class="fs-6 fw-bold">Relationship to the injured worker</legend>
-  <select class="form-select" aria-label="" [ngrxFormControlState]="form.controls.relationship">
-    <option value="">Choose a relationship</option>
-    <option value="Coworker">Coworker</option>
-    <option value="Spouse">Spouse</option>
-    <option value="OtherFamily">Family</option>
-    <option value="UnionRepresentative">Union</option>
-    <option value="Other">Other</option>
-  </select>
-
-  @if (form.value.relationship === 'Other') {
-    <legend class="fs-6 fw-bold">What is your relationship with the worker?</legend>
+@if (form) {
+  <div class="flex flex-col gap-y-2">
+    <label for="first-name" class="block text-sm font-semibold text-gray-900">First name</label>
     <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="first-name"
+      [ngrxFormControlState]="form.controls.firstName"
       type="text"
-      class="form-control"
-      id="relationship-to-worker-description"
-      [ngrxFormControlState]="form.controls.relationshipOther"
     />
-  }
-</fieldset>
 
-<div id="alert">
-  <h6>Will you be someone else be helping the injured worker with their claim?</h6>
-  <span>
-    If the injured worker would like to add you or someone else as a representative to help manage
-    their claim, please have them fill out and sign our <a href="#">authorization</a> form.
-  </span>
-</div>
+    <label for="last-name" class="block text-sm font-semibold text-gray-900">Last name</label>
+    <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="last-name"
+      [ngrxFormControlState]="form.controls.lastName"
+      type="text"
+    />
+
+    <label for="phone-number" class="block text-sm font-semibold text-gray-900">Phone number</label>
+    <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="phone-number"
+      [ngrxFormControlState]="form.controls.phoneNumber"
+      type="text"
+    />
+
+    <label for="relationship" class="mb-2 block text-sm font-semibold text-gray-900"
+      >Relationship to the injured worker</label
+    >
+    <select
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="relationship"
+      [ngrxFormControlState]="form.controls.relationship"
+    >
+      <option value="" disabled>Choose a relationship</option>
+      <option value="Coworker">Coworker</option>
+      <option value="Spouse">Spouse</option>
+      <option value="OtherFamily">Family</option>
+      <option value="UnionRepresentative">Union</option>
+      <option value="Other">Other</option>
+    </select>
+
+    @if (form.value.relationship === 'Other') {
+      <label for="relationship-other" class="mb-2 block text-sm font-semibold text-gray-900"
+        >Your message</label
+      >
+      <textarea
+        id="relationship-other"
+        rows="4"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      ></textarea>
+    }
+  </div>
+}

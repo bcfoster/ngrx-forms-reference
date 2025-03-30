@@ -1,190 +1,44 @@
-<div class="mx-auto max-w-sm">
-  <h1 class="mb-4 text-2xl leading-none font-bold text-gray-900">About you</h1>
+<div *ngrxLet="form$ as form" class="mx-auto max-w-sm">
+  <h1 class="mb-4 text-2xl leading-none font-bold text-gray-900">
+    Personal and contact information
+  </h1>
 
-  <form *ngrxLet="form$ as form" [ngrxFormState]="form" class="flex flex-col gap-y-2">
-    <div>
-      <label for="claim-number" class="mb-2 block text-sm font-normal">Claim number</label>
-      <input
-        type="text"
-        id="claim-number"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        [ngrxFormControlState]="form.controls.personalInformation.controls.claimNumber"
-      />
-    </div>
+  <form [ngrxFormState]="form" class="flex flex-col gap-y-2">
+    <label for="reporting-for-self" class="text-sm font-semibold text-gray-900">
+      Are you the person who was injured?
+    </label>
 
-    <div>
-      <label for="legal-first-name" class="mb-2 block text-sm font-normal">Legal first name</label>
-      <input
-        type="text"
-        id="legal-first-name"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        [ngrxFormControlState]="form.controls.personalInformation.controls.legalFirstName"
-      />
-    </div>
+    <input id="reporting-for-self" class="hidden" />
 
-    <div>
-      <label for="preferred-first-name" class="mb-2 block text-sm font-normal"
-        >Preferred first name</label
-      >
+    <div class="flex items-center gap-x-2">
       <input
-        type="text"
-        id="preferred-first-name"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        [ngrxFormControlState]="form.controls.personalInformation.controls.preferredFirstName"
+        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+        id="reporting-for-self-yes"
+        name="reporting-for-self"
+        [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
+        type="radio"
+        [value]="true"
       />
+      <label for="reporting-for-self-yes" class="text-sm font-medium text-gray-900">
+        Yes, I am the injured worker
+      </label>
     </div>
 
-    <div>
-      <label for="middle-name" class="mb-2 block text-sm font-normal">Middle name</label>
+    <div class="flex items-center gap-x-2">
       <input
-        type="text"
-        id="middle-name"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        [ngrxFormControlState]="form.controls.personalInformation.controls.middleName"
+        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+        id="reporting-for-self-no"
+        name="reporting-for-self"
+        [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
+        type="radio"
+        [value]="false"
       />
+      <label for="reporting-for-self-no" class="text-sm font-medium text-gray-900">
+        No, I am reporting on behalf of the injured worker
+      </label>
     </div>
 
-    <div>
-      <label for="last-name" class="mb-2 block text-sm font-normal">Last name</label>
-      <input
-        type="text"
-        id="last-name"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        [ngrxFormControlState]="form.controls.personalInformation.controls.lastName"
-      />
-    </div>
-
-    <div class="relative max-w-sm">
-      <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
-        <svg
-          class="h-4 w-4 text-gray-500 dark:text-gray-400"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-          />
-        </svg>
-      </div>
-      <input
-        datepicker
-        datepicker-autohide
-        id="default-datepicker"
-        type="text"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-        placeholder="Select date"
-      />
-    </div>
-    <div class="mb-5">
-      <label for="countries" class="mb-2 block text-sm font-medium text-gray-900"
-        >Select your country</label
-      >
-      <div class="block">
-        <select
-          id="countries"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-          [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
-        >
-          <option [value]="null" disabled>Choose an option</option>
-          <option [value]="true">Yes</option>
-          <option [value]="false">No</option>
-        </select>
-      </div>
-    </div>
-    <div class="mb-5">
-      <label for="email" class="mb-2 block text-sm font-medium text-gray-900">Your email</label>
-      <input
-        type="email"
-        id="email"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        placeholder="name@flowbite.com"
-        required
-      />
-    </div>
-    <div class="mb-5">
-      <label for="password" class="mb-2 block text-sm font-medium text-gray-900"
-        >Your password</label
-      >
-      <input
-        type="password"
-        id="password"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        required
-      />
-    </div>
-    <div class="mb-5 flex items-start">
-      <div class="flex h-5 items-center">
-        <input
-          id="remember"
-          type="checkbox"
-          class="h-4 w-4 rounded-sm border border-gray-300 bg-gray-50 focus:ring-3 focus:ring-blue-300"
-          required
-          [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
-          [value]="true"
-        />
-      </div>
-      <label for="remember" class="ms-2 text-sm font-medium text-gray-900">Remember me</label>
-    </div>
-    <div class="mb-5">
-      <label for="username-success" class="mb-2 block text-sm font-normal text-green-700"
-        >Your name</label
-      >
-      <input
-        type="text"
-        id="username-success"
-        class="block w-full rounded-lg border border-green-500 bg-green-50 p-2.5 text-sm text-green-900 placeholder-green-700 focus:border-green-500 focus:ring-green-500"
-      />
-      <p class="mt-2 text-sm text-green-600">
-        <span class="font-medium">Alright!</span> Username available!
-      </p>
-    </div>
-    <div>
-      <label for="username-error" class="mb-2 block text-sm font-normal text-red-700"
-        >Your name</label
-      >
-      <input
-        type="text"
-        id="username-error"
-        class="block w-full rounded-lg border border-red-500 bg-red-50 p-2.5 text-sm text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500"
-      />
-      <p class="mt-2 text-sm text-red-600">
-        <span class="font-medium">Oops!</span> Username already taken!
-      </p>
-    </div>
-
-    <fieldset [disabled]="form.isDisabled">
-      <legend class="fs-6 fw-bold">Are you the person who was injured?</legend>
-      <div class="form-check">
-        <input
-          type="radio"
-          name="is-injured-worker"
-          id="is-injured-worker-yes"
-          class="form-check-input"
-          [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
-          [value]="true"
-        />
-        <label for="is-injured-worker-yes" class="form-check-label"
-          >Yes, I am the injured worker</label
-        >
-      </div>
-      <div class="form-check">
-        <input
-          type="radio"
-          name="is-injured-worker"
-          id="is-injured-worker-no"
-          class="form-check-input"
-          [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
-          [value]="false"
-        />
-        <label for="is-injured-worker-no" class="form-check-label">
-          No, I am reporting on behalf of the injured worker
-        </label>
-      </div>
-    </fieldset>
-
-    @if (!(form.value.representativeInformation.reportingForSelf ?? true)) {
+    @if (form.value.representativeInformation.reportingForSelf === false) {
       <representative-info-form
         [form]="form.controls.representativeInformation"
       ></representative-info-form>
@@ -192,13 +46,14 @@
 
     <personal-info-form [form]="form.controls.personalInformation"></personal-info-form>
 
-    <div class="row g-2 my-3">
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary" [routerLink]="['..']">Save</button>
-      </div>
-      <div class="col-auto">
-        <button type="button" class="btn btn-outline-danger" (click)="reset()">Reset</button>
-      </div>
+    <div>
+      <button
+        type="button"
+        class="cursor-pointer rounded-lg bg-blue-500 px-3 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+        routerLink=".."
+      >
+        Continue
+      </button>
     </div>
   </form>
 </div>
