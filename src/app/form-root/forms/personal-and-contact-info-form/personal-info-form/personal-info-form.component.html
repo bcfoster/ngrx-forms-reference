@@ -93,37 +93,37 @@
       >Date of birth</label
     >
     <input id="date-of-birth" class="hidden" />
-    <div class="flex">
-      <select
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+    <div class="flex gap-x-2">
+      <input
+        #year
+        class="block w-1/2 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400 [&::-webkit-inner-spin-button]:appearance-none"
         id="date-of-birth-year"
+        (input)="onDateChanged($event)"
         [ngrxFormControlState]="form.controls.dateOfBirth.controls.year"
-      >
-        <option value="" disabled>Year</option>
-        @for (year of years; track year) {
-          <option value="{{ year }}">{{ year }}</option>
-        }
-      </select>
-      <select
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        maxlength="4"
+        placeholder="YYYY"
+        type="text"
+      />
+      <input
+        #month
+        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400 [&::-webkit-inner-spin-button]:appearance-none"
         id="date-of-birth-month"
+        (input)="onDateChanged($event)"
         [ngrxFormControlState]="form.controls.dateOfBirth.controls.month"
-      >
-        <option value="" disabled>Month</option>
-        @for (month of months; track month.value) {
-          <option value="{{ month.value }}">{{ month.displayValue }}</option>
-        }
-      </select>
-      <select
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        maxlength="2"
+        placeholder="MM"
+        type="text"
+      />
+      <input
+        #day
+        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400 [&::-webkit-inner-spin-button]:appearance-none"
         id="date-of-birth-day"
+        (input)="onDateChanged($event)"
         [ngrxFormControlState]="form.controls.dateOfBirth.controls.day"
-      >
-        <option value="" disabled>Day</option>
-        @for (day of days$ | ngrxPush; track day) {
-          <option value="{{ day }}">{{ day }}</option>
-        }
-      </select>
+        maxlength="2"
+        placeholder="DD"
+        type="text"
+      />
     </div>
   </div>
 }
