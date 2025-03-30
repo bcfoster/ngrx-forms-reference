@@ -48,5 +48,82 @@
         type="text"
       />
     }
+
+    <label for="legal-first-name" class="block text-sm font-semibold text-gray-900"
+      >Legal first name</label
+    >
+    <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="legal-first-name"
+      [ngrxFormControlState]="form.controls.legalFirstName"
+      type="text"
+    />
+
+    <label for="preferred-first-name" class="block text-sm font-semibold text-gray-900"
+      >Preferred first name</label
+    >
+    <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="preferred-first-name"
+      [ngrxFormControlState]="form.controls.preferredFirstName"
+      placeholder="Optional"
+      type="text"
+    />
+
+    <label for="middle-name" class="block text-sm font-semibold text-gray-900"
+      >Middle name or initial</label
+    >
+    <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="middle-name"
+      [ngrxFormControlState]="form.controls.middleName"
+      placeholder="Optional"
+      type="text"
+    />
+
+    <label for="last-name" class="block text-sm font-semibold text-gray-900">Last name</label>
+    <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="last-name"
+      [ngrxFormControlState]="form.controls.lastName"
+      type="text"
+    />
+
+    <label for="date-of-birth" class="block text-sm font-semibold text-gray-900"
+      >Date of birth</label
+    >
+    <input id="date-of-birth" class="hidden" />
+    <div class="flex">
+      <select
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="date-of-birth-year"
+        [ngrxFormControlState]="form.controls.dateOfBirth.controls.year"
+      >
+        <option value="" disabled>Year</option>
+        @for (year of years; track year) {
+          <option value="{{ year }}">{{ year }}</option>
+        }
+      </select>
+      <select
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="date-of-birth-month"
+        [ngrxFormControlState]="form.controls.dateOfBirth.controls.month"
+      >
+        <option value="" disabled>Month</option>
+        @for (month of months; track month.value) {
+          <option value="{{ month.value }}">{{ month.displayValue }}</option>
+        }
+      </select>
+      <select
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="date-of-birth-day"
+        [ngrxFormControlState]="form.controls.dateOfBirth.controls.day"
+      >
+        <option value="" disabled>Day</option>
+        @for (day of days$ | ngrxPush; track day) {
+          <option value="{{ day }}">{{ day }}</option>
+        }
+      </select>
+    </div>
   </div>
 }
