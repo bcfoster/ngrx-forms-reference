@@ -1,14 +1,33 @@
 <h2 class="mb-4 text-xl leading-none font-bold text-yellow-500">Representative information</h2>
 
 @if (form) {
-  <div class="flex flex-col gap-y-2">
-    <label for="first-name" class="block text-sm font-semibold text-gray-900">First name</label>
-    <input
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-      id="first-name"
-      [ngrxFormControlState]="form.controls.firstName"
-      type="text"
-    />
+  <div class="flex flex-col gap-y-3">
+    <div class="flex flex-col gap-y-1">
+      <label
+        for="first-name"
+        [ngClass]="{ 'text-red-500': form.controls.firstName.isTouched && form.controls.firstName.isInvalid }"
+        class="block text-sm font-semibold text-gray-900"
+        >First name</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        [ngClass]="{ 'border-red-500 bg-red-50 focus:border-red-600 focus:ring-red-600': form.controls.firstName.isTouched && form.controls.firstName.isInvalid }"
+        id="first-name"
+        [ngrxFormControlState]="form.controls.firstName"
+        type="text"
+      />
+      @if (form.controls.firstName.isTouched && form.controls.firstName.isInvalid) {
+        @if (form.controls.firstName.errors.required) {
+          <p class="text-sm text-red-500">First name is required</p>
+        }
+        @if (form.controls.firstName.errors.minLength) {
+          <p class="text-sm text-red-500">
+            First name must have a minimum length of
+            {{ form.controls.firstName.errors.minLength.minLength }}
+          </p>
+        }
+      }
+    </div>
 
     <label for="last-name" class="block text-sm font-semibold text-gray-900">Last name</label>
     <input
