@@ -57,6 +57,7 @@ export const validator = updateGroup<Form>({
       f.value.country === 'CA'
         ? validate(c, required, postalCode)
         : validate(c, required, maxLength(10)),
+    addressExtra: (c) => optional(c),
   }),
   // TODO: the validation rules for these controls is FUBAR
   phone: updateGroup<PhoneForm>({

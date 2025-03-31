@@ -26,7 +26,7 @@
       type="text"
     />
 
-    <label for="relationship" class="mb-2 block text-sm font-semibold text-gray-900"
+    <label for="relationship" class="block text-sm font-semibold text-gray-900"
       >Relationship to the injured worker</label
     >
     <select
@@ -43,13 +43,14 @@
     </select>
 
     @if (form.value.relationship === 'Other') {
-      <label for="relationship-other" class="mb-2 block text-sm font-semibold text-gray-900"
-        >Your message</label
+      <label for="relationship-other" class="block text-sm font-semibold text-gray-900"
+        >What is your relationship with the injured worker?</label
       >
       <textarea
+        class="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
         id="relationship-other"
-        rows="4"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        [ngrxFormControlState]="form.controls.relationshipOther"
+        rows="2"
       ></textarea>
     }
   </div>

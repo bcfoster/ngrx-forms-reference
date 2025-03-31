@@ -1,7 +1,7 @@
 <h2 class="mb-4 text-xl leading-none font-bold text-yellow-500">Your personal information</h2>
 
 @if (form) {
-  <div class="flex flex-col gap-y-2">
+  <div class="flex flex-col gap-y-3">
     <div>
       <label for="have-claim-number" class="block text-sm font-semibold text-gray-900">
         Have you already received a claim number for the incident you are reporting today?
@@ -60,24 +60,22 @@
     />
 
     <label for="preferred-first-name" class="block text-sm font-semibold text-gray-900"
-      >Preferred first name</label
+      >Preferred first name <span class="font-normal">(optional)</span></label
     >
     <input
       class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
       id="preferred-first-name"
       [ngrxFormControlState]="form.controls.preferredFirstName"
-      placeholder="Optional"
       type="text"
     />
 
     <label for="middle-name" class="block text-sm font-semibold text-gray-900"
-      >Middle name or initial</label
+      >Middle name or initial <span class="font-normal">(optional)</span></label
     >
     <input
       class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
       id="middle-name"
       [ngrxFormControlState]="form.controls.middleName"
-      placeholder="Optional"
       type="text"
     />
 
@@ -96,7 +94,7 @@
     <div class="flex gap-x-2">
       <input
         #year
-        class="block w-1/2 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400 [&::-webkit-inner-spin-button]:appearance-none"
+        class="block w-1/2 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
         id="date-of-birth-year"
         (input)="onDateChanged($event)"
         [ngrxFormControlState]="form.controls.dateOfBirth.controls.year"
@@ -106,7 +104,7 @@
       />
       <input
         #month
-        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400 [&::-webkit-inner-spin-button]:appearance-none"
+        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
         id="date-of-birth-month"
         (input)="onDateChanged($event)"
         [ngrxFormControlState]="form.controls.dateOfBirth.controls.month"
@@ -116,7 +114,7 @@
       />
       <input
         #day
-        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400 [&::-webkit-inner-spin-button]:appearance-none"
+        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
         id="date-of-birth-day"
         (input)="onDateChanged($event)"
         [ngrxFormControlState]="form.controls.dateOfBirth.controls.day"
@@ -124,6 +122,241 @@
         placeholder="DD"
         type="text"
       />
+    </div>
+
+    <label for="sex-at-birth" class="text-sm font-semibold text-gray-900"> Sex at birth </label>
+    <input id="sex-at-birth" class="hidden" />
+    <div class="flex items-center gap-x-2">
+      <input
+        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+        id="sex-at-birth-female"
+        name="sex-at-birth"
+        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
+        type="radio"
+        value="Female"
+      />
+      <label for="sex-at-birth-female" class="text-sm font-medium text-gray-900"> Female </label>
+    </div>
+    <div class="flex items-center gap-x-2">
+      <input
+        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+        id="sex-at-birth-intersex"
+        name="sex-at-birth"
+        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
+        type="radio"
+        value="Intersex"
+      />
+      <label for="sex-at-birth-intersex" class="text-sm font-medium text-gray-900">
+        Intersex
+      </label>
+    </div>
+    <div class="flex items-center gap-x-2">
+      <input
+        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+        id="sex-at-birth-male"
+        name="sex-at-birth"
+        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
+        type="radio"
+        value="Male"
+      />
+      <label for="sex-at-birth-male" class="text-sm font-medium text-gray-900"> Male </label>
+    </div>
+    <div class="flex items-center gap-x-2">
+      <input
+        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+        id="sex-at-birth-unknown"
+        name="sex-at-birth"
+        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
+        type="radio"
+        value="Unknown"
+      />
+      <label for="sex-at-birth-unknown" class="text-sm font-medium text-gray-900">
+        Prefer not to answer
+      </label>
+    </div>
+
+    <label for="gender" class="block text-sm font-semibold text-gray-900"
+      >Gender <span class="font-normal">(optional)</span></label
+    >
+    <select
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="gender"
+      [ngrxFormControlState]="form.controls.demographics.controls.gender"
+    >
+      <option value="" disabled>Choose your gender</option>
+      <option value="Man">Man</option>
+      <option value="Non-binary">Non-binary</option>
+      <option value="Two-Spirit">Two-Spirit</option>
+      <option value="Woman">Woman</option>
+      <option value="__<CUSTOM>__">Alternatively, please specify</option>
+    </select>
+
+    @if (form.value.demographics.gender === '__<CUSTOM>__') {
+      <label for="gender-other" class="block text-sm font-semibold text-gray-900"
+        >Please specify your gender <span class="font-normal">(optional)</span></label
+      >
+      <textarea
+        class="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="gender-other"
+        [ngrxFormControlState]="form.controls.demographics.controls.customGender"
+        rows="2"
+      ></textarea>
+    }
+
+    <label for="pronouns" class="block text-sm font-semibold text-gray-900"
+      >Pronouns <span class="font-normal">(optional)</span></label
+    >
+    <select
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="pronouns"
+      [ngrxFormControlState]="form.controls.demographics.controls.pronouns"
+    >
+      <option value="" disabled>Choose your pronouns</option>
+      <option value="He/him">He/him</option>
+      <option value="She/her">She/her</option>
+      <option value="They/them">They/them</option>
+      <option value="Ze/zir">Ze/zir</option>
+      <option value="__<CUSTOM>__">Alternatively, please specify</option>
+    </select>
+
+    @if (form.value.demographics.pronouns === '__<CUSTOM>__') {
+      <label for="gender-other" class="block text-sm font-semibold text-gray-900"
+        >Please specify your pronouns <span class="font-normal">(optional)</span></label
+      >
+      <textarea
+        class="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="pronouns-other"
+        [ngrxFormControlState]="form.controls.demographics.controls.customPronouns"
+        rows="2"
+      ></textarea>
+    }
+
+    <label for="height" class="block text-sm font-semibold text-gray-900"
+      >What is your height?</label
+    >
+    <input class="hidden" id="height" />
+    <div class="flex gap-x-2">
+      <div class="relative w-1/5">
+        <input
+          class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="height-feet"
+          [ngrxFormControlState]="form.controls.heightFeet"
+          type="text"
+        />
+        <span
+          class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
+        >
+          ft.
+        </span>
+      </div>
+
+      <div class="relative w-1/5">
+        <input
+          class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="height-inches"
+          [ngrxFormControlState]="form.controls.heightInches"
+          type="text"
+        />
+        <span
+          class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
+        >
+          in.
+        </span>
+      </div>
+    </div>
+
+    <label for="weight" class="block text-sm font-semibold text-gray-900"
+      >What is your weight?</label
+    >
+    <input class="hidden" id="weight" />
+    <div class="flex gap-x-2">
+      <div class="relative w-1/5">
+        <input
+          class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="weight-pounds"
+          [ngrxFormControlState]="form.controls.weight"
+          type="text"
+        />
+        <span
+          class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
+        >
+          lbs.
+        </span>
+      </div>
+    </div>
+
+    <label for="have-personal-health-number" class="block text-sm font-semibold text-gray-900">
+      Do you have a B.C. Personal Health Number (PHN)?
+    </label>
+    <div class="flex gap-x-3">
+      <input class="hidden" id="have-personal-health-number" />
+      <div class="flex items-center gap-x-2">
+        <input
+          class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+          id="have-personal-health-number-yes"
+          name="have-claim-number"
+          [ngrxFormControlState]="form.controls.havePhn"
+          type="radio"
+          [value]="true"
+        />
+        <label for="have-personal-health-number-yes" class="text-sm font-medium text-gray-900"
+          >Yes</label
+        >
+      </div>
+      <div class="flex items-center gap-x-2">
+        <input
+          class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+          id="have-personal-health-number-no"
+          name="have-personal-health-number"
+          [ngrxFormControlState]="form.controls.havePhn"
+          type="radio"
+          [value]="false"
+        />
+        <label for="have-personal-health-number-no" class="text-sm font-medium text-gray-900"
+          >No</label
+        >
+      </div>
+    </div>
+
+    @if (form.value.havePhn === true) {
+      <label for="personal-health-number" class="block text-sm font-semibold text-gray-900"
+        >Personal health number (PHN)</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="personal-health-number"
+        [ngrxFormControlState]="form.controls.phn"
+        type="text"
+      />
+    }
+
+    <label for="interpreter" class="block text-sm font-semibold text-gray-900">
+      If we need to speak with you about your claim, would you like an interpreter on the call?
+    </label>
+    <div class="flex gap-x-3">
+      <input class="hidden" id="interpreter" />
+      <div class="flex items-center gap-x-2">
+        <input
+          class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+          id="interpreter-yes"
+          name="interpreter"
+          [ngrxFormControlState]="form.controls.interpreter"
+          type="radio"
+          [value]="true"
+        />
+        <label for="interpreter-yes" class="text-sm font-medium text-gray-900">Yes</label>
+      </div>
+      <div class="flex items-center gap-x-2">
+        <input
+          class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
+          id="interpreter-no"
+          name="interpreter"
+          [ngrxFormControlState]="form.controls.interpreter"
+          type="radio"
+          [value]="false"
+        />
+        <label for="interpreter-no" class="text-sm font-medium text-gray-900">No</label>
+      </div>
     </div>
   </div>
 }

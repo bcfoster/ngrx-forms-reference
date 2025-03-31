@@ -18,7 +18,9 @@ export type IndigenousAncestry = 'Status' | 'NonStatus' | 'Inuit' | 'Metis' | 'O
 export interface DemographicsForm {
   sexAtBirth: SexAtBirth | '';
   gender: Gender | '';
+  customGender: '';
   pronouns: Pronouns | '';
+  customPronouns: '';
   indigenousInd: boolean | null;
   associationNation: string;
   ancestrey: IndigenousAncestry | '';
@@ -58,7 +60,9 @@ export const initialFormValue: Form = {
   demographics: {
     sexAtBirth: '',
     gender: '',
+    customGender: '',
     pronouns: '',
+    customPronouns: '',
     indigenousInd: null,
     ancestrey: '',
     associationNation: '',
@@ -84,13 +88,15 @@ export const validator = updateGroup<Form>({
       ? validate(c, required, minLength(8), maxLength(8))
       : optional(setValue(c, '')),
   legalFirstName: validate(required, minLength(2), maxLength(25)),
-  preferredFirstName: validate(maxLength(25)),
-  middleName: validate(maxLength(10)),
+  preferredFirstName: optional(maxLength(25)),
+  middleName: optional(maxLength(10)),
   lastName: validate(required, minLength(2), maxLength(30)),
   demographics: updateGroup({
     sexAtBirth: validate(required),
     gender: (c) => optional(c),
+    customGender: (c) => optional(c),
     pronouns: (c) => optional(c),
+    customPronouns: (c) => optional(c),
     indigenousInd: (c) => optional(c),
     ancestrey: (c) => optional(c),
     associationNation: (c) => optional(c),
