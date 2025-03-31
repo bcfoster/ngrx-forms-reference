@@ -1,0 +1,32 @@
+@if (control) {
+  <div class="flex flex-col gap-y-1">
+    <label
+      class="block text-sm font-semibold text-gray-900"
+      [for]="id"
+      [ngClass]="{ 'text-red-500': control.isTouched && control.isInvalid }"
+    >
+      {{ label }}
+      @if (optional) {
+        <span class="font-normal"> (optional)</span>
+      }
+    </label>
+    <textarea
+      class="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      [id]="id"
+      [ngClass]="{ 'border-red-500 bg-red-50 focus:border-red-600 focus:ring-red-600': control.isTouched && control.isInvalid }"
+      [ngrxFormControlState]="control"
+      rows="2"
+    ></textarea>
+    @if (control.isTouched && control.isInvalid) {
+      @if (control.errors.required) {
+        <p class="text-sm text-red-500">{{ label }} is required</p>
+      }
+      @if (control.errors.minLength) {
+        <p class="text-sm text-red-500">
+          {{ label }} must have a minimum length of
+          {{ control.errors.minLength.minLength }}
+        </p>
+      }
+    }
+  </div>
+}

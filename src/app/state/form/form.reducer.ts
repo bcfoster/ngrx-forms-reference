@@ -96,10 +96,10 @@ export const validate = (form: FormGroupState<Form>) =>
       employmentAndEmployerInfo: employmentAndEmployer.validator,
     },
     {
-      personalAndContactInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-      injuryAndIncident: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-      treatmentDetails: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-      employmentAndEmployerInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
+      // personalAndContactInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
+      // injuryAndIncident: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
+      // treatmentDetails: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
+      // employmentAndEmployerInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
     },
   );
 

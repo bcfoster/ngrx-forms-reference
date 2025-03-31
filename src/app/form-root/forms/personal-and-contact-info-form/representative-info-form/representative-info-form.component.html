@@ -2,75 +2,31 @@
 
 @if (form) {
   <div class="flex flex-col gap-y-3">
-    <div class="flex flex-col gap-y-1">
-      <label
-        for="first-name"
-        [ngClass]="{ 'text-red-500': form.controls.firstName.isTouched && form.controls.firstName.isInvalid }"
-        class="block text-sm font-semibold text-gray-900"
-        >First name</label
-      >
-      <input
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-        [ngClass]="{ 'border-red-500 bg-red-50 focus:border-red-600 focus:ring-red-600': form.controls.firstName.isTouched && form.controls.firstName.isInvalid }"
-        id="first-name"
-        [ngrxFormControlState]="form.controls.firstName"
-        type="text"
-      />
-      @if (form.controls.firstName.isTouched && form.controls.firstName.isInvalid) {
-        @if (form.controls.firstName.errors.required) {
-          <p class="text-sm text-red-500">First name is required</p>
-        }
-        @if (form.controls.firstName.errors.minLength) {
-          <p class="text-sm text-red-500">
-            First name must have a minimum length of
-            {{ form.controls.firstName.errors.minLength.minLength }}
-          </p>
-        }
-      }
-    </div>
+    <text-input [control]="form.controls.firstName" label="First name"></text-input>
 
-    <label for="last-name" class="block text-sm font-semibold text-gray-900">Last name</label>
-    <input
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-      id="last-name"
-      [ngrxFormControlState]="form.controls.lastName"
-      type="text"
-    />
+    <text-input [control]="form.controls.lastName" label="Last name"></text-input>
 
-    <label for="phone-number" class="block text-sm font-semibold text-gray-900">Phone number</label>
-    <input
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-      id="phone-number"
-      [ngrxFormControlState]="form.controls.phoneNumber"
-      type="text"
-    />
+    <text-input [control]="form.controls.phoneNumber" label="Phone number"></text-input>
 
-    <label for="relationship" class="block text-sm font-semibold text-gray-900"
-      >Relationship to the injured worker</label
+    <select-option
+      [control]="form.controls.relationship"
+      label="Relationship to the injured worker"
+      default="Choose a relationship"
+      [options]="[
+        { key: 'Coworker', value: 'Co-worker' },
+        { key: 'Spouse', value: 'Spouse' },
+        { key: 'OtherFamily', value: 'Other family member' },
+        { key: 'UnionRepresentative', value: 'Union rep' },
+        { key: 'Other', value: 'Other' },
+      ]"
     >
-    <select
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-      id="relationship"
-      [ngrxFormControlState]="form.controls.relationship"
-    >
-      <option value="" disabled>Choose a relationship</option>
-      <option value="Coworker">Coworker</option>
-      <option value="Spouse">Spouse</option>
-      <option value="OtherFamily">Family</option>
-      <option value="UnionRepresentative">Union</option>
-      <option value="Other">Other</option>
-    </select>
+    </select-option>
 
     @if (form.value.relationship === 'Other') {
-      <label for="relationship-other" class="block text-sm font-semibold text-gray-900"
-        >What is your relationship with the injured worker?</label
-      >
-      <textarea
-        class="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-        id="relationship-other"
-        [ngrxFormControlState]="form.controls.relationshipOther"
-        rows="2"
-      ></textarea>
+      <text-area
+        [control]="form.controls.relationshipOther"
+        label="Relationship to the injured worker"
+      ></text-area>
     }
   </div>
 }

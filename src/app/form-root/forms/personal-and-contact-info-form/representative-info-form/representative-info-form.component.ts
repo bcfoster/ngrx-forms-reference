@@ -3,10 +3,19 @@ import { Component, Input } from '@angular/core';
 import { FormGroupState, NgrxFormsModule } from 'ngrx-forms';
 
 import * as representativeInfo from '../../../../state/form/forms/personal-and-contact-info/representative-information.form';
+import { TextInputComponent } from '../../../controls/text-input/text-input.component';
+import { SelectOptionComponent } from '../../../controls/select-option/select-option.component';
+import { TextAreaComponent } from '../../../controls/text-area/text-area.component';
 
 @Component({
   selector: 'representative-info-form',
-  imports: [CommonModule, NgrxFormsModule],
+  imports: [
+    CommonModule,
+    NgrxFormsModule,
+    TextInputComponent,
+    SelectOptionComponent,
+    TextAreaComponent,
+  ],
   templateUrl: './representative-info-form.component.html',
   styles: ``,
 })
