@@ -2,7 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 import {
   createFormGroupState,
   FormGroupState,
-  markAsSubmitted,
   onNgrxForms,
   onNgrxFormsAction,
   ResetAction,
@@ -16,6 +15,7 @@ import { draftActions } from '../drafts/drafts.actions';
 import { formActions } from './form.actions';
 
 import { evaluateCompletion } from './form.progress';
+import * as contactInfo from './forms/personal-and-contact-info/contact-info.form';
 import * as employmentAndEmployer from './forms/employment-and-employer-info.form';
 import * as injuryAndIncident from './forms/injury-and-incident.form';
 import * as personalAndContactInfo from './forms/personal-and-contact-info.form';
@@ -68,10 +68,32 @@ const rawReducer = createReducer(
 
     return state;
   }),
-  onNgrxFormsAction(SetValueAction, (state) => ({
-    ...state,
-    lastEdited: new Date(),
-  })),
+  onNgrxFormsAction(SetValueAction, (state, action) => {
+    if (
+      action.controlId ===
+      state.form.controls.personalAndContactInfo.controls.contactInformation.controls.address
+        .controls.country.id
+    ) {
+      return {
+        ...state,
+        lastEdited: new Date(),
+        form: updateGroup(state.form, {
+          personalAndContactInfo: updateGroup<personalAndContactInfo.Form>({
+            contactInformation: updateGroup<contactInfo.Form>({
+              address: updateGroup<contactInfo.AddressForm>({
+                province: setValue(action.value === 'CA' ? 'AB' : 'AL'),
+              }),
+            }),
+          }),
+        }),
+      };
+    }
+
+    return {
+      ...state,
+      lastEdited: new Date(),
+    };
+  }),
   on(draftActions.draftLoaded, (state, action) => ({
     ...state,
     form: setValue(state.form, action.form),
@@ -87,21 +109,12 @@ const rawReducer = createReducer(
 );
 
 export const validate = (form: FormGroupState<Form>) =>
-  updateGroup<Form>(
-    form,
-    {
-      personalAndContactInfo: personalAndContactInfo.validator,
-      injuryAndIncident: injuryAndIncident.validator(form),
-      treatmentDetails: treatmentDetails.validator(form),
-      employmentAndEmployerInfo: employmentAndEmployer.validator,
-    },
-    {
-      // personalAndContactInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-      // injuryAndIncident: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-      // treatmentDetails: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-      // employmentAndEmployerInfo: (c, f) => (f !== initialFormState ? markAsSubmitted(c) : c),
-    },
-  );
+  updateGroup<Form>(form, {
+    personalAndContactInfo: personalAndContactInfo.validator,
+    injuryAndIncident: injuryAndIncident.validator(form),
+    treatmentDetails: treatmentDetails.validator(form),
+    employmentAndEmployerInfo: employmentAndEmployer.validator,
+  });
 
 export const reducer = wrapReducerWithFormStateUpdate(
   rawReducer,

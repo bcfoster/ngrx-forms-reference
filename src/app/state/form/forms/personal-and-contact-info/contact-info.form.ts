@@ -3,6 +3,7 @@ import { validate } from '../../../ngrx-forms/validate';
 import { email, maxLength, required } from 'ngrx-forms/validation';
 import { optional } from '../../../ngrx-forms/optional';
 import { postalCode } from '../../../ngrx-forms/postal-code';
+import { zipCode } from '../../../ngrx-forms/zip-code';
 
 export interface AddressForm {
   addressLine1: string;
@@ -32,8 +33,8 @@ export const initialFormValue: Form = {
     addressLine1: '',
     addressLine2: '',
     city: '',
-    province: '',
-    country: '',
+    province: 'BC',
+    country: 'CA',
     postalCode: '',
     addressExtra: '',
   },
@@ -53,10 +54,7 @@ export const validator = updateGroup<Form>({
     city: validate(required, maxLength(30)),
     province: validate(required),
     country: validate(required),
-    postalCode: (c, f) =>
-      f.value.country === 'CA'
-        ? validate(c, required, postalCode)
-        : validate(c, required, maxLength(10)),
+    postalCode: (c, f) => validate(c, required, f.value.country === 'CA' ? postalCode : zipCode),
     addressExtra: (c) => optional(c),
   }),
   // TODO: the validation rules for these controls is FUBAR

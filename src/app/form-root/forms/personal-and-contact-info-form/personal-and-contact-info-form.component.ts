@@ -11,6 +11,8 @@ import * as formSelectors from '../../../state/form/form.selectors';
 import { PersonalInfoFormComponent } from './personal-info-form/personal-info-form.component';
 import { RepresentativeInfoFormComponent } from './representative-info-form/representative-info-form.component';
 import { BinaryRadioGroupComponent } from '../../controls/binary-radio-group/binary-radio-group.component';
+import { ContactInfoFormComponent } from './contact-info-form/contact-info-form.component';
+import { EmailConsentFormComponent } from './email-consent-form/email-consent-form.component';
 
 @Component({
   selector: 'personal-and-contact-info-form',
@@ -22,6 +24,8 @@ import { BinaryRadioGroupComponent } from '../../controls/binary-radio-group/bin
     PersonalInfoFormComponent,
     RepresentativeInfoFormComponent,
     BinaryRadioGroupComponent,
+    ContactInfoFormComponent,
+    EmailConsentFormComponent,
   ],
   templateUrl: 'personal-and-contact-info-form.component.html',
   styles: ``,

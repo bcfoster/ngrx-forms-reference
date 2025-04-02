@@ -1,9 +1,9 @@
 <div *ngrxLet="form$ as form" class="mx-auto max-w-sm">
-  <h1 class="mb-4 text-2xl leading-none font-bold text-gray-900">
+  <h1 class="mb-4 text-2xl leading-none font-semibold text-gray-900">
     Personal and contact information
   </h1>
 
-  <form [ngrxFormState]="form" class="flex flex-col gap-y-2">
+  <form [ngrxFormState]="form" class="flex flex-col gap-y-5">
     <binary-radio-group
       [control]="form.controls.representativeInformation.controls.reportingForSelf"
       label="Are you the person who was injured?"
@@ -15,7 +15,11 @@
       <representative-info-form [form]="form.controls.representativeInformation" />
     }
 
-    <personal-info-form [form]="form.controls.personalInformation"></personal-info-form>
+    <personal-info-form [form]="form.controls.personalInformation" />
+
+    <contact-info-form [form]="form.controls.contactInformation" />
+
+    <email-consent-form [form]="form.controls.emailConsent" />
 
     <div>
       <button

@@ -1,0 +1,27 @@
+<div class="flex flex-col gap-y-3">
+  <binary-radio-group
+    [control]="form.controls.consentIsGiven"
+    [horizontal]="true"
+    label="At this time, are you open to receiving some information about your claim via email?"
+  />
+
+  @if (form.value.consentIsGiven) {
+    <binary-radio-group
+      [control]="form.controls.workerRepresentativesAuthorized"
+      [horizontal]="true"
+      label="Any authorized representative(s) you may have"
+    />
+
+    <binary-radio-group
+      [control]="form.controls.employerAndRepresentativesAuthorized"
+      [horizontal]="true"
+      label="Any employer(s) and their representiative(s)"
+    />
+
+    <binary-radio-group
+      [control]="form.controls.healthcareAndServiceProvidersAuthorized"
+      [horizontal]="true"
+      label="Your health care and service provider(s)"
+    />
+  }
+</div>
