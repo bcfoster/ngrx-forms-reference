@@ -26,7 +26,7 @@ import { TextAreaComponent } from '../../../controls/text-area/text-area.compone
   styles: ``,
 })
 export class PersonalInfoFormComponent {
-  @Input({ required: true }) form: FormGroupState<personalInfo.Form> | null = null;
+  @Input({ required: true }) form!: FormGroupState<personalInfo.Form>;
 
   @ViewChild('year') year!: ElementRef;
   @ViewChild('month') month!: ElementRef;

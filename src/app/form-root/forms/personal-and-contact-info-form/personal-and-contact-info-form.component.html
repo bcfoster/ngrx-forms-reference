@@ -12,9 +12,7 @@
     />
 
     @if (form.value.representativeInformation.reportingForSelf === false) {
-      <representative-info-form
-        [form]="form.controls.representativeInformation"
-      ></representative-info-form>
+      <representative-info-form [form]="form.controls.representativeInformation" />
     }
 
     <personal-info-form [form]="form.controls.personalInformation"></personal-info-form>

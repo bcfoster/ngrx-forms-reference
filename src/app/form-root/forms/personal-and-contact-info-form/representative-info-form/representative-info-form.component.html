@@ -1,32 +1,29 @@
 <h2 class="mb-4 text-xl leading-none font-bold text-yellow-500">Representative information</h2>
 
-@if (form) {
-  <div class="flex flex-col gap-y-3">
-    <text-input [control]="form.controls.firstName" label="First name" />
+<div class="flex flex-col gap-y-3">
+  <text-input [control]="form.controls.firstName" label="First name" />
 
-    <text-input [control]="form.controls.lastName" label="Last name" />
+  <text-input [control]="form.controls.lastName" label="Last name" />
 
-    <text-input [control]="form.controls.phoneNumber" label="Phone number" />
+  <text-input [control]="form.controls.phoneNumber" label="Phone number" />
 
-    <select-option
-      [control]="form.controls.relationship"
-      label="Relationship to the injured worker"
-      defaultLabel="Choose a relationship"
-      [options]="[
+  <select-option
+    [control]="form.controls.relationship"
+    label="Relationship to the injured worker"
+    defaultLabel="Choose a relationship"
+    [options]="[
         { key: 'Coworker', value: 'Co-worker' },
         { key: 'Spouse', value: 'Spouse' },
         { key: 'OtherFamily', value: 'Other family member' },
         { key: 'UnionRepresentative', value: 'Union rep' },
         { key: 'Other', value: 'Other' },
       ]"
-    >
-    </select-option>
+  />
 
-    @if (form.value.relationship === 'Other') {
-      <text-area
-        [control]="form.controls.relationshipOther"
-        label="Relationship to the injured worker"
-      ></text-area>
-    }
-  </div>
-}
+  @if (form.value.relationship === 'Other') {
+    <text-area
+      [control]="form.controls.relationshipOther"
+      label="Relationship to the injured worker"
+    />
+  }
+</div>

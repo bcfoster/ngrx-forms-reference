@@ -13,7 +13,7 @@ import { RepresentativeInfoFormComponent } from './representative-info-form/repr
 import { BinaryRadioGroupComponent } from '../../controls/binary-radio-group/binary-radio-group.component';
 
 @Component({
-  selector: 'app-personal-and-contact-info-form',
+  selector: 'personal-and-contact-info-form',
   imports: [
     FormsModule,
     NgrxFormsModule,
@@ -31,9 +31,5 @@ export class PersonalAndContactInfoFormComponent {
 
   constructor(private readonly store: Store) {
     this.form$ = this.store.select(formSelectors.selectPersonalAndContactInfoForm);
-  }
-
-  reset() {
-    return;
   }
 }

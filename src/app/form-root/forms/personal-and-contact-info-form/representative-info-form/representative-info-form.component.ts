@@ -20,5 +20,5 @@ import { TextAreaComponent } from '../../../controls/text-area/text-area.compone
   styles: ``,
 })
 export class RepresentativeInfoFormComponent {
-  @Input({ required: true }) form: FormGroupState<representativeInfo.Form> | null = null;
+  @Input({ required: true }) form!: FormGroupState<representativeInfo.Form>;
 }

@@ -1,195 +1,187 @@
 <h2 class="mb-4 text-xl leading-none font-bold text-yellow-500">Your personal information</h2>
 
-@if (form) {
-  <div class="flex flex-col gap-y-3">
-    <binary-radio-group
-      [control]="form.controls.haveClaimNumber"
-      [horizontal]="true"
-      label="Have claim number?"
-    >
-      <!-- TODO: pass custom template to child for stuff like the label -->
-    </binary-radio-group>
+<div class="flex flex-col gap-y-3">
+  <binary-radio-group
+    [control]="form.controls.haveClaimNumber"
+    [horizontal]="true"
+    label="Have claim number?"
+  >
+    <!-- TODO: pass custom template to child for stuff like the label -->
+  </binary-radio-group>
 
-    @if (form.value.haveClaimNumber === true) {
-      <text-input [control]="form.controls.claimNumber" label="Claim number" />
-    }
+  @if (form.value.haveClaimNumber === true) {
+    <text-input [control]="form.controls.claimNumber" label="Claim number" />
+  }
 
-    <text-input [control]="form.controls.legalFirstName" label="Legal first name" />
+  <text-input [control]="form.controls.legalFirstName" label="Legal first name" />
 
-    <text-input
-      [control]="form.controls.preferredFirstName"
-      label="Preferred first name"
-      [optional]="true"
+  <text-input
+    [control]="form.controls.preferredFirstName"
+    label="Preferred first name"
+    [optional]="true"
+  />
+
+  <text-input
+    [control]="form.controls.middleName"
+    label="Middle name or initial"
+    [optional]="true"
+  />
+
+  <text-input [control]="form.controls.lastName" label="Last name" />
+
+  <label for="date-of-birth" class="block text-sm font-semibold text-gray-900">Date of birth</label>
+  <input id="date-of-birth" class="hidden" />
+  <div class="flex gap-x-2">
+    <input
+      #year
+      class="block w-1/2 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="date-of-birth-year"
+      (input)="onDateChanged($event)"
+      [ngrxFormControlState]="form.controls.dateOfBirth.controls.year"
+      maxlength="4"
+      placeholder="YYYY"
+      type="text"
     />
-
-    <text-input
-      [control]="form.controls.middleName"
-      label="Middle name or initial"
-      [optional]="true"
+    <input
+      #month
+      class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="date-of-birth-month"
+      (input)="onDateChanged($event)"
+      [ngrxFormControlState]="form.controls.dateOfBirth.controls.month"
+      maxlength="2"
+      placeholder="MM"
+      type="text"
     />
+    <input
+      #day
+      class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="date-of-birth-day"
+      (input)="onDateChanged($event)"
+      [ngrxFormControlState]="form.controls.dateOfBirth.controls.day"
+      maxlength="2"
+      placeholder="DD"
+      type="text"
+    />
+  </div>
 
-    <text-input [control]="form.controls.lastName" label="Last name" />
-
-    <label for="date-of-birth" class="block text-sm font-semibold text-gray-900"
-      >Date of birth</label
-    >
-    <input id="date-of-birth" class="hidden" />
-    <div class="flex gap-x-2">
-      <input
-        #year
-        class="block w-1/2 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-        id="date-of-birth-year"
-        (input)="onDateChanged($event)"
-        [ngrxFormControlState]="form.controls.dateOfBirth.controls.year"
-        maxlength="4"
-        placeholder="YYYY"
-        type="text"
-      />
-      <input
-        #month
-        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-        id="date-of-birth-month"
-        (input)="onDateChanged($event)"
-        [ngrxFormControlState]="form.controls.dateOfBirth.controls.month"
-        maxlength="2"
-        placeholder="MM"
-        type="text"
-      />
-      <input
-        #day
-        class="block w-1/4 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-        id="date-of-birth-day"
-        (input)="onDateChanged($event)"
-        [ngrxFormControlState]="form.controls.dateOfBirth.controls.day"
-        maxlength="2"
-        placeholder="DD"
-        type="text"
-      />
-    </div>
-
-    <multi-radio-group
-      [control]="form.controls.demographics.controls.sexAtBirth"
-      label="Sex at birth"
-      [options]="[
+  <multi-radio-group
+    [control]="form.controls.demographics.controls.sexAtBirth"
+    label="Sex at birth"
+    [options]="[
         { key: 'Female', value: 'Female' },
         { key: 'Intersex', value: 'Intersex' },
         { key: 'Male', value: 'Male' },
         { key: 'Unknown', value: 'Prefer not to answer' },
       ]"
-    />
+  />
 
-    <select-option
-      [control]="form.controls.demographics.controls.gender"
-      label="Gender"
-      [optional]="true"
-      defaultLabel="Choose your gender"
-      [options]="[
+  <select-option
+    [control]="form.controls.demographics.controls.gender"
+    label="Gender"
+    [optional]="true"
+    defaultLabel="Choose your gender"
+    [options]="[
         { key: 'Man', value: 'Man' },
         { key: 'Non-binary', value: 'Non-binary' },
         { key: 'Two-Spirit', value: 'Two-Spirit' },
         { key: 'Woman', value: 'Woman' },
         { key: '__<CUSTOM>__', value: 'Alternatively, please specify' },
       ]"
-    />
+  />
 
-    @if (form.value.demographics.gender === '__<CUSTOM>__') {
-      <text-area
-        [control]="form.controls.demographics.controls.customGender"
-        label="Please specify your gender"
-        [optional]="true"
-      />
-    }
-
-    <select-option
-      [control]="form.controls.demographics.controls.pronouns"
-      label="Pronouns"
+  @if (form.value.demographics.gender === '__<CUSTOM>__') {
+    <text-area
+      [control]="form.controls.demographics.controls.customGender"
+      label="Please specify your gender"
       [optional]="true"
-      defaultLabel="Choose your pronouns"
-      [options]="[
+    />
+  }
+
+  <select-option
+    [control]="form.controls.demographics.controls.pronouns"
+    label="Pronouns"
+    [optional]="true"
+    defaultLabel="Choose your pronouns"
+    [options]="[
         { key: 'He/him', value: 'He/him' },
         { key: 'She/her', value: 'She/her' },
         { key: 'They/them', value: 'They/them' },
         { key: 'Ze/zir', value: 'Ze/zir' },
         { key: '__<CUSTOM>__', value: 'Alternatively, please specify' },
       ]"
-    />
+  />
 
-    @if (form.value.demographics.pronouns === '__<CUSTOM>__') {
-      <text-area
-        [control]="form.controls.demographics.controls.customPronouns"
-        label="Please specify your pronouns"
-        [optional]="true"
+  @if (form.value.demographics.pronouns === '__<CUSTOM>__') {
+    <text-area
+      [control]="form.controls.demographics.controls.customPronouns"
+      label="Please specify your pronouns"
+      [optional]="true"
+    />
+  }
+
+  <label for="height" class="block text-sm font-semibold text-gray-900">What is your height?</label>
+  <input class="hidden" id="height" />
+  <div class="flex gap-x-2">
+    <div class="relative w-1/5">
+      <input
+        class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="height-feet"
+        [ngrxFormControlState]="form.controls.heightFeet"
+        type="text"
       />
-    }
-
-    <label for="height" class="block text-sm font-semibold text-gray-900"
-      >What is your height?</label
-    >
-    <input class="hidden" id="height" />
-    <div class="flex gap-x-2">
-      <div class="relative w-1/5">
-        <input
-          class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-          id="height-feet"
-          [ngrxFormControlState]="form.controls.heightFeet"
-          type="text"
-        />
-        <span
-          class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
-        >
-          ft.
-        </span>
-      </div>
-
-      <div class="relative w-1/5">
-        <input
-          class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-          id="height-inches"
-          [ngrxFormControlState]="form.controls.heightInches"
-          type="text"
-        />
-        <span
-          class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
-        >
-          in.
-        </span>
-      </div>
+      <span
+        class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
+      >
+        ft.
+      </span>
     </div>
 
-    <label for="weight" class="block text-sm font-semibold text-gray-900"
-      >What is your weight?</label
-    >
-    <input class="hidden" id="weight" />
-    <div class="flex gap-x-2">
-      <div class="relative w-1/5">
-        <input
-          class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-          id="weight-pounds"
-          [ngrxFormControlState]="form.controls.weight"
-          type="text"
-        />
-        <span
-          class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
-        >
-          lbs.
-        </span>
-      </div>
+    <div class="relative w-1/5">
+      <input
+        class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="height-inches"
+        [ngrxFormControlState]="form.controls.heightInches"
+        type="text"
+      />
+      <span
+        class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
+      >
+        in.
+      </span>
     </div>
-
-    <binary-radio-group
-      [control]="form.controls.havePhn"
-      label="Do you have a B.C. Personal Health Number (PHN)?"
-      [horizontal]="true"
-    />
-
-    @if (form.value.havePhn === true) {
-      <text-input [control]="form.controls.phn" label="Personal Health Number (PHN)"></text-input>
-    }
-
-    <binary-radio-group
-      [control]="form.controls.interpreter"
-      label="If we need to speak with you about your claim, would you like an interpreter on the call?"
-      [horizontal]="true"
-    />
   </div>
-}
+
+  <label for="weight" class="block text-sm font-semibold text-gray-900">What is your weight?</label>
+  <input class="hidden" id="weight" />
+  <div class="flex gap-x-2">
+    <div class="relative w-1/5">
+      <input
+        class="rounded-s-gray-100 rounded-s-2 z-20 block w-full rounded-s-lg rounded-e-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="weight-pounds"
+        [ngrxFormControlState]="form.controls.weight"
+        type="text"
+      />
+      <span
+        class="rounded-e-gray-100 absolute end-0 top-0 h-full rounded-e-lg p-2.5 text-sm font-medium text-gray-500"
+      >
+        lbs.
+      </span>
+    </div>
+  </div>
+
+  <binary-radio-group
+    [control]="form.controls.havePhn"
+    label="Do you have a B.C. Personal Health Number (PHN)?"
+    [horizontal]="true"
+  />
+
+  @if (form.value.havePhn === true) {
+    <text-input [control]="form.controls.phn" label="Personal Health Number (PHN)"></text-input>
+  }
+
+  <binary-radio-group
+    [control]="form.controls.interpreter"
+    label="If we need to speak with you about your claim, would you like an interpreter on the call?"
+    [horizontal]="true"
+  />
+</div>
