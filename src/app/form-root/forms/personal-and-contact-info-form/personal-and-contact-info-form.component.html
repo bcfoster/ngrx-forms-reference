@@ -4,37 +4,12 @@
   </h1>
 
   <form [ngrxFormState]="form" class="flex flex-col gap-y-2">
-    <label for="reporting-for-self" class="text-sm font-semibold text-gray-900">
-      Are you the person who was injured?
-    </label>
-    <input id="reporting-for-self" class="hidden" />
-    <div class="flex items-center gap-x-2">
-      <input
-        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
-        id="reporting-for-self-yes"
-        name="reporting-for-self"
-        [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
-        type="radio"
-        [value]="true"
-      />
-      <label for="reporting-for-self-yes" class="text-sm font-medium text-gray-900">
-        Yes, I am the injured worker
-      </label>
-    </div>
-
-    <div class="flex items-center gap-x-2">
-      <input
-        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
-        id="reporting-for-self-no"
-        name="reporting-for-self"
-        [ngrxFormControlState]="form.controls.representativeInformation.controls.reportingForSelf"
-        type="radio"
-        [value]="false"
-      />
-      <label for="reporting-for-self-no" class="text-sm font-medium text-gray-900">
-        No, I am reporting on behalf of the injured worker
-      </label>
-    </div>
+    <binary-radio-group
+      [control]="form.controls.representativeInformation.controls.reportingForSelf"
+      label="Are you the person who was injured?"
+      trueLabel="Yes, I am the injured worker"
+      falseLabel="No, I am reporting on behalf of the injured worker"
+    />
 
     @if (form.value.representativeInformation.reportingForSelf === false) {
       <representative-info-form

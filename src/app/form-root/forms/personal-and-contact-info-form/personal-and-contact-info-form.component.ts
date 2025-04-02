@@ -10,6 +10,7 @@ import * as form from '../../../state/form/forms/personal-and-contact-info.form'
 import * as formSelectors from '../../../state/form/form.selectors';
 import { PersonalInfoFormComponent } from './personal-info-form/personal-info-form.component';
 import { RepresentativeInfoFormComponent } from './representative-info-form/representative-info-form.component';
+import { BinaryRadioGroupComponent } from '../../controls/binary-radio-group/binary-radio-group.component';
 
 @Component({
   selector: 'app-personal-and-contact-info-form',
@@ -20,6 +21,7 @@ import { RepresentativeInfoFormComponent } from './representative-info-form/repr
     RouterLink,
     PersonalInfoFormComponent,
     RepresentativeInfoFormComponent,
+    BinaryRadioGroupComponent,
   ],
   templateUrl: 'personal-and-contact-info-form.component.html',
   styles: ``,

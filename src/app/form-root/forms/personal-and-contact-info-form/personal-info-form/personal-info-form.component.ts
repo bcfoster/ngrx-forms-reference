@@ -4,10 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { FormGroupState, NgrxFormsModule } from 'ngrx-forms';
 
 import * as personalInfo from '../../../../state/form/forms/personal-and-contact-info/personal-info.form';
+import { TextInputComponent } from '../../../controls/text-input/text-input.component';
+import { BinaryRadioGroupComponent } from '../../../controls/binary-radio-group/binary-radio-group.component';
 
 @Component({
   selector: 'personal-info-form',
-  imports: [CommonModule, FormsModule, NgrxFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgrxFormsModule,
+    TextInputComponent,
+    BinaryRadioGroupComponent,
+  ],
   templateUrl: './personal-info-form.component.html',
   styles: ``,
 })
