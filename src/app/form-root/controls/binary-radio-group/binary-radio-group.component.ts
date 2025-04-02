@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControlState, NgrxFormsModule } from 'ngrx-forms';
 import { NgClass } from '@angular/common';
 
+// TODO: can share a base class with multi-radio-group
 @Component({
   selector: 'binary-radio-group',
   imports: [NgrxFormsModule, NgClass],

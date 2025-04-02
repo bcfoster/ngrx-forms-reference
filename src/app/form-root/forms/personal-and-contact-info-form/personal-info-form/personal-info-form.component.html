@@ -67,111 +67,59 @@
       />
     </div>
 
-    <label for="sex-at-birth" class="text-sm font-semibold text-gray-900"> Sex at birth </label>
-    <input id="sex-at-birth" class="hidden" />
-    <div class="flex items-center gap-x-2">
-      <input
-        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
-        id="sex-at-birth-female"
-        name="sex-at-birth"
-        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
-        type="radio"
-        value="Female"
-      />
-      <label for="sex-at-birth-female" class="text-sm font-medium text-gray-900"> Female </label>
-    </div>
-    <div class="flex items-center gap-x-2">
-      <input
-        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
-        id="sex-at-birth-intersex"
-        name="sex-at-birth"
-        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
-        type="radio"
-        value="Intersex"
-      />
-      <label for="sex-at-birth-intersex" class="text-sm font-medium text-gray-900">
-        Intersex
-      </label>
-    </div>
-    <div class="flex items-center gap-x-2">
-      <input
-        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
-        id="sex-at-birth-male"
-        name="sex-at-birth"
-        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
-        type="radio"
-        value="Male"
-      />
-      <label for="sex-at-birth-male" class="text-sm font-medium text-gray-900"> Male </label>
-    </div>
-    <div class="flex items-center gap-x-2">
-      <input
-        class="border-gray-300 bg-gray-100 text-blue-500 focus:ring-1 focus:ring-white"
-        id="sex-at-birth-unknown"
-        name="sex-at-birth"
-        [ngrxFormControlState]="form.controls.demographics.controls.sexAtBirth"
-        type="radio"
-        value="Unknown"
-      />
-      <label for="sex-at-birth-unknown" class="text-sm font-medium text-gray-900">
-        Prefer not to answer
-      </label>
-    </div>
+    <multi-radio-group
+      [control]="form.controls.demographics.controls.sexAtBirth"
+      label="Sex at birth"
+      [options]="[
+        { key: 'Female', value: 'Female' },
+        { key: 'Intersex', value: 'Intersex' },
+        { key: 'Male', value: 'Male' },
+        { key: 'Unknown', value: 'Prefer not to answer' },
+      ]"
+    />
 
-    <label for="gender" class="block text-sm font-semibold text-gray-900"
-      >Gender <span class="font-normal">(optional)</span></label
-    >
-    <select
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-      id="gender"
-      [ngrxFormControlState]="form.controls.demographics.controls.gender"
-    >
-      <option value="" disabled>Choose your gender</option>
-      <option value="Man">Man</option>
-      <option value="Non-binary">Non-binary</option>
-      <option value="Two-Spirit">Two-Spirit</option>
-      <option value="Woman">Woman</option>
-      <option value="__<CUSTOM>__">Alternatively, please specify</option>
-    </select>
+    <select-option
+      [control]="form.controls.demographics.controls.gender"
+      label="Gender"
+      [optional]="true"
+      defaultLabel="Choose your gender"
+      [options]="[
+        { key: 'Man', value: 'Man' },
+        { key: 'Non-binary', value: 'Non-binary' },
+        { key: 'Two-Spirit', value: 'Two-Spirit' },
+        { key: 'Woman', value: 'Woman' },
+        { key: '__<CUSTOM>__', value: 'Alternatively, please specify' },
+      ]"
+    />
 
     @if (form.value.demographics.gender === '__<CUSTOM>__') {
-      <label for="gender-other" class="block text-sm font-semibold text-gray-900"
-        >Please specify your gender <span class="font-normal">(optional)</span></label
-      >
-      <textarea
-        class="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-        id="gender-other"
-        [ngrxFormControlState]="form.controls.demographics.controls.customGender"
-        rows="2"
-      ></textarea>
+      <text-area
+        [control]="form.controls.demographics.controls.customGender"
+        label="Please specify your gender"
+        [optional]="true"
+      />
     }
 
-    <label for="pronouns" class="block text-sm font-semibold text-gray-900"
-      >Pronouns <span class="font-normal">(optional)</span></label
-    >
-    <select
-      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-      id="pronouns"
-      [ngrxFormControlState]="form.controls.demographics.controls.pronouns"
-    >
-      <option value="" disabled>Choose your pronouns</option>
-      <option value="He/him">He/him</option>
-      <option value="She/her">She/her</option>
-      <option value="They/them">They/them</option>
-      <option value="Ze/zir">Ze/zir</option>
-      <option value="__<CUSTOM>__">Alternatively, please specify</option>
-    </select>
+    <select-option
+      [control]="form.controls.demographics.controls.pronouns"
+      label="Pronouns"
+      [optional]="true"
+      defaultLabel="Choose your pronouns"
+      [options]="[
+        { key: 'He/him', value: 'He/him' },
+        { key: 'She/her', value: 'She/her' },
+        { key: 'They/them', value: 'They/them' },
+        { key: 'Ze/zir', value: 'Ze/zir' },
+        { key: '__<CUSTOM>__', value: 'Alternatively, please specify' },
+      ]"
+    />
 
     @if (form.value.demographics.pronouns === '__<CUSTOM>__') {
-      <label for="gender-other" class="block text-sm font-semibold text-gray-900"
-        >Please specify your pronouns <span class="font-normal">(optional)</span></label
-      >
-      <textarea
-        class="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-        id="pronouns-other"
-        [ngrxFormControlState]="form.controls.demographics.controls.customPronouns"
-        rows="2"
-      ></textarea>
+      <text-area
+        [control]="form.controls.demographics.controls.customPronouns"
+        label="Please specify your pronouns"
+        [optional]="true"
+      />
     }
 
     <label for="height" class="block text-sm font-semibold text-gray-900"

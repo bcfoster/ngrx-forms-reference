@@ -13,9 +13,9 @@
       [ngClass]="{ 'border-red-500 bg-red-50 focus:border-red-600 focus:ring-red-600': control.isSubmitted && control.isInvalid }"
       [ngrxFormControlState]="control"
     >
-      <option value="" disabled>{{ default }}</option>
+      <option [value]="''" disabled>{{ defaultLabel ?? 'Make a selection' }}</option>
       @for (option of options; track option.key) {
-        <option value="option.key">{{ option.value }}</option>
+        <option [value]="option.key">{{ option.value }}</option>
       }
     </select>
   </div>

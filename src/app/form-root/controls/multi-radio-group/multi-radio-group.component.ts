@@ -2,18 +2,19 @@ import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControlState, NgrxFormsModule } from 'ngrx-forms';
 
+// TODO: can share a base class with binary-radio-group
 @Component({
-  selector: 'select-option',
-  imports: [NgClass, NgrxFormsModule],
-  templateUrl: './select-option.component.html',
-  styleUrl: './select-option.component.css',
+  selector: 'multi-radio-group',
+  imports: [NgrxFormsModule, NgClass],
+  templateUrl: './multi-radio-group.component.html',
+  styleUrl: './multi-radio-group.component.css',
 })
-export class SelectOptionComponent {
+export class MultiRadioGroupComponent {
   @Input({ required: true }) control: FormControlState<string> | null = null;
   @Input({ required: true }) label = '';
   @Input({ required: true }) options: { key: string; value: string }[] = [];
+  @Input() horizontal = false;
   @Input() optional: boolean | undefined;
-  @Input() defaultLabel: string | undefined;
 
   get id(): string {
     return (

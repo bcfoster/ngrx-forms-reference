@@ -6,6 +6,9 @@ import { FormGroupState, NgrxFormsModule } from 'ngrx-forms';
 import * as personalInfo from '../../../../state/form/forms/personal-and-contact-info/personal-info.form';
 import { TextInputComponent } from '../../../controls/text-input/text-input.component';
 import { BinaryRadioGroupComponent } from '../../../controls/binary-radio-group/binary-radio-group.component';
+import { MultiRadioGroupComponent } from '../../../controls/multi-radio-group/multi-radio-group.component';
+import { SelectOptionComponent } from '../../../controls/select-option/select-option.component';
+import { TextAreaComponent } from '../../../controls/text-area/text-area.component';
 
 @Component({
   selector: 'personal-info-form',
@@ -15,6 +18,9 @@ import { BinaryRadioGroupComponent } from '../../../controls/binary-radio-group/
     NgrxFormsModule,
     TextInputComponent,
     BinaryRadioGroupComponent,
+    MultiRadioGroupComponent,
+    SelectOptionComponent,
+    TextAreaComponent,
   ],
   templateUrl: './personal-info-form.component.html',
   styles: ``,
