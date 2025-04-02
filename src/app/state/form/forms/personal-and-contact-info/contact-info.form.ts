@@ -50,10 +50,10 @@ export const initialFormValue: Form = {
 export const validator = updateGroup<Form>({
   address: updateGroup<AddressForm>({
     addressLine1: validate(required, maxLength(40)),
-    addressLine2: validate(required, maxLength(40)),
+    addressLine2: optional(maxLength(40)),
     city: validate(required, maxLength(30)),
-    province: validate(required),
-    country: validate(required),
+    province: optional(),
+    country: optional(),
     postalCode: (c, f) => validate(c, required, f.value.country === 'CA' ? postalCode : zipCode),
     addressExtra: (c) => optional(c),
   }),

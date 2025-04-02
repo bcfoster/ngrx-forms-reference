@@ -19,6 +19,7 @@ import * as contactInfo from './forms/personal-and-contact-info/contact-info.for
 import * as employmentAndEmployer from './forms/employment-and-employer-info.form';
 import * as injuryAndIncident from './forms/injury-and-incident.form';
 import * as personalAndContactInfo from './forms/personal-and-contact-info.form';
+import * as personalInfo from './forms/personal-and-contact-info/personal-info.form';
 import * as treatmentDetails from './forms/treatment-details.form';
 
 export const FORM_ID = 'form';
@@ -69,6 +70,29 @@ const rawReducer = createReducer(
     return state;
   }),
   onNgrxFormsAction(SetValueAction, (state, action) => {
+    if (
+      action.controlId.startsWith(
+        state.form.controls.personalAndContactInfo.controls.personalInformation.controls.dateOfBirth
+          .id,
+      )
+    ) {
+      return {
+        ...state,
+        lastEdited: new Date(),
+        form: updateGroup(state.form, {
+          personalAndContactInfo: updateGroup<personalAndContactInfo.Form>({
+            personalInformation: updateGroup<personalInfo.Form>({
+              dateOfBirth: updateGroup<personalInfo.DateOfBirthForm>({
+                year: (c) => setValue(c, isNaN(action.value as number) ? c.value : +c.value!),
+                month: (c) => setValue(c, isNaN(action.value as number) ? c.value : +c.value!),
+                day: (c) => setValue(c, isNaN(action.value as number) ? c.value : +c.value!),
+              }),
+            }),
+          }),
+        }),
+      };
+    }
+
     if (
       action.controlId ===
       state.form.controls.personalAndContactInfo.controls.contactInformation.controls.address

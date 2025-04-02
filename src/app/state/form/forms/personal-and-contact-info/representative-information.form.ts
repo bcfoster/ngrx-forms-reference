@@ -29,7 +29,8 @@ export const validator = (state: FormGroupState<Form>): FormGroupState<Form> =>
     {
       reportingForSelf: validate(required),
     },
-    state.value.reportingForSelf
+    state.value.reportingForSelf === initialFormValue.reportingForSelf ||
+      state.value.reportingForSelf === true
       ? {
           firstName: (c) => optional(setValue(c, '')),
           lastName: (c) => optional(setValue(c, '')),
