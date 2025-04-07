@@ -1,3 +1,55 @@
 <h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Incident details</h2>
 
-<div class="flex flex-col gap-y-3"></div>
+<div class="flex flex-col gap-y-3">
+  <binary-radio-group
+    [control]="form.controls.occurredInBc"
+    [horizontal]="true"
+    label="Did the incident occur in B.C.?"
+  />
+
+  <multi-radio-group
+    [control]="form.controls.incidentLocation"
+    label="Where did the incident occur?"
+    [options]="[
+      { key: 'EmployerWorkplace', value: 'At my employer\'s workplace' },
+      { key: 'AuthorizedLocation', value: 'At another authorized work location' },
+      { key: 'Other', value: 'Elsewhere' }
+    ]"
+  />
+
+  @let label =
+    form.value.incidentLocation === 'AuthorizedLocation' || form.value.incidentLocation === 'Other'
+      ? 'Describe the location of the incident (e.g. a parking lot or public road). Please include the province and/or country:'
+      : 'Please include the province and/or country:';
+
+  <text-area [control]="form.controls.incidentLocationDetails" [label]="label" />
+
+  <!-- TODO: sub-label -->
+  <binary-radio-group
+    [control]="form.controls.occurredDuringNormalShift"
+    [horizontal]="true"
+    label="Did your injury occur during your normal shift?"
+  />
+
+  @if (form.value.occurredDuringNormalShift === false) {
+    <text-area
+      [control]="form.controls.shiftAndTimeOfInjuryDetails"
+      label="Please tell us more about your shift and the time of the injury"
+      [optional]="true"
+    />
+  }
+
+  <binary-radio-group
+    [control]="form.controls.occurredWhilePerformingRegularDuties"
+    [horizontal]="true"
+    label="Did your injury occur while you were performing your regular work duties?"
+  />
+
+  @if (form.value.occurredWhilePerformingRegularDuties === false) {
+    <text-area
+      [control]="form.controls.activityAtTimeOfInjuryDetails"
+      label="Please tell us more about what you were doing at the time of the injury"
+      [optional]="true"
+    />
+  }
+</div>

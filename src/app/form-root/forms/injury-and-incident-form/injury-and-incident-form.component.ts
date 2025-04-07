@@ -10,6 +10,7 @@ import { InjuryDetailsFormComponent } from './injury-details-form/injury-details
 import * as form from '../../../state/form/forms/injury-and-incident.form';
 import * as formSelectors from '../../../state/form/form.selectors';
 import { IncidentDetailsFormComponent } from './incident-details-form/incident-details-form.component';
+import { TextAreaComponent } from '../../controls/text-area/text-area.component';
 
 @Component({
   selector: 'injury-and-incident-form',
@@ -20,6 +21,7 @@ import { IncidentDetailsFormComponent } from './incident-details-form/incident-d
     NgrxFormsModule,
     RouterLink,
     IncidentDetailsFormComponent,
+    TextAreaComponent,
   ],
   templateUrl: './injury-and-incident-form.component.html',
   styles: ``,

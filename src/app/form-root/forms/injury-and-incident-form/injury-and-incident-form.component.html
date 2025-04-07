@@ -10,6 +10,14 @@
 
     <incident-details-form [form]="form.controls.incidentDetails" />
 
+    <h2 class="text-xl leading-none font-semibold text-yellow-500">Additional information</h2>
+
+    <text-area
+      [control]="form.controls.additionalInformation"
+      label="Is there anything else you'd like to tell us about your injury or how it happened that you haven't already told us?"
+      [optional]="true"
+    />
+
     <div>
       <button
         type="button"
