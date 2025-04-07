@@ -4,8 +4,10 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
 import { FormRootComponent } from './form-root/form-root.component';
+import { EmploymentAndEmployerInfoFormComponent } from './form-root/forms/employment-and-employer-info-form/employment-and-employer-info-form.component';
 import { InjuryAndIncidentFormComponent } from './form-root/forms/injury-and-incident-form/injury-and-incident-form.component';
 import { PersonalAndContactInfoFormComponent } from './form-root/forms/personal-and-contact-info-form/personal-and-contact-info-form.component';
+import { TreatmentDetailsFormComponent } from './form-root/forms/treatment-details-form/treatment-details-form.component';
 import { FormShellComponent } from './form-shell/form-shell.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
 
@@ -38,11 +40,11 @@ export const routes: Routes = [
       },
       {
         path: 'treatment-details',
-        component: PersonalAndContactInfoFormComponent,
+        component: TreatmentDetailsFormComponent,
       },
       {
         path: 'employment-and-employer-info',
-        component: PersonalAndContactInfoFormComponent,
+        component: EmploymentAndEmployerInfoFormComponent,
       },
       {
         path: 'summary',
