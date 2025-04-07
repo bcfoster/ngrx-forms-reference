@@ -1,0 +1,15 @@
+@if (control) {
+  <div class="flex items-center">
+    <input
+      class="h-4 w-4 rounded-sm border border-gray-300 bg-gray-50 text-blue-500 focus:ring-0 focus:ring-offset-0"
+      id="have-not-missed-any-time"
+      [ngrxFormControlState]="control"
+      type="checkbox"
+    />
+    <label
+      for="have-not-missed-any-time"
+      class="ms-2 text-sm font-medium text-gray-900"
+      >{{ label }}</label
+    >
+  </div>
+}

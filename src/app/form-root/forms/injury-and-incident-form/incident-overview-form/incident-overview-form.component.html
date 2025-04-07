@@ -1,0 +1,223 @@
+<h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Incident overview</h2>
+
+<div class="flex flex-col gap-y-3">
+  <text-area
+    [control]="form.controls.howInjuryHappened"
+    label="Please tell us a little bit about your incident and how it happened"
+  />
+
+  <div class="flex flex-col gap-y-2">
+    <label class="block text-sm font-semibold text-gray-900" for="injury-date"
+      >When did your injury occur?</label
+    >
+    <input
+      class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+      id="injury-date"
+      [ngrxFormControlState]="form.controls.injuryDate"
+      type="date"
+    />
+  </div>
+
+  <checkbox [control]="form.controls.isInjuryDateApproximate" label="This is an approximate date" />
+
+  <div class="flex flex-col gap-y-2">
+    <label class="block text-sm font-semibold text-gray-900" for="injury-date"
+      >Approximately what time did your injury occur?</label
+    >
+    <div class="flex gap-x-2">
+      <div class="relative w-1/3">
+        <div class="pointer-events-none absolute inset-y-0 end-0 top-0 flex items-center pe-3.5">
+          <svg
+            class="h-4 w-4 text-gray-500"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <input
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm leading-none text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="time"
+          [ngrxFormControlState]="form.controls.injuryTime"
+          type="time"
+        />
+      </div>
+      <button
+        type="button"
+        class="cursor-pointer rounded-lg bg-blue-500 px-3 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+        (click)="clearInjuryTime()"
+      >
+        Clear
+      </button>
+    </div>
+  </div>
+
+  @let effectOnWork = form.controls.timelossIndicators.controls.injuriesEffectOnWork.controls;
+
+  <div class="flex flex-col gap-y-3">
+    <label class="block text-sm font-semibold text-gray-900" for="injury-date"
+      >How has your injury or condition affected your ability to work?
+      <span class="font-normal">(check all that apply)</span>
+      <p class="font-normal">
+        If you have multiple employers, please consider if you've missed time or will be missing
+        time from any of your jobs.
+      </p></label
+    >
+    <checkbox
+      [control]="effectOnWork.haveNotMissedAnyTime"
+      label="I have not missed any time from work since I was injured"
+    />
+    <checkbox
+      [control]="effectOnWork.haveMissedTimeOnTheDay"
+      label="I missed time from work on the day (or shift) I was injured"
+    />
+    <checkbox
+      [control]="effectOnWork.haveMissedTimeAfterTheDay"
+      label="I missed time from work after the day (or shift) I was injured"
+    />
+    <checkbox
+      [control]="effectOnWork.likelyToMissMoreWork"
+      label="I'll likely need to miss some (or more) time from work due to my injury or condition"
+    />
+    <checkbox
+      [control]="effectOnWork.dutiesAdjusted"
+      label="My work duties have been adjusted or changed due to my injury or condition"
+    />
+
+    <checkbox
+      *ngIf="isInjuryRecent$ | ngrxPush"
+      [control]="effectOnWork.notSureMyInjuryWillAffectWork"
+      label="I'm not sure yet how my injury or condition will affect my ability to work"
+    />
+  </div>
+
+  @let payAffected = form.controls.timelossIndicators.controls.paychequeAffected.controls;
+
+  <div class="flex flex-col gap-y-3">
+    <label class="block text-sm font-semibold text-gray-900" for="injury-date"
+      >Has your paycheque been impacted in any of the following ways?
+      <span class="font-normal">(check all that apply)</span>
+      <p class="font-normal">If you have multiple employers, please consider all of them.</p></label
+    >
+    <checkbox
+      [control]="payAffected.payAffectedByRegularHours"
+      label="I'm not able to work my regular hours because of my injury or condition, and this has changed my pay"
+    />
+    <checkbox
+      [control]="payAffected.payAffectedByOvertime"
+      label="I'm no longer able to work overtime or in other ways that allow me to earn more than my regular pay"
+    />
+    <checkbox
+      [control]="payAffected.payAffectedByAdjustedDuties"
+      label="My pay has changed because my work duties have been adjusted or changed"
+    />
+    <checkbox
+      [control]="payAffected.payUnaffectedStillReceivingWage"
+      label="No, my paycheque has not been impacted because my employer is continuing to pay my full wages while I'm unable to work due to my injury or condition"
+    />
+    <checkbox
+      [control]="payAffected.payUnaffectedNoImpact"
+      label="No, my paycheque has not been impacted in any of these ways"
+    />
+    <checkbox
+      [control]="payAffected.payUnaffectedUnknown"
+      label="I don't know if my paycheque will be impacted in any of these ways"
+    />
+  </div>
+
+  <div class="flex flex-col gap-y-3">
+    <label class="block text-sm font-semibold text-gray-900" for="injury-date">
+      Which of the following factors significantly contributed to your injury?
+      <span class="font-normal">(check all that apply)</span>
+    </label>
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.crush"
+      label="Being crushed by something or someone"
+    />
+    <checkbox [control]="form.controls.contributingFactors.controls.fall" label="Falling" />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.fireOrExplosion"
+      label="Being exposed to heat, fire, or an explosion, and/or getting burned"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.harmfulSubstance"
+      label="Coming in contact with a harmful substance"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.lifting"
+      label="Lifting, pushing, and/or pulling something"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.overexertion"
+      label="Performing work activities at an unusually intense pace or for an extended time"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.repetition"
+      label="Doing one or more similar motions throughout a shift or day"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.sharpEdge"
+      label="A sharp object cutting you"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.slipOrTrip"
+      label="Slipping or tripping on something"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.struck"
+      label="Getting struck by something"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.twist"
+      label="Twisting your body"
+    />
+    <checkbox
+      [control]="form.controls.contributingFactors.controls.unSureOther"
+      label="Other or not sure"
+    />
+  </div>
+
+  <multi-radio-group
+    [control]="form.controls.accidentInvolved"
+    label="Were any of the following involved in the incident?"
+    [options]="[
+      { key: 'MotorVehicle', value: 'A motor vehicle' },
+      { key: 'Assault', value: 'An assault by another individual' },
+      { key: 'HomeOwnerProperty', value: 'A hazard at a homeowner\'s property' },
+      { key: 'Other', value: 'Another party who is not a worker nor an employer' },
+      { key: 'None', value: 'No, none of the above were involved' }
+    ]"
+  />
+
+  <!-- TODO: missing sub-label -->
+  <text-area
+    *ngIf="form.value.accidentInvolved === 'Other'"
+    [control]="form.controls.accidentInvolvedOther"
+    label="Please tell us more about who was involved in the incident"
+    [optional]="true"
+  />
+
+  <div class="flex flex-col gap-y-3">
+    <label class="block text-sm font-semibold text-gray-900" for="injury-date"
+      >Were any of the following items damaged in the incident?
+      <span class="font-normal">(check all that apply)</span>
+    </label>
+    <checkbox [control]="form.controls.itemsDamaged.controls.hearingAid" label="A hearing aid" />
+    <checkbox
+      [control]="form.controls.itemsDamaged.controls.artificialLimb"
+      label="An artificial limb"
+    />
+    <checkbox [control]="form.controls.itemsDamaged.controls.dentures" label="Dentures" />
+    <checkbox [control]="form.controls.itemsDamaged.controls.eyeGlasses" label="Eyeglasses" />
+    <checkbox
+      [control]="form.controls.itemsDamaged.controls.none"
+      label="No, none of the above items were damaged"
+    />
+  </div>
+</div>

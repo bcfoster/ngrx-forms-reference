@@ -12,7 +12,6 @@ import { AccidentInvolved, WeightLifted } from '../../../../services/wrio-api.se
 export type ReasonMissTypeFromWork = 'AttendMedicalAppointment' | 'InjuryPrevented' | 'Both';
 
 export interface InjuriesEffectOnWork {
-  selected: string[];
   haveNotMissedAnyTime: boolean;
   haveMissedTimeOnTheDay: boolean;
   haveMissedTimeAfterTheDay: boolean;
@@ -22,7 +21,6 @@ export interface InjuriesEffectOnWork {
 }
 
 export interface PaychequeAffected {
-  selected: string[];
   payUnaffectedNoImpact: boolean;
   payAffectedByRegularHours: boolean;
   payAffectedByOvertime: boolean;
@@ -36,34 +34,57 @@ export interface TimelossIndicators {
   paychequeAffected: PaychequeAffected;
 }
 
+export interface ContributingFactors {
+  crush: boolean;
+  fall: boolean;
+  fireOrExplosion: boolean;
+  harmfulSubstance: boolean;
+  lifting: boolean;
+  overexertion: boolean;
+  repetition: boolean;
+  sharpEdge: boolean;
+  slipOrTrip: boolean;
+  struck: boolean;
+  twist: boolean;
+  unSureOther: boolean;
+}
+
 export interface MissedTimeFromWorkForm {
   notMissed: string;
   missedDayShift: string;
 }
 
+export interface ItemsDamaged {
+  hearingAid: boolean;
+  artificialLimb: boolean;
+  dentures: boolean;
+  eyeGlasses: boolean;
+  none: boolean;
+}
+
 export interface Form {
   howInjuryHappened: string;
   timelossIndicators: TimelossIndicators;
-  contributingFactors: string[];
+  contributingFactors: ContributingFactors;
   accidentInvolved: AccidentInvolved | '';
   accidentInvolvedOther: string;
   reasonMissTimeFromWork: ReasonMissTypeFromWork | '';
   injuryDate: string;
-  isInjuryDateApproximate: boolean | null;
+  isInjuryDateApproximate: boolean;
+  injuryTime: string;
   weightLifted: WeightLifted | '';
   describeLifting: string;
   injuryType: string;
   anticipatedMissingTime: string;
   missedTimeFromWork: MissedTimeFromWorkForm;
-  injuryWasCatastrophic: boolean | null;
-  itemsDamaged: string[];
+  injuryWasCatastrophic: boolean;
+  itemsDamaged: ItemsDamaged;
 }
 
 export const initialFormValue: Form = {
   howInjuryHappened: '',
   timelossIndicators: {
     injuriesEffectOnWork: {
-      selected: [],
       haveNotMissedAnyTime: false,
       haveMissedTimeOnTheDay: false,
       haveMissedTimeAfterTheDay: false,
@@ -72,8 +93,7 @@ export const initialFormValue: Form = {
       notSureMyInjuryWillAffectWork: false,
     },
     paychequeAffected: {
-      selected: [],
-      payUnaffectedNoImpact: true,
+      payUnaffectedNoImpact: false,
       payAffectedByRegularHours: false,
       payAffectedByOvertime: false,
       payAffectedByAdjustedDuties: false,
@@ -81,12 +101,26 @@ export const initialFormValue: Form = {
       payUnaffectedUnknown: false,
     },
   },
-  contributingFactors: [],
+  contributingFactors: {
+    crush: false,
+    fall: false,
+    fireOrExplosion: false,
+    harmfulSubstance: false,
+    lifting: false,
+    overexertion: false,
+    repetition: false,
+    sharpEdge: false,
+    slipOrTrip: false,
+    struck: false,
+    twist: false,
+    unSureOther: false,
+  },
   accidentInvolved: '',
   accidentInvolvedOther: '',
   reasonMissTimeFromWork: '',
   injuryDate: '',
-  isInjuryDateApproximate: null,
+  isInjuryDateApproximate: false,
+  injuryTime: '00:00',
   weightLifted: '',
   describeLifting: '',
   injuryType: '',
@@ -95,8 +129,14 @@ export const initialFormValue: Form = {
     notMissed: '',
     missedDayShift: '',
   },
-  injuryWasCatastrophic: null,
-  itemsDamaged: [],
+  injuryWasCatastrophic: false,
+  itemsDamaged: {
+    hearingAid: false,
+    artificialLimb: false,
+    dentures: false,
+    eyeGlasses: false,
+    none: false,
+  },
 };
 
 export const validator =
@@ -106,14 +146,10 @@ export const validator =
       howInjuryHappened: validate(required, maxLength(5100), minWords(3)),
       timelossIndicators: updateGroup<TimelossIndicators>({
         injuriesEffectOnWork: updateGroup<InjuriesEffectOnWork>({
-          // TODO: adding and removing to this array can be done in the component
-          //       at least i'm pretty certain that's the approach i've done before
-          selected: validate(required),
+          // TODO: validate at least one child is true
         }),
-        // TODO: adding and removing to this array can be done in the component
-        //       at least i'm pretty certain that's the approach i've done before
         paychequeAffected: updateGroup<PaychequeAffected>({
-          selected: validate(required),
+          // TODO: validate at least one child is true
         }),
       }),
       contributingFactors: validate(required),
@@ -137,10 +173,9 @@ export const validator =
             )
           : () => ({}),
       ),
+      injuryTime: validate(required),
       weightLifted: (c, f) =>
-        f.value.contributingFactors.some((cf) => cf === 'lifting')
-          ? validate(c, required)
-          : optional(c),
+        f.value.contributingFactors.lifting ? validate(c, required) : optional(c),
       describeLifting: (c, f) =>
         f.value.weightLifted === 'NotSure'
           ? validate(c, required, maxLength(250), minWords(3))
