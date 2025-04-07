@@ -8,7 +8,7 @@ import { FormControlState, NgrxFormsModule } from 'ngrx-forms';
   styles: ``,
 })
 export class CheckboxComponent {
-  @Input({ required: true }) control: FormControlState<boolean> | null = null;
+  @Input({ required: true }) control: FormControlState<boolean> | undefined;
   @Input({ required: true }) label = '';
 
   get id(): string {

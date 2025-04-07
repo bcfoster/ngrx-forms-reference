@@ -1,0 +1,113 @@
+<h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Injury details</h2>
+
+<div class="flex flex-col gap-y-3">
+  <div class="flex flex-col gap-y-2">
+    <label class="block text-sm font-semibold text-gray-900" for="body-parts"
+      >What part of your body was injured?
+      <p class="text-sm font-normal">You can select more than one body part.</p></label
+    >
+    <input class="hidden" id="body-parts" />
+
+    <div class="flex gap-x-3">
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="head">Head & neck</label>
+        <input class="hidden" id="head" />
+
+        @let head = form.controls.bodyParts.controls.head;
+
+        <checkbox [control]="head.controls[HEAD.RIGHT_EYE]" label="Right eye" />
+        <checkbox [control]="head.controls[HEAD.LEFT_EYE]" label="Left eye" />
+        <checkbox [control]="head.controls[HEAD.RIGHT_EAR]" label="Right ear" />
+        <checkbox [control]="head.controls[HEAD.LEFT_EAR]" label="Left ear" />
+        <checkbox [control]="head.controls[HEAD.FOREHEAD]" label="Forehead" />
+        <checkbox [control]="head.controls[HEAD.SKULL]" label="Skull" />
+        <checkbox [control]="head.controls[HEAD.NOSE]" label="Nose" />
+        <checkbox [control]="head.controls[HEAD.MOUTH]" label="Mouth" />
+        <checkbox [control]="head.controls[HEAD.TEETH]" label="Teeth" />
+        <checkbox [control]="head.controls[HEAD.NECK]" label="Neck" />
+        <checkbox [control]="head.controls[HEAD.OTHER]" label="Other" />
+      </div>
+
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="torso">Torso & back</label>
+        <input class="hidden" id="torso" />
+
+        @let torso = form.controls.bodyParts.controls.torso;
+
+        <checkbox [control]="torso.controls[TORSO.CHEST]" label="Chest" />
+        <checkbox [control]="torso.controls[TORSO.ORGANS]" label="Organs" />
+        <checkbox [control]="torso.controls[TORSO.UPPER_BACK]" label="Upper back" />
+        <checkbox [control]="torso.controls[TORSO.LOWER_BACK]" label="Lower back" />
+        <checkbox [control]="torso.controls[TORSO.ABDOMEN]" label="Abdomen" />
+        <checkbox [control]="torso.controls[TORSO.WAIST]" label="Waist" />
+        <checkbox [control]="torso.controls[TORSO.BUTTOCKS]" label="Buttocks" />
+        <checkbox [control]="torso.controls[TORSO.GROIN]" label="Groin" />
+        <checkbox [control]="torso.controls[TORSO.OTHER]" label="Other" />
+      </div>
+
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="right-arm">Right arm</label>
+        <input class="hidden" id="right-arm" />
+
+        @let rightArm = form.controls.bodyParts.controls.rightArm;
+
+        <checkbox [control]="rightArm.controls[ARM.SHOULDER]" label="Shoulder" />
+        <checkbox [control]="rightArm.controls[ARM.UPPER_ARM]" label="Upper arm" />
+        <checkbox [control]="rightArm.controls[ARM.ELBOW]" label="Elbow" />
+        <checkbox [control]="rightArm.controls[ARM.LOWER_ARM]" label="Lower arm" />
+        <checkbox [control]="rightArm.controls[ARM.WRIST]" label="Wrist" />
+        <checkbox [control]="rightArm.controls[ARM.HAND]" label="Hand" />
+        <checkbox [control]="rightArm.controls[ARM.FINGERS]" label="Fingers" />
+        <checkbox [control]="rightArm.controls[ARM.THUMB]" label="Thumb" />
+        <checkbox [control]="rightArm.controls[ARM.OTHER]" label="Other" />
+      </div>
+
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="left-arm">Left arm</label>
+        <input class="hidden" id="left-arm" />
+
+        @let leftArm = form.controls.bodyParts.controls.leftArm;
+
+        <checkbox [control]="leftArm.controls[ARM.SHOULDER]" label="Shoulder" />
+        <checkbox [control]="leftArm.controls[ARM.UPPER_ARM]" label="Upper arm" />
+        <checkbox [control]="leftArm.controls[ARM.ELBOW]" label="Elbow" />
+        <checkbox [control]="leftArm.controls[ARM.LOWER_ARM]" label="Lower arm" />
+        <checkbox [control]="leftArm.controls[ARM.WRIST]" label="Wrist" />
+        <checkbox [control]="leftArm.controls[ARM.HAND]" label="Hand" />
+        <checkbox [control]="leftArm.controls[ARM.FINGERS]" label="Fingers" />
+        <checkbox [control]="leftArm.controls[ARM.THUMB]" label="Thumb" />
+        <checkbox [control]="leftArm.controls[ARM.OTHER]" label="Other" />
+      </div>
+
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="right-leg">Right leg</label>
+        <input class="hidden" id="right-leg" />
+
+        @let rightLeg = form.controls.bodyParts.controls.rightLeg;
+
+        <checkbox [control]="rightLeg.controls[LEG.UPPER_LEG]" label="Upper leg" />
+        <checkbox [control]="rightLeg.controls[LEG.KNEE]" label="Knee" />
+        <checkbox [control]="rightLeg.controls[LEG.SHIN]" label="Shin" />
+        <checkbox [control]="rightLeg.controls[LEG.ANKLE]" label="Ankle" />
+        <checkbox [control]="rightLeg.controls[LEG.FOOT]" label="Foot" />
+        <checkbox [control]="rightLeg.controls[LEG.TOES]" label="Toes" />
+        <checkbox [control]="rightLeg.controls[LEG.OTHER]" label="Other" />
+      </div>
+
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="left-leg">Left leg</label>
+        <input class="hidden" id="left-leg" />
+
+        @let leftLeg = form.controls.bodyParts.controls.leftLeg;
+
+        <checkbox [control]="leftLeg.controls[LEG.UPPER_LEG]" label="Upper leg" />
+        <checkbox [control]="leftLeg.controls[LEG.KNEE]" label="Knee" />
+        <checkbox [control]="leftLeg.controls[LEG.SHIN]" label="Shin" />
+        <checkbox [control]="leftLeg.controls[LEG.ANKLE]" label="Ankle" />
+        <checkbox [control]="leftLeg.controls[LEG.FOOT]" label="Foot" />
+        <checkbox [control]="leftLeg.controls[LEG.TOES]" label="Toes" />
+        <checkbox [control]="leftLeg.controls[LEG.OTHER]" label="Other" />
+      </div>
+    </div>
+  </div>
+</div>

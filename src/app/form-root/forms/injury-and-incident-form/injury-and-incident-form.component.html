@@ -6,6 +6,8 @@
   <form [ngrxFormState]="form" class="flex flex-col gap-y-5">
     <incident-overview-form [form]="form.controls.incidentOverview" />
 
+    <injury-details-form [form]="form.controls.injuryDetails" />
+
     <div>
       <button
         type="button"
