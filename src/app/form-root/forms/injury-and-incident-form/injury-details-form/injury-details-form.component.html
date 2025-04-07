@@ -110,4 +110,45 @@
       </div>
     </div>
   </div>
+
+  <multi-radio-group
+    [control]="form.controls.dominantHand"
+    label="What is your dominant hand?"
+    [optional]="true"
+    [options]="[
+    { key: 'Left', value: 'Left' },
+    { key: 'Right', value: 'Right' },
+    { key: 'Ambidextrous', value: 'Ambidextrous' }
+  ]"
+  />
+
+  <binary-radio-group
+    [control]="form.controls.haveHadPriorProblemsWithInjuredAreas"
+    [horizontal]="true"
+    label="Have you had any prior problems with the injured area(s)?"
+  />
+
+  @if (form.value.haveHadPriorProblemsWithInjuredAreas) {
+    <binary-radio-group
+      [control]="form.controls.haveFullyRecoveredFromPriorInjury"
+      [horizontal]="true"
+      label="Have you fully recovered from your prior injury or condition?"
+    />
+
+    @if (form.value.haveFullyRecoveredFromPriorInjury === false) {
+      <binary-radio-group
+        [control]="form.controls.haveExistingClaimNumber"
+        [horizontal]="true"
+        label="Do you have a WorkSafeBC claim for this prior injury or condition?"
+      />
+
+      @if (form.value.haveExistingClaimNumber === false) {
+        <text-area
+          [control]="form.controls.additionalInformationPreviousInjury"
+          label="Is there anything else you'd like to tell us to help us understand your prior injury or condition?"
+          [optional]="true"
+        />
+      }
+    }
+  }
 </div>

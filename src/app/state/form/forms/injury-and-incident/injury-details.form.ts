@@ -64,3 +64,6 @@ export const validator = (
         : optional(c),
     diagnosedConcussion: (c, f) => (f.value.impactToHead ? validate(c, required) : optional(c)),
   });
+
+// TODO: there are form state updates that need to happen here on the boolean transitions
+//       clearing the text area, setting booleans to null, etc.

@@ -9,6 +9,7 @@ import { IncidentOverviewFormComponent } from './incident-overview-form/incident
 import { InjuryDetailsFormComponent } from './injury-details-form/injury-details-form.component';
 import * as form from '../../../state/form/forms/injury-and-incident.form';
 import * as formSelectors from '../../../state/form/form.selectors';
+import { IncidentDetailsFormComponent } from './incident-details-form/incident-details-form.component';
 
 @Component({
   selector: 'injury-and-incident-form',
@@ -18,6 +19,7 @@ import * as formSelectors from '../../../state/form/form.selectors';
     LetDirective,
     NgrxFormsModule,
     RouterLink,
+    IncidentDetailsFormComponent,
   ],
   templateUrl: './injury-and-incident-form.component.html',
   styles: ``,
