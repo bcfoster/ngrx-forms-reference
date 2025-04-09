@@ -20,7 +20,7 @@ export interface Form {
   typeOfFirstAidReceived: string;
   haveVisitedPractitioner: boolean | null;
   dateReceivedTreatment: string;
-  isApproximateDate: boolean | null;
+  isApproximateDate: boolean;
   clinicOrHospitalName: string;
   practitionerName: string;
   practitionerLastName: string;
@@ -39,7 +39,7 @@ export const initialFormValue: Form = {
   typeOfFirstAidReceived: '',
   haveVisitedPractitioner: null,
   dateReceivedTreatment: '',
-  isApproximateDate: null,
+  isApproximateDate: false,
   clinicOrHospitalName: '',
   practitionerName: '',
   practitionerLastName: '',

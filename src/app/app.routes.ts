@@ -3,11 +3,11 @@ import { CanActivateFn, Router, Routes } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 
+import { EmploymentAndEmployerInfoFormComponent } from './form/employment-and-employer-info-form/employment-and-employer-info-form.component';
+import { InjuryAndIncidentFormComponent } from './form/injury-and-incident-form/injury-and-incident-form.component';
+import { PersonalAndContactInfoFormComponent } from './form/personal-and-contact-info-form/personal-and-contact-info-form.component';
+import { TreatmentDetailsFormComponent } from './form/treatment-details-form/treatment-details-form.component';
 import { FormRootComponent } from './form-root/form-root.component';
-import { EmploymentAndEmployerInfoFormComponent } from './form-root/forms/employment-and-employer-info-form/employment-and-employer-info-form.component';
-import { InjuryAndIncidentFormComponent } from './form-root/forms/injury-and-incident-form/injury-and-incident-form.component';
-import { PersonalAndContactInfoFormComponent } from './form-root/forms/personal-and-contact-info-form/personal-and-contact-info-form.component';
-import { TreatmentDetailsFormComponent } from './form-root/forms/treatment-details-form/treatment-details-form.component';
 import { FormShellComponent } from './form-shell/form-shell.component';
 import { FormSummaryComponent } from './form-summary/form-summary.component';
 

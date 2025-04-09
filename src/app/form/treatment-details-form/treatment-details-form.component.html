@@ -1,0 +1,55 @@
+<div *ngrxLet="form$ as form" class="mx-auto max-w-sm">
+  <h1 class="mb-4 text-2xl leading-none font-semibold text-gray-900">Treatment details</h1>
+
+  <h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Medical care</h2>
+
+  <div class="flex flex-col gap-y-3">
+    <!-- TODO: sub-title -->
+    <binary-radio-group
+      [control]="form.controls.haveReceivedFirstAid"
+      [horizontal]="true"
+      label="Did you receive first aid or treatment at your workplace?"
+    />
+
+    @if (form.value.haveReceivedFirstAid) {
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="injury-date"
+          >When did you receive first aid?</label
+        >
+        <input
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="injury-date"
+          [ngrxFormControlState]="form.controls.dateReceivedFirstAid"
+          type="date"
+        />
+      </div>
+
+      <checkbox [control]="form.controls.isApproximateDate" label="This is an approximate date" />
+
+      <text-area
+        [control]="form.controls.typeOfFirstAidReceived"
+        label="What type of treatment did you receive at your workplace?"
+      />
+    }
+
+    <binary-radio-group
+      [control]="form.controls.haveVisitedPractitioner"
+      [horizontal]="true"
+      label="Did you visit a hospital, or a physician or other qualified practitioner?"
+    />
+
+    @if (form.value.haveVisitedPractitioner) {
+      <h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">
+        Medical practitioner details
+      </h2>
+    }
+
+    @if (form.value.haveVisitedPractitioner === false) {
+      <binary-radio-group
+        [control]="form.controls.haveAppointmentBooked"
+        [horizontal]="true"
+        label="Do you have an appointment booked with a physician or other qualified practicioner to treat this injury?"
+      />
+    }
+  </div>
+</div>
