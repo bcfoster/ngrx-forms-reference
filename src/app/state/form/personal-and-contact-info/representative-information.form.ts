@@ -1,9 +1,9 @@
 import { FormGroupState, setValue, updateGroup } from 'ngrx-forms';
 import { minLength, required } from 'ngrx-forms/validation';
 
-import { optional } from '../../../ngrx-forms/optional';
-import { validate } from '../../../ngrx-forms/validate';
-import { RepresentativeRelationshipType } from '../../../../services/wrio-api.service';
+import { optional } from '../../ngrx-forms/optional';
+import { validate } from '../../ngrx-forms/validate';
+import { RepresentativeRelationshipType } from '../../../services/wrio-api.service';
 
 export interface Form {
   reportingForSelf: boolean | null;

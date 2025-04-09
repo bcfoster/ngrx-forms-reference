@@ -11,7 +11,7 @@ import { EmailConsentFormComponent } from './email-consent-form/email-consent-fo
 import { PersonalInfoFormComponent } from './personal-info-form/personal-info-form.component';
 import { RepresentativeInfoFormComponent } from './representative-info-form/representative-info-form.component';
 import { BinaryRadioGroupComponent } from '../../form-controls/binary-radio-group/binary-radio-group.component';
-import * as form from '../../state/form/forms/personal-and-contact-info.form';
+import * as form from '../../state/form/personal-and-contact-info/personal-and-contact-info.form';
 import * as formSelectors from '../../state/form/form.selectors';
 
 @Component({

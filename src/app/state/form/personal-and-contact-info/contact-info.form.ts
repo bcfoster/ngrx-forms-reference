@@ -1,9 +1,10 @@
 import { updateGroup } from 'ngrx-forms';
-import { validate } from '../../../ngrx-forms/validate';
 import { email, maxLength, required } from 'ngrx-forms/validation';
-import { optional } from '../../../ngrx-forms/optional';
-import { postalCode } from '../../../ngrx-forms/postal-code';
-import { zipCode } from '../../../ngrx-forms/zip-code';
+
+import { optional } from '../../ngrx-forms/optional';
+import { postalCode } from '../../ngrx-forms/postal-code';
+import { validate } from '../../ngrx-forms/validate';
+import { zipCode } from '../../ngrx-forms/zip-code';
 
 export interface AddressForm {
   addressLine1: string;

@@ -3,7 +3,7 @@ import { FormGroupState } from 'ngrx-forms';
 
 import { SelectOptionComponent } from '../../../form-controls/select-option/select-option.component';
 import { TextInputComponent } from '../../../form-controls/text-input/text-input.component';
-import * as contactInfo from '../../../state/form/forms/personal-and-contact-info/contact-info.form';
+import * as contactInfo from '../../../state/form/personal-and-contact-info/contact-info.form';
 
 @Component({
   selector: 'contact-info-form',

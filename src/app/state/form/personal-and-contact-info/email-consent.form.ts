@@ -1,9 +1,9 @@
 import { FormGroupState, setValue, updateGroup } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
 
-import * as personalAndContactInfo from '../../forms/personal-and-contact-info.form';
-import { optional } from '../../../ngrx-forms/optional';
-import { validate } from '../../../ngrx-forms/validate';
+import * as personalAndContactInfo from './personal-and-contact-info.form';
+import { optional } from '../../ngrx-forms/optional';
+import { validate } from '../../ngrx-forms/validate';
 
 export interface Form {
   consentIsGiven: boolean | null;

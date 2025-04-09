@@ -1,10 +1,10 @@
 import { updateGroup } from 'ngrx-forms';
 
 import { optional } from '../../ngrx-forms/optional';
-import * as contactInfo from './personal-and-contact-info/contact-info.form';
-import * as emailConsent from './personal-and-contact-info/email-consent.form';
-import * as personalInfo from './personal-and-contact-info/personal-info.form';
-import * as representativeInfo from './personal-and-contact-info/representative-information.form';
+import * as contactInfo from './contact-info.form';
+import * as emailConsent from './email-consent.form';
+import * as personalInfo from './personal-info.form';
+import * as representativeInfo from './representative-information.form';
 
 export interface Form {
   representativeInformation: representativeInfo.Form;

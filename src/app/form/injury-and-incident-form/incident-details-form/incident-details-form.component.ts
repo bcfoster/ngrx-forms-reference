@@ -4,7 +4,7 @@ import { FormGroupState } from 'ngrx-forms';
 import { BinaryRadioGroupComponent } from '../../../form-controls/binary-radio-group/binary-radio-group.component';
 import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-group/multi-radio-group.component';
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
-import * as incidentDetails from '../../../state/form/forms/injury-and-incident/incident-details.form';
+import * as incidentDetails from '../../../state/form/injury-and-incident/incident-details.form';
 
 @Component({
   selector: 'incident-details-form',

@@ -1,5 +1,5 @@
 import { setValue, updateGroup } from 'ngrx-forms';
-import { validate } from '../../../ngrx-forms/validate';
+import { validate } from '../../ngrx-forms/validate';
 import {
   greaterThanOrEqualTo,
   lessThanOrEqualTo,
@@ -8,7 +8,7 @@ import {
   number,
   required,
 } from 'ngrx-forms/validation';
-import { optional } from '../../../ngrx-forms/optional';
+import { optional } from '../../ngrx-forms/optional';
 
 export type SexAtBirth = 'Female' | 'Intersex' | 'Male' | 'Unknown';
 export type Gender = 'Man' | 'Non-binary' | 'Two-Spirit' | 'Woman' | '__<CUSTOM>__';

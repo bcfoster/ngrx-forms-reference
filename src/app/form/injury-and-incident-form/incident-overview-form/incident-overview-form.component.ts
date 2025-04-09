@@ -9,7 +9,7 @@ import { CheckboxComponent } from '../../../form-controls/checkbox/checkbox.comp
 import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-group/multi-radio-group.component';
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
 import * as formSelectors from '../../../state/form/form.selectors';
-import * as incidentOverview from '../../../state/form/forms/injury-and-incident/incident-overview.form';
+import * as incidentOverview from '../../../state/form/injury-and-incident/incident-overview.form';
 
 @Component({
   selector: 'incident-overview-form',

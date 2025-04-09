@@ -5,8 +5,8 @@ import { BinaryRadioGroupComponent } from '../../../form-controls/binary-radio-g
 import { CheckboxComponent } from '../../../form-controls/checkbox/checkbox.component';
 import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-group/multi-radio-group.component';
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
-import { BODY_PARTS } from '../../../state/form/forms/injury-and-incident/body-parts';
-import * as injuryDetails from '../../../state/form/forms/injury-and-incident/injury-details.form';
+import { BODY_PARTS } from '../../../state/form/injury-and-incident/body-parts';
+import * as injuryDetails from '../../../state/form/injury-and-incident/injury-details.form';
 
 @Component({
   selector: 'injury-details-form',

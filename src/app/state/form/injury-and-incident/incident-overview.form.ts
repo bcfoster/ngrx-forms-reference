@@ -1,13 +1,13 @@
 import { FormGroupState, updateGroup } from 'ngrx-forms';
 import { maxLength, required } from 'ngrx-forms/validation';
 
-import * as formReducer from '../../form.reducer';
-import { earlierThan } from '../../../ngrx-forms/earlier-than';
-import { minWords } from '../../../ngrx-forms/min-words';
-import { minYear } from '../../../ngrx-forms/min-year';
-import { optional } from '../../../ngrx-forms/optional';
-import { validate } from '../../../ngrx-forms/validate';
-import { AccidentInvolved, WeightLifted } from '../../../../services/wrio-api.service';
+import * as formReducer from '../form.reducer';
+import { earlierThan } from '../../ngrx-forms/earlier-than';
+import { minWords } from '../../ngrx-forms/min-words';
+import { minYear } from '../../ngrx-forms/min-year';
+import { optional } from '../../ngrx-forms/optional';
+import { validate } from '../../ngrx-forms/validate';
+import { AccidentInvolved, WeightLifted } from '../../../services/wrio-api.service';
 
 export type ReasonMissTypeFromWork = 'AttendMedicalAppointment' | 'InjuryPrevented' | 'Both';
 

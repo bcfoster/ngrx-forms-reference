@@ -1,10 +1,10 @@
 import { FormGroupState, updateGroup } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
 
-import { optional } from '../../../ngrx-forms/optional';
-import { validate } from '../../../ngrx-forms/validate';
-import { DominantHandSide } from '../../../../services/wrio-api.service';
-import * as injuryAndIncident from '../injury-and-incident.form';
+import { optional } from '../../ngrx-forms/optional';
+import { validate } from '../../ngrx-forms/validate';
+import { DominantHandSide } from '../../../services/wrio-api.service';
+import * as injuryAndIncident from './injury-and-incident.form';
 
 export interface BodyParts {
   head: boolean[];

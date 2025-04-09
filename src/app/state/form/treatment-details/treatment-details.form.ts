@@ -60,16 +60,16 @@ export const validator = (form: FormGroupState<formReducer.Form>) =>
   updateGroup<Form>(
     {
       haveReceivedFirstAid: validate(required),
-      dateReceivedFirstAid: (c, f) =>
-        f.value.haveReceivedFirstAid
-          ? validate(
-              c,
-              required,
-              earlierThan(new Date().toISOString()),
-              laterThan(form.value.injuryAndIncident.incidentOverview.injuryDate),
-              minYear(1900),
-            )
-          : optional(c),
+      // dateReceivedFirstAid: (c, f) =>
+      //   f.value.haveReceivedFirstAid
+      //     ? validate(
+      //         c,
+      //         required,
+      //         earlierThan(new Date().toISOString()),
+      //         laterThan(form.value.injuryAndIncident.incidentOverview.injuryDate),
+      //         minYear(1900),
+      //       )
+      //     : optional(c),
       typeOfFirstAidReceived: (c, f) =>
         f.value.haveReceivedFirstAid ? validate(c, required) : optional(c),
       haveVisitedPractitioner: validate(required),

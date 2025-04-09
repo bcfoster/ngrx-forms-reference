@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroupState } from 'ngrx-forms';
 
 import { BinaryRadioGroupComponent } from '../../../form-controls/binary-radio-group/binary-radio-group.component';
-import * as emailConsent from '../../../state/form/forms/personal-and-contact-info/email-consent.form';
+import * as emailConsent from '../../../state/form/personal-and-contact-info/email-consent.form';
 
 @Component({
   selector: 'email-consent-form',

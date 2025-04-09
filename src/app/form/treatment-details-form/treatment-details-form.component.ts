@@ -8,7 +8,7 @@ import { BinaryRadioGroupComponent } from '../../form-controls/binary-radio-grou
 import { CheckboxComponent } from '../../form-controls/checkbox/checkbox.component';
 import { TextAreaComponent } from '../../form-controls/text-area/text-area.component';
 import * as formSelectors from '../../state/form/form.selectors';
-import * as form from '../../state/form/forms/treatment-details.form';
+import * as form from '../../state/form/treatment-details/treatment-details.form';
 
 @Component({
   selector: 'treatment-details-form',

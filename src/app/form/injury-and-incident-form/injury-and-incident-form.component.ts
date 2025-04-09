@@ -9,7 +9,7 @@ import { IncidentDetailsFormComponent } from './incident-details-form/incident-d
 import { IncidentOverviewFormComponent } from './incident-overview-form/incident-overview-form.component';
 import { InjuryDetailsFormComponent } from './injury-details-form/injury-details-form.component';
 import { TextAreaComponent } from '../../form-controls/text-area/text-area.component';
-import * as form from '../../state/form/forms/injury-and-incident.form';
+import * as form from '../../state/form/injury-and-incident/injury-and-incident.form';
 import * as formSelectors from '../../state/form/form.selectors';
 
 @Component({

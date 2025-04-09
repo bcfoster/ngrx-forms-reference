@@ -15,12 +15,12 @@ import { draftActions } from '../drafts/drafts.actions';
 import { formActions } from './form.actions';
 
 import { evaluateCompletion } from './form.progress';
-import * as contactInfo from './forms/personal-and-contact-info/contact-info.form';
-import * as employmentAndEmployer from './forms/employment-and-employer-info.form';
-import * as injuryAndIncident from './forms/injury-and-incident.form';
-import * as personalAndContactInfo from './forms/personal-and-contact-info.form';
-import * as personalInfo from './forms/personal-and-contact-info/personal-info.form';
-import * as treatmentDetails from './forms/treatment-details.form';
+import * as contactInfo from './personal-and-contact-info/contact-info.form';
+import * as employmentAndEmployer from './employment-and-employer-info/employment-and-employer-info.form';
+import * as injuryAndIncident from './injury-and-incident/injury-and-incident.form';
+import * as personalAndContactInfo from './personal-and-contact-info/personal-and-contact-info.form';
+import * as personalInfo from './personal-and-contact-info/personal-info.form';
+import * as treatmentDetails from './treatment-details/treatment-details.form';
 
 export const FORM_ID = 'form';
 export const VERSION = 2;
