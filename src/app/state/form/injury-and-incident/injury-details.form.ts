@@ -1,22 +1,14 @@
 import { FormGroupState, updateGroup } from 'ngrx-forms';
 import { required } from 'ngrx-forms/validation';
 
+import { BodyPart } from './body-part';
+import * as injuryAndIncident from './injury-and-incident.form';
 import { optional } from '../../ngrx-forms/optional';
 import { validate } from '../../ngrx-forms/validate';
 import { DominantHandSide } from '../../../services/wrio-api.service';
-import * as injuryAndIncident from './injury-and-incident.form';
-
-export interface BodyParts {
-  head: boolean[];
-  torso: boolean[];
-  leftArm: boolean[];
-  rightArm: boolean[];
-  leftLeg: boolean[];
-  rightLeg: boolean[];
-}
 
 export interface Form {
-  bodyParts: BodyParts;
+  bodyParts: BodyPart[];
   haveHadPriorProblemsWithInjuredAreas: boolean | null;
   haveFullyRecoveredFromPriorInjury: boolean | null;
   haveExistingClaimNumber: boolean | null;
@@ -27,14 +19,7 @@ export interface Form {
 }
 
 export const initialFormValue: Form = {
-  bodyParts: {
-    head: [false, false, false, false, false, false, false, false, false, false, false],
-    torso: [false, false, false, false, false, false, false, false, false],
-    leftArm: [false, false, false, false, false, false, false, false, false],
-    rightArm: [false, false, false, false, false, false, false, false, false],
-    leftLeg: [false, false, false, false, false, false, false],
-    rightLeg: [false, false, false, false, false, false, false],
-  },
+  bodyParts: [],
   haveHadPriorProblemsWithInjuredAreas: null,
   haveFullyRecoveredFromPriorInjury: null,
   haveExistingClaimNumber: null,
@@ -49,7 +34,6 @@ export const validator = (
   parent: FormGroupState<injuryAndIncident.Form>,
 ): FormGroupState<Form> =>
   updateGroup<Form>(state, {
-    // TODO: revisit validation rules
     bodyParts: validate(required),
     haveHadPriorProblemsWithInjuredAreas: validate(required),
     haveFullyRecoveredFromPriorInjury: (c, f) =>
@@ -59,7 +43,7 @@ export const validator = (
         ? validate(c, required)
         : optional(c),
     impactToHead: (c, f) =>
-      f.value.bodyParts.head.some((bp) => bp) && parent.value.incidentOverview.injuryWasCatastrophic
+      f.value.bodyParts.some((bp) => bp) && parent.value.incidentOverview.injuryWasCatastrophic
         ? validate(c, required)
         : optional(c),
     diagnosedConcussion: (c, f) => (f.value.impactToHead ? validate(c, required) : optional(c)),

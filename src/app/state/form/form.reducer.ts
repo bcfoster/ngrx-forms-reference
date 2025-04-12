@@ -15,9 +15,11 @@ import { draftActions } from '../drafts/drafts.actions';
 import { formActions } from './form.actions';
 
 import { evaluateCompletion } from './form.progress';
-import * as contactInfo from './personal-and-contact-info/contact-info.form';
 import * as employmentAndEmployer from './employment-and-employer-info/employment-and-employer-info.form';
+import { injuryAndIncidentActions } from './injury-and-incident.actions';
 import * as injuryAndIncident from './injury-and-incident/injury-and-incident.form';
+import * as injuryDetails from './injury-and-incident/injury-details.form';
+import * as contactInfo from './personal-and-contact-info/contact-info.form';
 import * as personalAndContactInfo from './personal-and-contact-info/personal-and-contact-info.form';
 import * as personalInfo from './personal-and-contact-info/personal-info.form';
 import * as treatmentDetails from './treatment-details/treatment-details.form';
@@ -129,6 +131,30 @@ const rawReducer = createReducer(
   on(formActions.start, (state) => ({
     ...state,
     form: initialFormState,
+  })),
+  on(injuryAndIncidentActions.addBodyPart, (state, action) => ({
+    ...state,
+    form: updateGroup(state.form, {
+      injuryAndIncident: updateGroup<injuryAndIncident.Form>({
+        injuryDetails: updateGroup<injuryDetails.Form>({
+          bodyParts: (c) => setValue(c, [...c.value, action.id]),
+        }),
+      }),
+    }),
+  })),
+  on(injuryAndIncidentActions.removeBodyPart, (state, action) => ({
+    ...state,
+    form: updateGroup(state.form, {
+      injuryAndIncident: updateGroup<injuryAndIncident.Form>({
+        injuryDetails: updateGroup<injuryDetails.Form>({
+          bodyParts: (c) =>
+            setValue(
+              c,
+              c.value.filter((v) => v !== action.id),
+            ),
+        }),
+      }),
+    }),
   })),
 );
 

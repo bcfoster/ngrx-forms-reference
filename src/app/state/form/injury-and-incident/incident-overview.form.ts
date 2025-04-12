@@ -139,6 +139,14 @@ export const initialFormValue: Form = {
   },
 };
 
+const injuriesEffectOnWorkSelected = (work: InjuriesEffectOnWork): boolean =>
+  work.dutiesAdjusted ||
+  work.haveMissedTimeAfterTheDay ||
+  work.haveMissedTimeOnTheDay ||
+  work.haveNotMissedAnyTime ||
+  work.likelyToMissMoreWork ||
+  work.notSureMyInjuryWillAffectWork;
+
 export const validator =
   (parent: FormGroupState<formReducer.Form>) =>
   (form: FormGroupState<Form>): FormGroupState<Form> =>

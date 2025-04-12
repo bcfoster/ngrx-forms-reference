@@ -1,20 +1,22 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { FormGroupState, NgrxFormsModule } from 'ngrx-forms';
 
 import { BinaryRadioGroupComponent } from '../../../form-controls/binary-radio-group/binary-radio-group.component';
 import { CheckboxComponent } from '../../../form-controls/checkbox/checkbox.component';
 import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-group/multi-radio-group.component';
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
-import { BODY_PARTS } from '../../../state/form/injury-and-incident/body-parts';
+import { BodyPart } from '../../../state/form/injury-and-incident/body-part';
+import { injuryAndIncidentActions } from '../../../state/form/injury-and-incident.actions';
 import * as injuryDetails from '../../../state/form/injury-and-incident/injury-details.form';
 
 @Component({
   selector: 'injury-details-form',
   imports: [
-    CheckboxComponent,
-    NgrxFormsModule,
-    MultiRadioGroupComponent,
     BinaryRadioGroupComponent,
+    CheckboxComponent,
+    MultiRadioGroupComponent,
+    NgrxFormsModule,
     TextAreaComponent,
   ],
   templateUrl: './injury-details-form.component.html',
@@ -23,8 +25,15 @@ import * as injuryDetails from '../../../state/form/injury-and-incident/injury-d
 export class InjuryDetailsFormComponent {
   @Input({ required: true }) form!: FormGroupState<injuryDetails.Form>;
 
-  protected readonly HEAD = BODY_PARTS.HEAD;
-  protected readonly TORSO = BODY_PARTS.TORSO;
-  protected readonly ARM = BODY_PARTS.ARM;
-  protected readonly LEG = BODY_PARTS.LEG;
+  constructor(private readonly store: Store) {}
+
+  onChange(event: Event, id: BodyPart) {
+    const target = event.target as HTMLInputElement;
+
+    if (target.checked) {
+      this.store.dispatch(injuryAndIncidentActions.addBodyPart({ id }));
+    } else {
+      this.store.dispatch(injuryAndIncidentActions.removeBodyPart({ id }));
+    }
+  }
 }
