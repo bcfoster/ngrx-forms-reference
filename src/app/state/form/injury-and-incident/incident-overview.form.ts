@@ -1,5 +1,5 @@
-import { FormGroupState, updateGroup } from 'ngrx-forms';
-import { maxLength, required } from 'ngrx-forms/validation';
+import { FormControlState, FormGroupState, setValue, updateGroup } from 'ngrx-forms';
+import { maxLength, notEqualTo, required, requiredTrue } from 'ngrx-forms/validation';
 
 import * as formReducer from '../form.reducer';
 import { earlierThan } from '../../ngrx-forms/earlier-than';
@@ -31,7 +31,9 @@ export interface PaychequeAffected {
 
 export interface TimelossIndicators {
   injuriesEffectOnWork: InjuriesEffectOnWork;
+  injuriesEffectOnWorkSelected: boolean;
   paychequeAffected: PaychequeAffected;
+  paychequeAffectedSelected: boolean;
 }
 
 export interface ContributingFactors {
@@ -66,6 +68,7 @@ export interface Form {
   howInjuryHappened: string;
   timelossIndicators: TimelossIndicators;
   contributingFactors: ContributingFactors;
+  contributingFactorSelected: boolean;
   accidentInvolved: AccidentInvolved | '';
   accidentInvolvedOther: string;
   reasonMissTimeFromWork: ReasonMissTypeFromWork | '';
@@ -74,10 +77,6 @@ export interface Form {
   injuryTime: string;
   weightLifted: WeightLifted | '';
   describeLifting: string;
-  injuryType: string;
-  anticipatedMissingTime: string;
-  missedTimeFromWork: MissedTimeFromWorkForm;
-  injuryWasCatastrophic: boolean;
   itemsDamaged: ItemsDamaged;
 }
 
@@ -92,6 +91,7 @@ export const initialFormValue: Form = {
       dutiesAdjusted: false,
       notSureMyInjuryWillAffectWork: false,
     },
+    injuriesEffectOnWorkSelected: false,
     paychequeAffected: {
       payUnaffectedNoImpact: false,
       payAffectedByRegularHours: false,
@@ -100,6 +100,7 @@ export const initialFormValue: Form = {
       payUnaffectedStillReceivingWage: false,
       payUnaffectedUnknown: false,
     },
+    paychequeAffectedSelected: false,
   },
   contributingFactors: {
     crush: false,
@@ -115,6 +116,7 @@ export const initialFormValue: Form = {
     twist: false,
     unSureOther: false,
   },
+  contributingFactorSelected: false,
   accidentInvolved: '',
   accidentInvolvedOther: '',
   reasonMissTimeFromWork: '',
@@ -123,13 +125,6 @@ export const initialFormValue: Form = {
   injuryTime: '00:00',
   weightLifted: '',
   describeLifting: '',
-  injuryType: '',
-  anticipatedMissingTime: '',
-  missedTimeFromWork: {
-    notMissed: '',
-    missedDayShift: '',
-  },
-  injuryWasCatastrophic: false,
   itemsDamaged: {
     hearingAid: false,
     artificialLimb: false,
@@ -139,58 +134,121 @@ export const initialFormValue: Form = {
   },
 };
 
-const injuriesEffectOnWorkSelected = (work: InjuriesEffectOnWork): boolean =>
-  work.dutiesAdjusted ||
-  work.haveMissedTimeAfterTheDay ||
-  work.haveMissedTimeOnTheDay ||
-  work.haveNotMissedAnyTime ||
-  work.likelyToMissMoreWork ||
-  work.notSureMyInjuryWillAffectWork;
+const isInjuriesEffectOnWorkSelected = (
+  control: FormControlState<boolean>,
+  indicators: FormGroupState<TimelossIndicators>,
+): FormControlState<boolean> =>
+  setValue(
+    control,
+    Object.values(indicators.value.injuriesEffectOnWork).some((v) => v),
+  );
+
+const isPaychequeAffectedSelected = (
+  control: FormControlState<boolean>,
+  indicators: FormGroupState<TimelossIndicators>,
+): FormControlState<boolean> =>
+  setValue(
+    control,
+    Object.values(indicators.value.paychequeAffected).some((v) => v),
+  );
+
+const isContributingFactorSelected = (
+  control: FormControlState<boolean>,
+  form: FormGroupState<Form>,
+): FormControlState<boolean> =>
+  setValue(
+    control,
+    Object.values(form.value.contributingFactors).some((v) => v),
+  );
 
 export const validator =
   (parent: FormGroupState<formReducer.Form>) =>
   (form: FormGroupState<Form>): FormGroupState<Form> =>
-    updateGroup<Form>(form, {
-      howInjuryHappened: validate(required, maxLength(5100), minWords(3)),
-      timelossIndicators: updateGroup<TimelossIndicators>({
-        injuriesEffectOnWork: updateGroup<InjuriesEffectOnWork>({
-          // TODO: validate at least one child is true
+    updateGroup<Form>(
+      form,
+      {
+        timelossIndicators: updateGroup<TimelossIndicators>({
+          injuriesEffectOnWorkSelected: isInjuriesEffectOnWorkSelected,
+          paychequeAffectedSelected: isPaychequeAffectedSelected,
         }),
-        paychequeAffected: updateGroup<PaychequeAffected>({
-          // TODO: validate at least one child is true
+        contributingFactorSelected: isContributingFactorSelected,
+      },
+      {
+        howInjuryHappened: validate(required, maxLength(5100), minWords(3)),
+        timelossIndicators: updateGroup<TimelossIndicators>({
+          injuriesEffectOnWork: updateGroup<InjuriesEffectOnWork>({
+            haveNotMissedAnyTime: optional(),
+            haveMissedTimeOnTheDay: optional(),
+            haveMissedTimeAfterTheDay: optional(),
+            likelyToMissMoreWork: optional(),
+            dutiesAdjusted: optional(),
+            notSureMyInjuryWillAffectWork: optional(),
+          }),
+          injuriesEffectOnWorkSelected: validate(requiredTrue),
+          paychequeAffected: updateGroup<PaychequeAffected>({
+            payUnaffectedNoImpact: optional(),
+            payAffectedByRegularHours: optional(),
+            payAffectedByOvertime: optional(),
+            payAffectedByAdjustedDuties: optional(),
+            payUnaffectedStillReceivingWage: optional(),
+            payUnaffectedUnknown: optional(),
+          }),
+          paychequeAffectedSelected: validate(requiredTrue),
         }),
-      }),
-      contributingFactors: validate(required),
-      accidentInvolved: validate(required),
-      // TODO: this should have minLength(2) or minWords(3) or some shit?
-      accidentInvolvedOther: (c) => optional(c),
-      injuryDate: validate(
-        required,
-        earlierThan(new Date().toISOString()),
-        minYear(1900),
-        parent.value.treatmentDetails.dateReceivedFirstAid
-          ? earlierThan(parent.value.treatmentDetails.dateReceivedFirstAid)
-          : () => ({}),
-        parent.value.treatmentDetails.dateReceivedTreatment
-          ? earlierThan(parent.value.treatmentDetails.dateReceivedTreatment)
-          : () => ({}),
-        // TODO: clean up this validation - remove the bang operator
-        parent.value.employmentAndEmployerInfo.reportingToEmployer.dateReportedInjury
-          ? earlierThan(
-              parent.value.employmentAndEmployerInfo.reportingToEmployer.dateReportedInjury,
-            )
-          : () => ({}),
-      ),
-      injuryTime: validate(required),
-      weightLifted: (c, f) =>
-        f.value.contributingFactors.lifting ? validate(c, required) : optional(c),
-      describeLifting: (c, f) =>
-        f.value.weightLifted === 'NotSure'
-          ? validate(c, required, maxLength(250), minWords(3))
-          : optional(c),
-      reasonMissTimeFromWork: (c, f) =>
-        f.value.timelossIndicators.injuriesEffectOnWork.haveMissedTimeOnTheDay ||
-        f.value.timelossIndicators.injuriesEffectOnWork.likelyToMissMoreWork
-          ? validate(c, required)
-          : optional(c),
-    });
+        contributingFactors: updateGroup<ContributingFactors>({
+          crush: optional(),
+          fall: optional(),
+          fireOrExplosion: optional(),
+          harmfulSubstance: optional(),
+          lifting: optional(),
+          overexertion: optional(),
+          repetition: optional(),
+          sharpEdge: optional(),
+          slipOrTrip: optional(),
+          struck: optional(),
+          twist: optional(),
+          unSureOther: optional(),
+        }),
+        contributingFactorSelected: validate(requiredTrue),
+        accidentInvolved: validate(required),
+        // TODO: this should have minLength(2) or minWords(3) or some shit?
+        accidentInvolvedOther: (c) => optional(c),
+        injuryDate: validate(
+          required,
+          earlierThan(new Date().toISOString()),
+          minYear(1900),
+          parent.value.treatmentDetails.dateReceivedFirstAid
+            ? earlierThan(parent.value.treatmentDetails.dateReceivedFirstAid)
+            : () => ({}),
+          parent.value.treatmentDetails.dateReceivedTreatment
+            ? earlierThan(parent.value.treatmentDetails.dateReceivedTreatment)
+            : () => ({}),
+          // TODO: clean up this validation - remove the bang operator
+          parent.value.employmentAndEmployerInfo.reportingToEmployer.dateReportedInjury
+            ? earlierThan(
+                parent.value.employmentAndEmployerInfo.reportingToEmployer.dateReportedInjury,
+              )
+            : () => ({}),
+        ),
+        isInjuryDateApproximate: optional(),
+        injuryTime: validate(notEqualTo('00:00')),
+        weightLifted: (c, f) =>
+          f.value.contributingFactors.lifting ? validate(c, required) : optional(c),
+        describeLifting: (c, f) =>
+          f.value.weightLifted === 'NotSure'
+            ? validate(c, required, maxLength(250), minWords(3))
+            : optional(c),
+        reasonMissTimeFromWork: (c, f) =>
+          f.value.timelossIndicators.injuriesEffectOnWork.haveMissedTimeOnTheDay ||
+          f.value.timelossIndicators.injuriesEffectOnWork.likelyToMissMoreWork
+            ? validate(c, required)
+            : optional(c),
+        itemsDamaged: updateGroup<ItemsDamaged>({
+          hearingAid: optional(),
+          artificialLimb: optional(),
+          dentures: optional(),
+          eyeGlasses: optional(),
+          none: optional(),
+        }),
+      },
+    );

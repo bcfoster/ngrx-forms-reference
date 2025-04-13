@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { FormGroupState, NgrxFormsModule } from 'ngrx-forms';
 
 import { BinaryRadioGroupComponent } from '../../../form-controls/binary-radio-group/binary-radio-group.component';
-import { CheckboxComponent } from '../../../form-controls/checkbox/checkbox.component';
 import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-group/multi-radio-group.component';
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
 import { BodyPart } from '../../../state/form/injury-and-incident/body-part';
@@ -14,7 +13,6 @@ import * as injuryDetails from '../../../state/form/injury-and-incident/injury-d
   selector: 'injury-details-form',
   imports: [
     BinaryRadioGroupComponent,
-    CheckboxComponent,
     MultiRadioGroupComponent,
     NgrxFormsModule,
     TextAreaComponent,

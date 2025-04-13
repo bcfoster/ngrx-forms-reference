@@ -13,9 +13,8 @@ export interface Form {
   incidentLocationDetails: string;
   occurredDuringNormalShift: boolean | null;
   shiftAndTimeOfInjuryDetails: string;
-  activityAtTimeOfInjuryDetails: string;
   occurredWhilePerformingRegularDuties: boolean | null;
-  changesOccurredDueToInjury: string[];
+  activityAtTimeOfInjuryDetails: string;
 }
 
 export const initialFormValue: Form = {
@@ -24,20 +23,24 @@ export const initialFormValue: Form = {
   incidentLocationDetails: '',
   occurredDuringNormalShift: null,
   shiftAndTimeOfInjuryDetails: '',
-  activityAtTimeOfInjuryDetails: '',
   occurredWhilePerformingRegularDuties: null,
-  changesOccurredDueToInjury: [],
+  activityAtTimeOfInjuryDetails: '',
 };
 
-export const validator = updateGroup<Form>({
-  occurredInBc: validate(required),
-  incidentLocation: validate(required),
-  incidentLocationDetails: (c, f) =>
-    !(f.value.occurredInBc ?? true) || f.value.incidentLocation !== 'EmployerWorkplace'
-      ? validate(c, required, minLength(1), minWords(3), maxLength(200))
-      : optional(setValue(c, '')),
-  shiftAndTimeOfInjuryDetails: validate(maxLength(250)),
-  activityAtTimeOfInjuryDetails: validate(maxLength(250)),
-  occurredDuringNormalShift: validate(required),
-  occurredWhilePerformingRegularDuties: validate(required),
-});
+export const validator = updateGroup<Form>(
+  {
+    shiftAndTimeOfInjuryDetails: (c, f) =>
+      f.value.occurredDuringNormalShift ? setValue(c, '') : c,
+    activityAtTimeOfInjuryDetails: (c, f) =>
+      f.value.occurredWhilePerformingRegularDuties ? setValue(c, '') : c,
+  },
+  {
+    occurredInBc: validate(required),
+    incidentLocation: validate(required),
+    incidentLocationDetails: validate(required, minLength(1), minWords(3), maxLength(200)),
+    occurredDuringNormalShift: validate(required),
+    shiftAndTimeOfInjuryDetails: optional(maxLength(250)),
+    occurredWhilePerformingRegularDuties: validate(required),
+    activityAtTimeOfInjuryDetails: optional(maxLength(250)),
+  },
+);

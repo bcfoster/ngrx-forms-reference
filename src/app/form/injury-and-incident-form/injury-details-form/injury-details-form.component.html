@@ -8,128 +8,129 @@
     >
     <input class="hidden" id="body-parts" />
 
-    <div class="flex gap-x-3">
-      <div class="flex flex-col gap-y-2">
-        <label class="block text-sm font-semibold text-gray-900" for="head">Head & neck</label>
-        <input class="hidden" id="head" />
-        <input type="checkbox" (change)="onChange($event, 'head.right-eye')" />
-        <input type="checkbox" (change)="onChange($event, 'head.left-eye')" />
-        <input type="checkbox" (change)="onChange($event, 'head.right-ear')" />
-        <input type="checkbox" (change)="onChange($event, 'head.left-ear')" />
-        <input type="checkbox" (change)="onChange($event, 'head.forehead')" />
-        <input type="checkbox" (change)="onChange($event, 'head.skull')" />
-        <input type="checkbox" (change)="onChange($event, 'head.nose')" />
-        <input type="checkbox" (change)="onChange($event, 'head.mouth')" />
-        <input type="checkbox" (change)="onChange($event, 'head.neck')" />
-        <input type="checkbox" (change)="onChange($event, 'head.other')" />
-      </div>
+    <!--    <div class="flex gap-x-3">-->
+    <!--      <div class="flex flex-col gap-y-2">-->
+    <!--        <label class="block text-sm font-semibold text-gray-900" for="head">Head & neck</label>-->
+    <!--        <input class="hidden" id="head" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.right-eye')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.left-eye')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.right-ear')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.left-ear')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.forehead')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.skull')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.nose')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.mouth')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.neck')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'head.other')" />-->
+    <!--      </div>-->
 
-      <div class="flex flex-col gap-y-2">
-        <label class="block text-sm font-semibold text-gray-900" for="torso">Torso & back</label>
-        <input class="hidden" id="torso" />
-        <input type="checkbox" (change)="onChange($event, 'torso.chest')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.organs')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.upper-back')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.lower-back')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.abdomen')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.waist')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.buttocks')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.groin')" />
-        <input type="checkbox" (change)="onChange($event, 'torso.other')" />
-      </div>
+    <!--      <div class="flex flex-col gap-y-2">-->
+    <!--        <label class="block text-sm font-semibold text-gray-900" for="torso">Torso & back</label>-->
+    <!--        <input class="hidden" id="torso" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.chest')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.organs')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.upper-back')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.lower-back')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.abdomen')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.waist')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.buttocks')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.groin')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'torso.other')" />-->
+    <!--      </div>-->
 
-      <div class="flex flex-col gap-y-2">
-        <label class="block text-sm font-semibold text-gray-900" for="right-arm">Right arm</label>
-        <input class="hidden" id="right-arm" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.shoulder')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.upper-arm')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.elbow')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.lower-arm')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.wrist')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.hand')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.fingers')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.thumb')" />
-        <input type="checkbox" (change)="onChange($event, 'right-arm.other')" />
-      </div>
+    <!--      <div class="flex flex-col gap-y-2">-->
+    <!--        <label class="block text-sm font-semibold text-gray-900" for="right-arm">Right arm</label>-->
+    <!--        <input class="hidden" id="right-arm" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.shoulder')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.upper-arm')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.elbow')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.lower-arm')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.wrist')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.hand')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.fingers')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.thumb')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-arm.other')" />-->
+    <!--      </div>-->
 
-      <div class="flex flex-col gap-y-2">
-        <label class="block text-sm font-semibold text-gray-900" for="left-arm">Left arm</label>
-        <input class="hidden" id="left-arm" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.shoulder')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.upper-arm')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.elbow')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.lower-arm')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.wrist')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.hand')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.fingers')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.thumb')" />
-        <input type="checkbox" (change)="onChange($event, 'left-arm.other')" />
-      </div>
+    <!--      <div class="flex flex-col gap-y-2">-->
+    <!--        <label class="block text-sm font-semibold text-gray-900" for="left-arm">Left arm</label>-->
+    <!--        <input class="hidden" id="left-arm" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.shoulder')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.upper-arm')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.elbow')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.lower-arm')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.wrist')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.hand')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.fingers')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.thumb')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-arm.other')" />-->
+    <!--      </div>-->
 
-      <div class="flex flex-col gap-y-2">
-        <label class="block text-sm font-semibold text-gray-900" for="right-leg">Right leg</label>
-        <input class="hidden" id="right-leg" />
-        <input type="checkbox" (change)="onChange($event, 'right-leg.upper-leg')" />
-        <input type="checkbox" (change)="onChange($event, 'right-leg.knee')" />
-        <input type="checkbox" (change)="onChange($event, 'right-leg.shin')" />
-        <input type="checkbox" (change)="onChange($event, 'right-leg.ankle')" />
-        <input type="checkbox" (change)="onChange($event, 'right-leg.foot')" />
-        <input type="checkbox" (change)="onChange($event, 'right-leg.toes')" />
-        <input type="checkbox" (change)="onChange($event, 'right-leg.other')" />
-      </div>
+    <!--      <div class="flex flex-col gap-y-2">-->
+    <!--        <label class="block text-sm font-semibold text-gray-900" for="right-leg">Right leg</label>-->
+    <!--        <input class="hidden" id="right-leg" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-leg.upper-leg')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-leg.knee')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-leg.shin')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-leg.ankle')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-leg.foot')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-leg.toes')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'right-leg.other')" />-->
+    <!--      </div>-->
 
-      <div class="flex flex-col gap-y-2">
-        <label class="block text-sm font-semibold text-gray-900" for="left-leg">Left leg</label>
-        <input class="hidden" id="left-leg" />
-        <input type="checkbox" (change)="onChange($event, 'left-leg.upper-leg')" />
-        <input type="checkbox" (change)="onChange($event, 'left-leg.knee')" />
-        <input type="checkbox" (change)="onChange($event, 'left-leg.shin')" />
-        <input type="checkbox" (change)="onChange($event, 'left-leg.ankle')" />
-        <input type="checkbox" (change)="onChange($event, 'left-leg.foot')" />
-        <input type="checkbox" (change)="onChange($event, 'left-leg.toes')" />
-        <input type="checkbox" (change)="onChange($event, 'left-leg.other')" />
-      </div>
-    </div>
-  </div>
+    <!--      <div class="flex flex-col gap-y-2">-->
+    <!--        <label class="block text-sm font-semibold text-gray-900" for="left-leg">Left leg</label>-->
+    <!--        <input class="hidden" id="left-leg" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-leg.upper-leg')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-leg.knee')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-leg.shin')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-leg.ankle')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-leg.foot')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-leg.toes')" />-->
+    <!--        <input type="checkbox" (change)="onChange($event, 'left-leg.other')" />-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
 
-  <multi-radio-group
-    [control]="form.controls.dominantHand"
-    label="What is your dominant hand?"
-    [optional]="true"
-    [options]="[
+    <multi-radio-group
+      [control]="form.controls.dominantHand"
+      label="What is your dominant hand?"
+      [optional]="true"
+      [options]="[
     { key: 'Left', value: 'Left' },
     { key: 'Right', value: 'Right' },
     { key: 'Ambidextrous', value: 'Ambidextrous' }
   ]"
-  />
-
-  <binary-radio-group
-    [control]="form.controls.haveHadPriorProblemsWithInjuredAreas"
-    [horizontal]="true"
-    label="Have you had any prior problems with the injured area(s)?"
-  />
-
-  @if (form.value.haveHadPriorProblemsWithInjuredAreas) {
-    <binary-radio-group
-      [control]="form.controls.haveFullyRecoveredFromPriorInjury"
-      [horizontal]="true"
-      label="Have you fully recovered from your prior injury or condition?"
     />
 
-    @if (form.value.haveFullyRecoveredFromPriorInjury === false) {
+    <binary-radio-group
+      [control]="form.controls.haveHadPriorProblemsWithInjuredAreas"
+      [horizontal]="true"
+      label="Have you had any prior problems with the injured area(s)?"
+    />
+
+    @if (form.value.haveHadPriorProblemsWithInjuredAreas) {
       <binary-radio-group
-        [control]="form.controls.haveExistingClaimNumber"
+        [control]="form.controls.haveFullyRecoveredFromPriorInjury"
         [horizontal]="true"
-        label="Do you have a claim for this prior injury or condition?"
+        label="Have you fully recovered from your prior injury or condition?"
       />
 
-      @if (form.value.haveExistingClaimNumber === false) {
-        <text-area
-          [control]="form.controls.additionalInformationPreviousInjury"
-          label="Is there anything else you'd like to tell us to help us understand your prior injury or condition?"
-          [optional]="true"
+      @if (form.value.haveFullyRecoveredFromPriorInjury === false) {
+        <binary-radio-group
+          [control]="form.controls.haveExistingClaimNumber"
+          [horizontal]="true"
+          label="Do you have a claim for this prior injury or condition?"
         />
+
+        @if (form.value.haveExistingClaimNumber === false) {
+          <text-area
+            [control]="form.controls.additionalInformationPreviousInjury"
+            label="Is there anything else you'd like to tell us to help us understand your prior injury or condition?"
+            [optional]="true"
+          />
+        }
       }
     }
-  }
+  </div>
 </div>

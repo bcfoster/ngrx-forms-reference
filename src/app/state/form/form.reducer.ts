@@ -17,6 +17,7 @@ import { formActions } from './form.actions';
 import { evaluateCompletion } from './form.progress';
 import * as employmentAndEmployer from './employment-and-employer-info/employment-and-employer-info.form';
 import { injuryAndIncidentActions } from './injury-and-incident.actions';
+import * as incidentOverview from './injury-and-incident/incident-overview.form';
 import * as injuryAndIncident from './injury-and-incident/injury-and-incident.form';
 import * as injuryDetails from './injury-and-incident/injury-details.form';
 import * as contactInfo from './personal-and-contact-info/contact-info.form';
@@ -109,6 +110,38 @@ const rawReducer = createReducer(
               address: updateGroup<contactInfo.AddressForm>({
                 province: setValue(action.value === 'CA' ? 'AB' : 'AL'),
               }),
+            }),
+          }),
+        }),
+      };
+    }
+
+    if (
+      action.controlId.startsWith(
+        state.form.controls.injuryAndIncident.controls.incidentOverview.controls.itemsDamaged.id,
+      )
+    ) {
+      const isNone =
+        action.controlId ===
+        state.form.controls.injuryAndIncident.controls.incidentOverview.controls.itemsDamaged
+          .controls.none.id;
+
+      return {
+        ...state,
+        form: updateGroup(state.form, {
+          injuryAndIncident: updateGroup<injuryAndIncident.Form>({
+            incidentOverview: updateGroup<incidentOverview.Form>({
+              itemsDamaged: (c) =>
+                isNone
+                  ? updateGroup(c, {
+                      hearingAid: setValue(false),
+                      artificialLimb: setValue(false),
+                      dentures: setValue(false),
+                      eyeGlasses: setValue(false),
+                    })
+                  : updateGroup(c, {
+                      none: setValue(false),
+                    }),
             }),
           }),
         }),

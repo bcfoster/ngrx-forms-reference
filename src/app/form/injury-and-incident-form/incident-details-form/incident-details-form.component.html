@@ -17,12 +17,14 @@
     ]"
   />
 
-  @let label =
-    form.value.incidentLocation === 'AuthorizedLocation' || form.value.incidentLocation === 'Other'
-      ? 'Describe the location of the incident (e.g. a parking lot or public road). Please include the province and/or country:'
-      : 'Please include the province and/or country:';
+  @if (form.value.incidentLocation) {
+    @let label =
+      form.value.incidentLocation === 'AuthorizedLocation' || form.value.incidentLocation === 'Other'
+        ? 'Describe the location of the incident (e.g. a parking lot or public road). Please include the province and/or country:'
+        : 'Please include the province and/or country:';
 
-  <text-area [control]="form.controls.incidentLocationDetails" [label]="label" />
+    <text-area [control]="form.controls.incidentLocationDetails" [label]="label" />
+  }
 
   <!-- TODO: sub-label -->
   <binary-radio-group
