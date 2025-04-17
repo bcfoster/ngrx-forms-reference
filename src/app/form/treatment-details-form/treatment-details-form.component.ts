@@ -9,6 +9,8 @@ import { CheckboxComponent } from '../../form-controls/checkbox/checkbox.compone
 import { TextAreaComponent } from '../../form-controls/text-area/text-area.component';
 import * as formSelectors from '../../state/form/form.selectors';
 import * as form from '../../state/form/treatment-details/treatment-details.form';
+import { TextInputComponent } from '../../form-controls/text-input/text-input.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'treatment-details-form',
@@ -18,6 +20,8 @@ import * as form from '../../state/form/treatment-details/treatment-details.form
     CheckboxComponent,
     NgrxFormsModule,
     TextAreaComponent,
+    TextInputComponent,
+    RouterLink,
   ],
   templateUrl: './treatment-details-form.component.html',
   styles: ``,

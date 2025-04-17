@@ -322,10 +322,31 @@ export const initialFormValue: Form = {
 
 export const validator = updateGroup<Form>(
   {
+    // employmentDetails: {
+    //   employmentType: '',
+    //   educationalInstitutionAndProgram: '',
+    //   havePurchasedPersonalOptionalProtection: null,
+    //   purchasedPersonalOptionalProtectionAccountNumber: '',
+    //   accountantName: '',
+    //   accountantPhoneNumber: '',
+    //   socialInsuranceNumber: '',
+    //   currentlyAttendingSchool: null,
+    //   completedRecentProgramOfStudy: null,
+    //   fieldOfStudy: '',
+    //   schoolName: '',
+    //   apprenticeshipProgramName: '',
+    //   apprenticeshipCertificationNumber: '',
+    //   attachmentType: '',
+    //   employmentStatus: '',
+    //   workedOver12Months: null,
+    //   whenDidJobBegin: null,
+    //   whenDidJobBeginIsApproximate: null,
+    //   expectedJobEndDate: null,
+    //   expectedJobEndDateIsApproximate: null,
+    //   temporaryJobAdditionalInformation: '',
+    // },
     employmentDetails: updateGroup<EmploymentDetailsForm>({
       employmentType: validate(required),
-      apprenticeshipProgramName: (c, f) =>
-        f.value.employmentType === 'Apprenticeship' ? validate(c, required) : optional(c),
       educationalInstitutionAndProgram: (c, f) =>
         f.value.employmentType === 'Student' ? validate(c, required, minWords(3)) : optional(c),
       havePurchasedPersonalOptionalProtection: (c, f) =>
@@ -336,6 +357,11 @@ export const validator = updateGroup<Form>(
         f.value.havePurchasedPersonalOptionalProtection
           ? validate(c, required, accountNumber)
           : optional(c),
+      accountantName: optional(), // TODO: timeloss
+      accountantPhoneNumber: optional(), // TODO: timeloss
+
+      apprenticeshipProgramName: (c, f) =>
+        f.value.employmentType === 'Apprenticeship' ? validate(c, required) : optional(c),
     }),
     employerInformation: updateGroup<EmployerInformationForm>({
       jobTitle: validate(required),

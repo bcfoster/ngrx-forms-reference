@@ -1,9 +1,9 @@
 <div *ngrxLet="form$ as form" class="mx-auto max-w-sm">
   <h1 class="mb-4 text-2xl leading-none font-semibold text-gray-900">Treatment details</h1>
 
-  <h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Medical care</h2>
+  <form [ngrxFormState]="form" class="flex flex-col gap-y-5">
+    <h2 class="text-xl leading-none font-semibold text-yellow-500">Medical care</h2>
 
-  <div class="flex flex-col gap-y-3">
     <!-- TODO: sub-title -->
     <binary-radio-group
       [control]="form.controls.haveReceivedFirstAid"
@@ -39,9 +39,53 @@
     />
 
     @if (form.value.haveVisitedPractitioner) {
-      <h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">
+      <h2 class="text-xl leading-none font-semibold text-yellow-500">
         Medical practitioner details
       </h2>
+
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="injury-date"
+          >Date of treatment</label
+        >
+        <input
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="date-received-first-aid"
+          [ngrxFormControlState]="form.controls.dateReceivedFirstAid"
+          type="date"
+        />
+      </div>
+
+      <text-input
+        [control]="form.controls.clinicOrHospitalName"
+        label="Clinic or hospital name"
+        [optional]="true"
+      />
+
+      <h3 class="text-md leading-none font-semibold text-black">
+        Physician or qualified practitioner
+      </h3>
+
+      <text-input [control]="form.controls.practitionerName" label="First name" [optional]="true" />
+
+      <text-input
+        [control]="form.controls.practitionerLastName"
+        label="Last name"
+        [optional]="true"
+      />
+
+      <text-input
+        [control]="form.controls.clinicOrHospitalAddress"
+        label="In what city or town is the clinic or hospital located?"
+        [optional]="true"
+      />
+
+      <text-input
+        [control]="form.controls.clinicOrHospitalPhoneNumber"
+        label="Clinic or hospital's phone number"
+        [optional]="true"
+      />
+
+      <text-area [control]="form.controls.clinicTreatmentDetails" label="What was the treatment?" />
     }
 
     @if (form.value.haveVisitedPractitioner === false) {
@@ -51,5 +95,39 @@
         label="Do you have an appointment booked with a physician or other qualified practicioner to treat this injury?"
       />
     }
-  </div>
+
+    <h2 class="text-xl leading-none font-semibold text-yellow-500">
+      Authorization to access personal information
+    </h2>
+
+    <binary-radio-group
+      [control]="form.controls.authorization.controls.authorizedToAccessInjuryInformation"
+      [horizontal]="true"
+      label="Do you authorize us to access personal information from third parties related to your injury and employment?"
+    />
+
+    @if (form.value.authorization.authorizedToAccessInjuryInformation) {
+      <text-area
+        [control]="form.controls.authorization.controls.workerSignature"
+        label="Signature"
+      />
+    }
+
+    <h2 class="text-xl leading-none font-semibold text-yellow-500">Additional information</h2>
+
+    <text-area
+      [control]="form.controls.additionalInformation"
+      label="Is there anything else you'd like to tell us about your treatment or appointments that you haven't already told us?"
+    />
+
+    <div>
+      <button
+        type="button"
+        class="cursor-pointer rounded-lg bg-blue-500 px-3 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+        routerLink=".."
+      >
+        Continue
+      </button>
+    </div>
+  </form>
 </div>

@@ -109,14 +109,14 @@
     [label]="form.value.address.country === 'CA' ? 'Postal code' : 'ZIP code'"
   />
 
-  <h3 class="text-md mb-4 leading-none font-semibold text-black">Phone number(s)</h3>
+  <h3 class="text-md leading-none font-semibold text-black">Phone number(s)</h3>
 
   <text-input [control]="form.controls.phone.controls.homePhone" label="Home phone number" />
   <text-input [control]="form.controls.phone.controls.cellPhone" label="Mobile phone number" />
   <text-input [control]="form.controls.phone.controls.workPhone" label="Work phone number" />
   <text-input [control]="form.controls.phone.controls.extension" label="Extension" />
 
-  <h3 class="text-md mb-4 leading-none font-semibold text-black">Email</h3>
+  <h3 class="text-md leading-none font-semibold text-black">Email</h3>
 
   <text-input [control]="form.controls.email" label="Email address" />
 </div>
