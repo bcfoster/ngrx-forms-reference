@@ -1,0 +1,107 @@
+<h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Employment type</h2>
+
+<div class="flex flex-col gap-y-3">
+  <multi-radio-group
+    [control]="form.controls.employmentType"
+    label="Which of the following best describes your employment type at the time of your injury?"
+    [options]="[
+      { key: 'Employee', value: 'Employee' },
+      { key: 'Proprietor', value: 'Self-employed as a sole proprietor, an independent operator, or in a partnership' },
+      { key: 'Incorporated', value: 'Owner or shareholder of an incorporated company' },
+      { key: 'Spouse', value: 'Employee and spouse of sole proprietor' },
+      { key: 'Student', value: 'Student in an internship, practicum, or similar placement' },
+      { key: 'Apprenticeship', value: 'Apprenticeship' },
+      { key: 'Volunteer', value: 'Volunteer' },
+    ]"
+  />
+
+  @if (form.value.employmentType === 'Proprietor') {
+    <binary-radio-group
+      [control]="form.controls.havePurchasedPersonalOptionalProtection"
+      [horizontal]="true"
+      label="Have you purchased personal optional protection?"
+    />
+
+    @if (form.value.havePurchasedPersonalOptionalProtection) {
+      <text-input
+        [control]="form.controls.purchasedPersonalOptionalProtectionAccountNumber"
+        label="Please enter your account number"
+        [optional]="true"
+      />
+    }
+  }
+
+  @if (form.value.employmentType === 'Incorporated') {
+    <text-input
+      [control]="form.controls.accountantName"
+      label="What is your accountant's or bookkeeper's name?"
+      [optional]="true"
+    />
+
+    <text-input
+      [control]="form.controls.accountantPhoneNumber"
+      label="What is their phone number?"
+      [optional]="true"
+    />
+
+    <text-input
+      [control]="form.controls.purchasedPersonalOptionalProtectionAccountNumber"
+      label="Please enter your account number"
+      [optional]="true"
+    />
+  }
+
+  @if (form.value.employmentType === 'Apprenticeship') {
+    <text-input
+      [control]="form.controls.apprenticeshipProgramName"
+      label="What is the name of the apprenticeship program you are in?"
+    />
+
+    <text-input
+      [control]="form.controls.apprenticeshipCertificationNumber"
+      label="Apprenticehsip certification number"
+      [optional]="true"
+    />
+  }
+
+  @if (form.value.employmentType === 'Student') {
+    <text-input
+      [control]="form.controls.educationalInstitutionAndProgram"
+      label="What is the name of the educational institution and program?"
+    />
+  }
+
+  @if (form.value.employmentType !== '' && form.value.employmentType !== 'Student') {
+    <binary-radio-group
+      [control]="form.controls.currentlyAttendingSchool"
+      [horizontal]="true"
+      label="Are you currently attending school on a part-time or full-time basis?"
+    />
+
+    @if (form.value.currentlyAttendingSchool) {
+      <text-input [control]="form.controls.fieldOfStudy" label="What are you studying?" />
+
+      <text-input [control]="form.controls.schoolName" label="What school are you attending?" />
+    }
+
+    <binary-radio-group
+      [control]="form.controls.completedRecentProgramOfStudy"
+      [horizontal]="true"
+      label="Have you completed a program of study in the past two years?"
+    />
+
+    @if (form.value.completedRecentProgramOfStudy) {
+      <text-input [control]="form.controls.completedFieldOfStudy" label="What are you studying?" />
+
+      <text-input
+        [control]="form.controls.completedSchoolName"
+        label="What school are you attending?"
+      />
+    }
+  }
+
+  <text-input
+    [control]="form.controls.socialInsuranceNumber"
+    label="Social Insurance Number (SIN)"
+  />
+</div>

@@ -36,6 +36,8 @@ export interface EmploymentDetailsForm {
   expectedJobEndDate: string | null;
   expectedJobEndDateIsApproximate: boolean | null;
   temporaryJobAdditionalInformation: string;
+  completedSchoolName: string;
+  completedFieldOfStudy: string;
 }
 
 export interface EmployerAddressForm {
@@ -56,6 +58,11 @@ export interface EmployerInformationForm {
   phoneNumber: string;
   extension: string;
   employerAddress: EmployerAddressForm;
+  haveReportedInjury: boolean | null;
+  dateReportedInjury: string;
+  dateReportedInjuryIsApproximate: boolean;
+  shouldContactForQuestions: boolean | null;
+  whoReportedInjuryTo: string;
 }
 
 export interface ReportingToEmployerForm {
@@ -202,6 +209,8 @@ export const initialFormValue: Form = {
     expectedJobEndDate: null,
     expectedJobEndDateIsApproximate: null,
     temporaryJobAdditionalInformation: '',
+    completedSchoolName: '',
+    completedFieldOfStudy: '',
   },
   employerInformation: {
     jobTitle: '',
@@ -219,6 +228,11 @@ export const initialFormValue: Form = {
       postalCode: '',
       addressExtra: '',
     },
+    haveReportedInjury: null,
+    dateReportedInjury: '',
+    dateReportedInjuryIsApproximate: false,
+    shouldContactForQuestions: null,
+    whoReportedInjuryTo: '',
   },
   reportingToEmployer: {
     haveReportedInjury: null,
