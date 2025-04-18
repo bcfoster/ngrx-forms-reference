@@ -11,18 +11,20 @@ import * as formSelectors from '../../state/form/form.selectors';
 import { EmployerDetailsFormComponent } from './employer-details-form/employer-details-form.component';
 import { TextAreaComponent } from '../../form-controls/text-area/text-area.component';
 import { BinaryRadioGroupComponent } from '../../form-controls/binary-radio-group/binary-radio-group.component';
+import { EmploymentDetailsFormComponent } from './employment-details-form/employment-details-form.component';
 
 @Component({
   selector: 'employment-and-employer-info-form',
   imports: [
+    BinaryRadioGroupComponent,
+    EmployerDetailsFormComponent,
     EmploymentTypeFormComponent,
     LetDirective,
     NgrxFormsModule,
-    RouterLink,
-    EmployerDetailsFormComponent,
-    TextAreaComponent,
-    BinaryRadioGroupComponent,
     PushPipe,
+    RouterLink,
+    TextAreaComponent,
+    EmploymentDetailsFormComponent,
   ],
   templateUrl: './employment-and-employer-info-form.component.html',
   styles: ``,

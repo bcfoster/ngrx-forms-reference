@@ -32,9 +32,9 @@ export interface EmploymentDetailsForm {
   employmentStatus: EmploymentStatus | '';
   workedOver12Months: boolean | null;
   whenDidJobBegin: string | null;
-  whenDidJobBeginIsApproximate: boolean | null;
+  whenDidJobBeginIsApproximate: boolean;
   expectedJobEndDate: string | null;
-  expectedJobEndDateIsApproximate: boolean | null;
+  expectedJobEndDateIsApproximate: boolean;
   temporaryJobAdditionalInformation: string;
   completedSchoolName: string;
   completedFieldOfStudy: string;
@@ -205,9 +205,9 @@ export const initialFormValue: Form = {
     employmentStatus: '',
     workedOver12Months: null,
     whenDidJobBegin: null,
-    whenDidJobBeginIsApproximate: null,
+    whenDidJobBeginIsApproximate: false,
     expectedJobEndDate: null,
-    expectedJobEndDateIsApproximate: null,
+    expectedJobEndDateIsApproximate: false,
     temporaryJobAdditionalInformation: '',
     completedSchoolName: '',
     completedFieldOfStudy: '',

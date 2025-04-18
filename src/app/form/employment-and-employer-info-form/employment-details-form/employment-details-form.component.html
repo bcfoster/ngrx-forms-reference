@@ -1,0 +1,70 @@
+<h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Employment details</h2>
+
+<div class="flex flex-col gap-y-3">
+  <multi-radio-group
+    [control]="form.controls.attachmentType"
+    label="At the time of your injury, were you employed on a permanent or temporary basis?"
+    [options]="[
+      { key: 'Permanent', value: 'Permanent' },
+      { key: 'Temporary', value: 'Temporary' },
+    ]"
+  />
+
+  @if (form.value.attachmentType === 'Permanent') {
+    <binary-radio-group
+      [control]="form.controls.workedOver12Months"
+      [horizontal]="true"
+      label="At the time of your injury, had you worked for this employer for 12 months or more?"
+    />
+  } @else if (form.value.attachmentType === 'Temporary') {
+    <div class="flex flex-col gap-y-2">
+      <label class="block text-sm font-semibold text-gray-900" for="when-did-job-begin"
+        >When did you begin working for this employer?</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="when-did-job-begin"
+        [ngrxFormControlState]="form.controls.whenDidJobBegin"
+        type="date"
+      />
+    </div>
+
+    <checkbox
+      [control]="form.controls.whenDidJobBeginIsApproximate"
+      label="This is an approximate date"
+    />
+
+    <div class="flex flex-col gap-y-2">
+      <!-- TODO: optional -->
+      <label class="block text-sm font-semibold text-gray-900" for="expected-job-end-date"
+        >When is (or was) your work for this employer expected to end?</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="expected-job-end-date"
+        [ngrxFormControlState]="form.controls.expectedJobEndDate"
+        type="date"
+      />
+    </div>
+
+    <checkbox
+      [control]="form.controls.expectedJobEndDateIsApproximate"
+      label="This is an approximate date"
+    />
+
+    <text-area
+      [control]="form.controls.temporaryJobAdditionalInformation"
+      label="Is there anything else you'd like to tell us about the temporary nature of your employment?"
+      [optional]="true"
+    />
+  }
+
+  <multi-radio-group
+    [control]="form.controls.employmentStatus"
+    label="At the time of your injury, were you employed full time or part time by this employer?"
+    [options]="[
+      { key: 'FullTime', value: 'Full time' },
+      { key: 'PartTime', value: 'Part time' },
+    ]"
+  />
+</div>
