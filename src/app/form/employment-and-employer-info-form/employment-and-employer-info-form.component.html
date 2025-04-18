@@ -1,12 +1,41 @@
+@let isTimeloss = (isTimelossInjury$ | ngrxPush) ?? false;
+
 <div *ngrxLet="form$ as form" class="mx-auto max-w-sm">
   <h1 class="mb-4 text-2xl leading-none font-semibold text-gray-900">
     Employment and employer's information
   </h1>
 
   <form [ngrxFormState]="form" class="flex flex-col gap-y-5">
-    <employment-type-form [form]="form.controls.employmentDetails" />
+    <employment-type-form
+      [form]="form.controls.employmentDetails"
+      [isTimelossInjury]="isTimeloss"
+    />
 
-    <employer-details-form [form]="form.controls.employerInformation" />
+    <employer-details-form
+      [form]="form.controls.employerInformation"
+      [isTimelossInjury]="isTimeloss"
+    />
+
+    @if (isTimeloss) {
+      <!-- employment details-->
+      <!-- shift information -->
+      <!-- earnings -->
+      <!-- return to work -->
+    }
+
+    <h2 class="text-xl leading-none font-semibold text-yellow-500">Additional information</h2>
+
+    <text-area
+      [control]="form.controls.additionalInformation"
+      label="Is there anything else you'd like to tell us about your injury or how it happened that you haven't already told us?"
+      [optional]="true"
+    />
+
+    <binary-radio-group
+      [control]="form.controls.employerInformation.controls.otherEmployer"
+      [horizontal]="true"
+      label="Did you have any other employers at the time of your injury?"
+    />
 
     <div>
       <button

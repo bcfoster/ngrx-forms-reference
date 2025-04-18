@@ -32,13 +32,6 @@ export const selectFormPercentComplete = createSelector(selectForm, (form) =>
     : 1,
 );
 
-export const selectPersonalAndContactInfoFormPercentComplete = createSelector(
-  selectPersonalAndContactInfoForm,
-  (form) =>
-    (form.userDefinedProperties['mandatory'] ?? 0)
-      ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
-      : 1,
-);
 export const selectIncidentAndInjuryDetailsFormPercentComplete = createSelector(
   selectIncidentAndInjuryForm,
   (form) =>
@@ -54,3 +47,20 @@ export const selectTreatmentDetailsFormPercentComplete = createSelector(
       ? form.userDefinedProperties['valid'] / form.userDefinedProperties['mandatory']
       : 1,
 );
+
+export const selectIsTimelossInjury = createSelector(selectIncidentAndInjuryForm, (form) => {
+  const work = form.value.incidentOverview.timelossIndicators.injuriesEffectOnWork;
+  const pay = form.value.incidentOverview.timelossIndicators.paychequeAffected;
+
+  if (work.haveMissedTimeAfterTheDay || work.likelyToMissMoreWork) {
+    return true;
+  }
+
+  return (
+    work.dutiesAdjusted &&
+    (pay.payAffectedByRegularHours ||
+      pay.payAffectedByOvertime ||
+      pay.payAffectedByAdjustedDuties ||
+      pay.payUnaffectedStillReceivingWage)
+  );
+});
