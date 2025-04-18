@@ -12,6 +12,7 @@ import { EmployerDetailsFormComponent } from './employer-details-form/employer-d
 import { TextAreaComponent } from '../../form-controls/text-area/text-area.component';
 import { BinaryRadioGroupComponent } from '../../form-controls/binary-radio-group/binary-radio-group.component';
 import { EmploymentDetailsFormComponent } from './employment-details-form/employment-details-form.component';
+import { ShiftInfoFormComponent } from './shift-info-form/shift-info-form.component';
 
 @Component({
   selector: 'employment-and-employer-info-form',
@@ -25,6 +26,7 @@ import { EmploymentDetailsFormComponent } from './employment-details-form/employ
     RouterLink,
     TextAreaComponent,
     EmploymentDetailsFormComponent,
+    ShiftInfoFormComponent,
   ],
   templateUrl: './employment-and-employer-info-form.component.html',
   styles: ``,

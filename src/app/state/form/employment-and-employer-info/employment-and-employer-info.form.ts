@@ -112,7 +112,7 @@ export interface ShiftInformationForm {
     saturday: boolean | null;
     sunday: boolean | null;
   };
-  averageWeeklyWorkHours: number;
+  averageWeeklyWorkHours: string;
   additionalInformation: string;
 }
 
@@ -270,7 +270,7 @@ export const initialFormValue: Form = {
       saturday: null,
       sunday: null,
     },
-    averageWeeklyWorkHours: 0,
+    averageWeeklyWorkHours: '',
     additionalInformation: '',
   },
   earnings: {

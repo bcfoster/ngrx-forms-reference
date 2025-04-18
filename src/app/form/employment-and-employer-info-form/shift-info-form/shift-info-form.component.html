@@ -1,0 +1,55 @@
+<h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Shift information</h2>
+
+<div class="flex flex-col gap-y-3">
+  <multi-radio-group
+    [control]="form.controls.workPattern"
+    label="Please tell us about your normal work week at the time of your injury"
+    [options]="[
+      { key: 'SameShifts', value: 'I was working the same days and hours each week' },
+      { key: 'RotatingShifts', value: 'I was working rotating shifts' },
+      { key: 'NoPattern', value: 'I was working different hours and/or days each week, with no regular pattern' },
+    ]"
+  />
+
+  @if (form.value.workPattern === 'SameShifts') {
+    <!-- TODO: time (hours/minutes) worked during week -->
+  }
+
+  @if (form.value.workPattern === 'RotatingShifts') {
+    <multi-radio-group
+      [control]="form.controls.daysOnOffRotation"
+      label="How many different shift patterns of days on and days off were in your rotation schedule before they repeated?"
+      [options]="[
+        { key: 'LessThanSix', value: 'Less than 6' },
+        { key: 'SixOrMore', value: '6 or more' }
+      ]"
+    />
+
+    @if (form.value.daysOnOffRotation === 'LessThanSix') {
+      <!-- TODO: rotation schedule (array of shift patterns) -->
+    }
+  }
+
+  @if (form.value.workPattern === 'NoPattern') {
+    <binary-radio-group
+      [control]="form.controls.haveDaysNeverWorked"
+      [horizontal]="true"
+      label="Are there days of the week that you never work?"
+    />
+
+    @if (form.value.haveDaysNeverWorked) {
+      <!-- TODO: checkboxes for each day of the week -->
+    }
+
+    <text-input
+      [control]="form.controls.averageWeeklyWorkHours"
+      label="On average, how many hours do you work each week?"
+    />
+
+    <text-area
+      [control]="form.controls.additionalInformation"
+      label="Is there anything else you'd like to tell us about your work schedule that you haven't already told us?"
+      [optional]="true"
+    />
+  }
+</div>
