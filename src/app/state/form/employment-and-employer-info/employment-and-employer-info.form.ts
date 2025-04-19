@@ -1,6 +1,7 @@
-import { disable, enable, setValue, updateGroup } from 'ngrx-forms';
+import { disable, enable, FormGroupState, setValue, updateGroup } from 'ngrx-forms';
 import { maxLength, minLength, required } from 'ngrx-forms/validation';
 
+import * as formReducer from '../form.reducer';
 import { accountNumber } from '../../ngrx-forms/account-number';
 import { earlierThan } from '../../ngrx-forms/earlier-than';
 import { minWords } from '../../ngrx-forms/min-words';
@@ -326,84 +327,85 @@ export const initialFormValue: Form = {
   additionalInformation: '',
 };
 
-export const validator = updateGroup<Form>(
-  {
-    // employmentDetails: {
-    //   employmentType: '',
-    //   educationalInstitutionAndProgram: '',
-    //   havePurchasedPersonalOptionalProtection: null,
-    //   purchasedPersonalOptionalProtectionAccountNumber: '',
-    //   accountantName: '',
-    //   accountantPhoneNumber: '',
-    //   socialInsuranceNumber: '',
-    //   currentlyAttendingSchool: null,
-    //   completedRecentProgramOfStudy: null,
-    //   fieldOfStudy: '',
-    //   schoolName: '',
-    //   apprenticeshipProgramName: '',
-    //   apprenticeshipCertificationNumber: '',
-    //   attachmentType: '',
-    //   employmentStatus: '',
-    //   workedOver12Months: null,
-    //   whenDidJobBegin: null,
-    //   whenDidJobBeginIsApproximate: null,
-    //   expectedJobEndDate: null,
-    //   expectedJobEndDateIsApproximate: null,
-    //   temporaryJobAdditionalInformation: '',
-    // },
-    employmentDetails: updateGroup<EmploymentDetailsForm>({
-      employmentType: validate(required),
-      educationalInstitutionAndProgram: (c, f) =>
-        f.value.employmentType === 'Student' ? validate(c, required, minWords(3)) : optional(c),
-      havePurchasedPersonalOptionalProtection: (c, f) =>
-        f.value.employmentType === 'Incorporated' || f.value.employmentType === 'Proprietor'
-          ? validate(c, required)
-          : optional(c),
-      purchasedPersonalOptionalProtectionAccountNumber: (c, f) =>
-        f.value.havePurchasedPersonalOptionalProtection
-          ? validate(c, required, accountNumber)
-          : optional(c),
-      accountantName: optional(), // TODO: timeloss
-      accountantPhoneNumber: optional(), // TODO: timeloss
-
-      apprenticeshipProgramName: (c, f) =>
-        f.value.employmentType === 'Apprenticeship' ? validate(c, required) : optional(c),
-    }),
-    employerInformation: updateGroup<EmployerInformationForm>({
-      jobTitle: validate(required),
-      name: validate(required, minLength(1), maxLength(100)),
-      employerAddress: updateGroup<EmployerAddressForm>({
-        addressLine1: validate(required, maxLength(40)),
-        // TODO: this is optional, but has validation rules - optional will have to support validators
-        addressLine2: validate(maxLength(40)),
-        city: validate(required, maxLength(30)),
-        // TODO: revisit validation
-        province: validate(required),
-        country: validate(required),
-        postalCode: (c, f) =>
-          f.value.country === 'CA' ? validate(c, required, postalCode) : validate(c, required),
+export const validator = (form: FormGroupState<formReducer.Form>) =>
+  updateGroup<Form>(
+    {
+      employmentDetails: updateGroup<EmploymentDetailsForm>({
+        employmentType: validate(required),
+        havePurchasedPersonalOptionalProtection: (c, f) =>
+          f.value.employmentType === 'Proprietor' ? validate(c, required) : optional(c),
       }),
-      // TODO: this is optional
-      contactName: validate(maxLength(56)),
-      // TODO: this is optional
-      phoneNumber: validate(minLength(10), maxLength(12)),
-      otherEmployer: validate(required),
-    }),
-    reportingToEmployer: updateGroup<ReportingToEmployerForm>({
-      haveReportedInjury: validate(required),
-      // TODO: some garbage date validation
-      dateReportedInjury: (c, f) =>
-        f.value.haveReportedInjury
-          ? validate(c, required, earlierThan(new Date().toISOString()), minYear(1900))
-          : optional(c),
-      whoReportedInjuryTo: (c, f) =>
-        f.value.haveReportedInjury ? validate(c, required, minWords(2)) : optional(c),
-    }),
-    additionalInformation: (c) => optional(c),
-  },
-  {
-    employerInformation: updateGroup<EmployerInformationForm>({
-      extension: (c, f) => (f.value.phoneNumber.length > 0 ? enable(c) : disable(setValue(c, ''))),
-    }),
-  },
-);
+      employerInformation: updateGroup<EmployerInformationForm>({
+        name: validate(required),
+        jobTitle: validate(required),
+        employerAddress: updateGroup<EmployerAddressForm>({
+          addressLine1: validate(required),
+          addressLine2: optional(),
+          city: validate(required),
+          province: validate(required),
+          country: validate(required),
+          postalCode: validate(required),
+        }),
+        haveReportedInjury: validate(required),
+        otherEmployer: validate(required),
+      }),
+      additionalInformation: optional(),
+    },
+    form.value.isTimelossInjury ? {} : {},
+  );
+
+// employmentDetails: updateGroup<EmploymentDetailsForm>({
+//   employmentType: validate(required),
+//   educationalInstitutionAndProgram: (c, f) =>
+//     f.value.employmentType === 'Student' ? validate(c, required, minWords(3)) : optional(c),
+//   havePurchasedPersonalOptionalProtection: (c, f) =>
+//     f.value.employmentType === 'Incorporated' || f.value.employmentType === 'Proprietor'
+//       ? validate(c, required)
+//       : optional(c),
+//   purchasedPersonalOptionalProtectionAccountNumber: (c, f) =>
+//     f.value.havePurchasedPersonalOptionalProtection
+//       ? validate(c, required, accountNumber)
+//       : optional(c),
+//   accountantName: optional(), // TODO: timeloss
+//   accountantPhoneNumber: optional(), // TODO: timeloss
+//
+//   apprenticeshipProgramName: (c, f) =>
+//     f.value.employmentType === 'Apprenticeship' ? validate(c, required) : optional(c),
+// }),
+//   employerInformation: updateGroup<EmployerInformationForm>({
+//   jobTitle: validate(required),
+//   name: validate(required, minLength(1), maxLength(100)),
+//   employerAddress: updateGroup<EmployerAddressForm>({
+//     addressLine1: validate(required, maxLength(40)),
+//     // TODO: this is optional, but has validation rules - optional will have to support validators
+//     addressLine2: validate(maxLength(40)),
+//     city: validate(required, maxLength(30)),
+//     // TODO: revisit validation
+//     province: validate(required),
+//     country: validate(required),
+//     postalCode: (c, f) =>
+//       f.value.country === 'CA' ? validate(c, required, postalCode) : validate(c, required),
+//   }),
+//   // TODO: this is optional
+//   contactName: validate(maxLength(56)),
+//   // TODO: this is optional
+//   phoneNumber: validate(minLength(10), maxLength(12)),
+//   otherEmployer: validate(required),
+// }),
+//   reportingToEmployer: updateGroup<ReportingToEmployerForm>({
+//   haveReportedInjury: validate(required),
+//   // TODO: some garbage date validation
+//   dateReportedInjury: (c, f) =>
+//     f.value.haveReportedInjury
+//       ? validate(c, required, earlierThan(new Date().toISOString()), minYear(1900))
+//       : optional(c),
+//   whoReportedInjuryTo: (c, f) =>
+//     f.value.haveReportedInjury ? validate(c, required, minWords(2)) : optional(c),
+// }),
+//   additionalInformation: (c) => optional(c),
+// },
+// {
+//   employerInformation: updateGroup<EmployerInformationForm>({
+//     extension: (c, f) =>
+//       f.value.phoneNumber.length > 0 ? enable(c) : disable(setValue(c, '')),
+// }),

@@ -33,6 +33,7 @@ export interface Form {
   injuryAndIncident: injuryAndIncident.Form;
   treatmentDetails: treatmentDetails.Form;
   employmentAndEmployerInfo: employmentAndEmployer.Form;
+  isTimelossInjury: boolean;
 }
 
 export const initialFormValue: Form = {
@@ -40,6 +41,7 @@ export const initialFormValue: Form = {
   injuryAndIncident: injuryAndIncident.initialFormValue,
   treatmentDetails: treatmentDetails.initialFormValue,
   employmentAndEmployerInfo: employmentAndEmployer.initialFormValue,
+  isTimelossInjury: true,
 };
 
 export interface State {
@@ -196,7 +198,7 @@ export const validate = (form: FormGroupState<Form>) =>
     personalAndContactInfo: personalAndContactInfo.validator,
     injuryAndIncident: injuryAndIncident.validator(form),
     treatmentDetails: treatmentDetails.validator(form),
-    employmentAndEmployerInfo: employmentAndEmployer.validator,
+    employmentAndEmployerInfo: employmentAndEmployer.validator(form),
   });
 
 export const reducer = wrapReducerWithFormStateUpdate(

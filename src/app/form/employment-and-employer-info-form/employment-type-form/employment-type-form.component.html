@@ -15,36 +15,49 @@
     ]"
   />
 
-  @if (isTimelossInjury) {
-    @if (form.value.employmentType === 'Proprietor') {
-      <binary-radio-group
-        [control]="form.controls.havePurchasedPersonalOptionalProtection"
-        [horizontal]="true"
-        label="Have you purchased personal optional protection?"
-      />
+  @if (form.value.employmentType === 'Employee' && isTimelossInjury) {
+    <binary-radio-group
+      [control]="form.controls.currentlyAttendingSchool"
+      [horizontal]="true"
+      label="Are you currently attending school on a part-time or full-time basis?"
+    />
 
-      @if (form.value.havePurchasedPersonalOptionalProtection) {
-        <text-input
-          [control]="form.controls.purchasedPersonalOptionalProtectionAccountNumber"
-          label="Please enter your account number"
-          [optional]="true"
-        />
-      }
+    @if (form.value.currentlyAttendingSchool) {
+      <text-input [control]="form.controls.fieldOfStudy" label="What are you studying?" />
+
+      <text-input [control]="form.controls.schoolName" label="What school are you attending?" />
     }
 
-    @if (form.value.employmentType === 'Incorporated') {
-      <text-input
-        [control]="form.controls.accountantName"
-        label="What is your accountant's or bookkeeper's name?"
-        [optional]="true"
-      />
+    <binary-radio-group
+      [control]="form.controls.completedRecentProgramOfStudy"
+      [horizontal]="true"
+      label="Have you completed a program of study in the past two years?"
+    />
+
+    @if (form.value.completedRecentProgramOfStudy) {
+      <text-input [control]="form.controls.completedFieldOfStudy" label="What are you studying?" />
 
       <text-input
-        [control]="form.controls.accountantPhoneNumber"
-        label="What is their phone number?"
-        [optional]="true"
+        [control]="form.controls.completedSchoolName"
+        label="What school are you attending?"
       />
+    }
 
+    <text-input
+      [control]="form.controls.socialInsuranceNumber"
+      label="Social Insurance Number (SIN)"
+      [optional]="true"
+    />
+  }
+
+  @if (form.value.employmentType === 'Proprietor') {
+    <binary-radio-group
+      [control]="form.controls.havePurchasedPersonalOptionalProtection"
+      [horizontal]="true"
+      label="Have you purchased personal optional protection?"
+    />
+
+    @if (form.value.havePurchasedPersonalOptionalProtection) {
       <text-input
         [control]="form.controls.purchasedPersonalOptionalProtectionAccountNumber"
         label="Please enter your account number"
@@ -52,27 +65,7 @@
       />
     }
 
-    @if (form.value.employmentType === 'Apprenticeship') {
-      <text-input
-        [control]="form.controls.apprenticeshipProgramName"
-        label="What is the name of the apprenticeship program you are in?"
-      />
-
-      <text-input
-        [control]="form.controls.apprenticeshipCertificationNumber"
-        label="Apprenticehsip certification number"
-        [optional]="true"
-      />
-    }
-
-    @if (form.value.employmentType === 'Student') {
-      <text-input
-        [control]="form.controls.educationalInstitutionAndProgram"
-        label="What is the name of the educational institution and program?"
-      />
-    }
-
-    @if (form.value.employmentType !== '' && form.value.employmentType !== 'Student') {
+    @if (isTimelossInjury) {
       <binary-radio-group
         [control]="form.controls.currentlyAttendingSchool"
         [horizontal]="true"
@@ -102,11 +95,201 @@
           label="What school are you attending?"
         />
       }
+
+      <text-input
+        [control]="form.controls.socialInsuranceNumber"
+        label="Social Insurance Number (SIN)"
+        [optional]="true"
+      />
+    }
+  }
+
+  @if (form.value.employmentType === 'Incorporated' && isTimelossInjury) {
+    <text-input
+      [control]="form.controls.purchasedPersonalOptionalProtectionAccountNumber"
+      label="Please enter your account number"
+      [optional]="true"
+    />
+
+    @if (isTimelossInjury) {
+      <text-input
+        [control]="form.controls.accountantName"
+        label="What is your accountant's or bookkeeper's name?"
+        [optional]="true"
+      />
+
+      <text-input
+        [control]="form.controls.accountantPhoneNumber"
+        label="What is their phone number?"
+        [optional]="true"
+      />
+
+      <binary-radio-group
+        [control]="form.controls.currentlyAttendingSchool"
+        [horizontal]="true"
+        label="Are you currently attending school on a part-time or full-time basis?"
+      />
+
+      @if (form.value.currentlyAttendingSchool) {
+        <text-input [control]="form.controls.fieldOfStudy" label="What are you studying?" />
+
+        <text-input [control]="form.controls.schoolName" label="What school are you attending?" />
+      }
+
+      <binary-radio-group
+        [control]="form.controls.completedRecentProgramOfStudy"
+        [horizontal]="true"
+        label="Have you completed a program of study in the past two years?"
+      />
+
+      @if (form.value.completedRecentProgramOfStudy) {
+        <text-input
+          [control]="form.controls.completedFieldOfStudy"
+          label="What are you studying?"
+        />
+
+        <text-input
+          [control]="form.controls.completedSchoolName"
+          label="What school are you attending?"
+        />
+      }
+
+      <text-input
+        [control]="form.controls.socialInsuranceNumber"
+        label="Social Insurance Number (SIN)"
+        [optional]="true"
+      />
+    }
+  }
+
+  @if (form.value.employmentType === 'Spouse') {
+    <binary-radio-group
+      [control]="form.controls.currentlyAttendingSchool"
+      [horizontal]="true"
+      label="Are you currently attending school on a part-time or full-time basis?"
+    />
+
+    @if (form.value.currentlyAttendingSchool) {
+      <text-input [control]="form.controls.fieldOfStudy" label="What are you studying?" />
+
+      <text-input [control]="form.controls.schoolName" label="What school are you attending?" />
+    }
+
+    <binary-radio-group
+      [control]="form.controls.completedRecentProgramOfStudy"
+      [horizontal]="true"
+      label="Have you completed a program of study in the past two years?"
+    />
+
+    @if (form.value.completedRecentProgramOfStudy) {
+      <text-input [control]="form.controls.completedFieldOfStudy" label="What are you studying?" />
+
+      <text-input
+        [control]="form.controls.completedSchoolName"
+        label="What school are you attending?"
+      />
     }
 
     <text-input
       [control]="form.controls.socialInsuranceNumber"
       label="Social Insurance Number (SIN)"
+      [optional]="true"
+    />
+  }
+
+  @if (form.value.employmentType === 'Student') {
+    <text-input
+      [control]="form.controls.educationalInstitutionAndProgram"
+      label="What is the name of the educational institution and program?"
+    />
+
+    @if (isTimelossInjury) {
+      <text-input
+        [control]="form.controls.socialInsuranceNumber"
+        label="Social Insurance Number (SIN)"
+        [optional]="true"
+      />
+    }
+  }
+
+  @if (isTimelossInjury && form.value.employmentType === 'Apprenticeship') {
+    <text-input
+      [control]="form.controls.apprenticeshipProgramName"
+      label="What is the name of the apprenticeship program you are in?"
+    />
+
+    <text-input
+      [control]="form.controls.apprenticeshipCertificationNumber"
+      label="Apprenticehsip certification number"
+      [optional]="true"
+    />
+
+    <binary-radio-group
+      [control]="form.controls.currentlyAttendingSchool"
+      [horizontal]="true"
+      label="Are you currently attending school on a part-time or full-time basis?"
+    />
+
+    @if (form.value.currentlyAttendingSchool) {
+      <text-input [control]="form.controls.fieldOfStudy" label="What are you studying?" />
+
+      <text-input [control]="form.controls.schoolName" label="What school are you attending?" />
+    }
+
+    <binary-radio-group
+      [control]="form.controls.completedRecentProgramOfStudy"
+      [horizontal]="true"
+      label="Have you completed a program of study in the past two years?"
+    />
+
+    @if (form.value.completedRecentProgramOfStudy) {
+      <text-input [control]="form.controls.completedFieldOfStudy" label="What are you studying?" />
+
+      <text-input
+        [control]="form.controls.completedSchoolName"
+        label="What school are you attending?"
+      />
+    }
+
+    <text-input
+      [control]="form.controls.socialInsuranceNumber"
+      label="Social Insurance Number (SIN)"
+      [optional]="true"
+    />
+  }
+
+  @if (form.value.employmentType === 'Volunteer') {
+    <binary-radio-group
+      [control]="form.controls.currentlyAttendingSchool"
+      [horizontal]="true"
+      label="Are you currently attending school on a part-time or full-time basis?"
+    />
+
+    @if (form.value.currentlyAttendingSchool) {
+      <text-input [control]="form.controls.fieldOfStudy" label="What are you studying?" />
+
+      <text-input [control]="form.controls.schoolName" label="What school are you attending?" />
+    }
+
+    <binary-radio-group
+      [control]="form.controls.completedRecentProgramOfStudy"
+      [horizontal]="true"
+      label="Have you completed a program of study in the past two years?"
+    />
+
+    @if (form.value.completedRecentProgramOfStudy) {
+      <text-input [control]="form.controls.completedFieldOfStudy" label="What are you studying?" />
+
+      <text-input
+        [control]="form.controls.completedSchoolName"
+        label="What school are you attending?"
+      />
+    }
+
+    <text-input
+      [control]="form.controls.socialInsuranceNumber"
+      label="Social Insurance Number (SIN)"
+      [optional]="true"
     />
   }
 </div>
