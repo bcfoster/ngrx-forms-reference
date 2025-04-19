@@ -5,7 +5,7 @@ import {
   isDevMode,
   makeEnvironmentProviders,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -30,7 +30,12 @@ export const appConfig: ApplicationConfig = {
     provideApiBaseUrl(),
     provideEffects([FormEffects, DraftsEffects]),
     provideHttpClient(),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'top',
+      }),
+    ),
     provideStore(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideState(drafts.feature),
