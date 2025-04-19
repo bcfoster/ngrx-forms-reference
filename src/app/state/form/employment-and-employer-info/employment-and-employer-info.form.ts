@@ -82,7 +82,7 @@ export interface WorkDay {
 }
 
 export interface ShiftPatternForm {
-  firstDay: string | null;
+  firstDay: string;
   pattern: {
     daysOn: number;
     daysOff: number;
@@ -91,15 +91,7 @@ export interface ShiftPatternForm {
 
 export interface ShiftInformationForm {
   workPattern: string;
-  weekPaidHours: {
-    monday: WorkDay;
-    tuesday: WorkDay;
-    wednesday: WorkDay;
-    thursday: WorkDay;
-    friday: WorkDay;
-    saturday: WorkDay;
-    sunday: WorkDay;
-  };
+  weekPaidHours: WorkDay[];
   daysOnOffRotation: string;
   shiftPattern: ShiftPatternForm;
   haveDaysNeverWorked: boolean | null;
@@ -246,18 +238,18 @@ export const initialFormValue: Form = {
   },
   shiftInformation: {
     workPattern: '',
-    weekPaidHours: {
-      monday: { hours: 0, minutes: 0 },
-      tuesday: { hours: 0, minutes: 0 },
-      wednesday: { hours: 0, minutes: 0 },
-      thursday: { hours: 0, minutes: 0 },
-      friday: { hours: 0, minutes: 0 },
-      saturday: { hours: 0, minutes: 0 },
-      sunday: { hours: 0, minutes: 0 },
-    },
+    weekPaidHours: [
+      { hours: 0, minutes: 0 }, // mon
+      { hours: 0, minutes: 0 }, // tue
+      { hours: 0, minutes: 0 }, // wed
+      { hours: 0, minutes: 0 }, // thu
+      { hours: 0, minutes: 0 }, // fri
+      { hours: 0, minutes: 0 }, // sat
+      { hours: 0, minutes: 0 }, // sun
+    ],
     daysOnOffRotation: '',
     shiftPattern: {
-      firstDay: null,
+      firstDay: '',
       pattern: [{ daysOn: 0, daysOff: 0 }],
     },
     haveDaysNeverWorked: null,

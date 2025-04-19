@@ -12,7 +12,53 @@
   />
 
   @if (form.value.workPattern === 'SameShifts') {
-    <!-- TODO: time (hours/minutes) worked during week -->
+    <div class="relative overflow-x-auto">
+      <table class="w-full text-left text-sm text-gray-500 rtl:text-right">
+        <thead class="text-gray-900">
+          <tr>
+            <th scope="col" class="px-1"></th>
+            <th scope="col" class="px-1 font-semibold">Hours</th>
+            <th scope="col" class="px-1 font-semibold">Minutes</th>
+          </tr>
+        </thead>
+        <tbody>
+          @let days =
+            [
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+              'Sunday',
+            ];
+
+          @for (day of days; track day; let i = $index) {
+            <tr class="bg-white">
+              <th scope="row" class="px-1 py-3 font-semibold whitespace-nowrap text-gray-900">
+                {{ day }}
+              </th>
+              <td class="px-1">
+                <input
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                  [id]="i + '-hours'"
+                  [ngrxFormControlState]="form.controls.weekPaidHours.controls[i].controls.hours"
+                  type="number"
+                />
+              </td>
+              <td class="px-1">
+                <input
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                  [id]="i + '-minutes'"
+                  [ngrxFormControlState]="form.controls.weekPaidHours.controls[i].controls.minutes"
+                  type="number"
+                />
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   }
 
   @if (form.value.workPattern === 'RotatingShifts') {
@@ -26,7 +72,25 @@
     />
 
     @if (form.value.daysOnOffRotation === 'LessThanSix') {
-      <!-- TODO: rotation schedule (array of shift patterns) -->
+      <h3 class="text-md leading-none font-semibold text-black">Rotation schedule</h3>
+
+      <h3 class="text-md leading-none text-black">Shift pattern 1</h3>
+
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="first-day"
+          >First day of the rotation you were injured</label
+        >
+        <input
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="first-day"
+          [ngrxFormControlState]="form.controls.shiftPattern.controls.firstDay"
+          type="date"
+        />
+      </div>
+
+      <!-- days on and days off-->
+
+      <!-- array of additional days -->
     }
   }
 
