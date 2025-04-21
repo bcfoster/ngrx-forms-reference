@@ -351,7 +351,25 @@ export const validator = (form: FormGroupState<formReducer.Form>) =>
       }),
       additionalInformation: optional(),
     },
-    form.value.isTimelossInjury ? {} : {},
+    form.value.isTimelossInjury
+      ? {
+          employmentDetails: updateGroup<EmploymentDetailsForm>({
+            attachmentType: validate(required),
+            employmentStatus: validate(required),
+          }),
+          shiftInformation: updateGroup<ShiftInformationForm>({
+            workPattern: validate(required),
+          }),
+          earnings: updateGroup<EarningsForm>({
+            maintainedFullSalary: validate(required),
+            injuryTimeReceivingBaseSalary: validate(required),
+            // TODO: additional compensations
+          }),
+          returnToWork: updateGroup<ReturnToWorkForm>({
+            missedTimeFromWorkAfterInjury: validate(required),
+          }),
+        }
+      : {},
   );
 
 // employmentDetails: updateGroup<EmploymentDetailsForm>({

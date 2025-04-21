@@ -18,9 +18,12 @@
 
     @if (isTimeloss) {
       <employment-details-form [form]="form.controls.employmentDetails" />
+
       <shift-info-form [form]="form.controls.shiftInformation" />
-      <!-- earnings -->
-      <!-- return to work -->
+
+      <earnings-form [form]="form.controls.earnings" />
+
+      <return-to-work-form [form]="form.controls.returnToWork" />
     }
 
     <h2 class="text-xl leading-none font-semibold text-yellow-500">Additional information</h2>
@@ -31,11 +34,13 @@
       [optional]="true"
     />
 
-    <binary-radio-group
-      [control]="form.controls.employerInformation.controls.otherEmployer"
-      [horizontal]="true"
-      label="Did you have any other employers at the time of your injury?"
-    />
+    @if (!isTimeloss) {
+      <binary-radio-group
+        [control]="form.controls.employerInformation.controls.otherEmployer"
+        [horizontal]="true"
+        label="Did you have any other employers at the time of your injury?"
+      />
+    }
 
     <div>
       <button

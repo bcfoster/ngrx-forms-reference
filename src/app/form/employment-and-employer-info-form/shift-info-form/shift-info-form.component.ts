@@ -1,5 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormGroupState, NgrxFormsModule } from 'ngrx-forms';
+import { Store } from '@ngrx/store';
+import {
+  AddArrayControlAction,
+  FormGroupState,
+  NgrxFormsModule,
+  RemoveArrayControlAction,
+} from 'ngrx-forms';
 
 import { BinaryRadioGroupComponent } from '../../../form-controls/binary-radio-group/binary-radio-group.component';
 import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-group/multi-radio-group.component';
@@ -12,6 +19,7 @@ import * as empInfo from '../../../state/form/employment-and-employer-info/emplo
   imports: [
     BinaryRadioGroupComponent,
     MultiRadioGroupComponent,
+    NgIf,
     NgrxFormsModule,
     TextAreaComponent,
     TextInputComponent,
@@ -21,4 +29,20 @@ import * as empInfo from '../../../state/form/employment-and-employer-info/emplo
 })
 export class ShiftInfoFormComponent {
   @Input({ required: true }) form!: FormGroupState<empInfo.ShiftInformationForm>;
+
+  constructor(private readonly store: Store) {}
+
+  add() {
+    const id = this.form.controls.shiftPattern.controls.pattern.id;
+    const pattern = {
+      daysOn: 0,
+      daysOff: 0,
+    };
+    this.store.dispatch(new AddArrayControlAction(id, pattern));
+  }
+
+  remove(i: number) {
+    const id = this.form.controls.shiftPattern.controls.pattern.id;
+    this.store.dispatch(new RemoveArrayControlAction(id, i));
+  }
 }

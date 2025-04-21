@@ -72,25 +72,77 @@
     />
 
     @if (form.value.daysOnOffRotation === 'LessThanSix') {
-      <h3 class="text-md leading-none font-semibold text-black">Rotation schedule</h3>
+      <h3 class="text-md leading-none font-semibold text-gray-900">Rotation schedule</h3>
 
-      <h3 class="text-md leading-none text-black">Shift pattern 1</h3>
-
-      <div class="flex flex-col gap-y-2">
-        <label class="block text-sm font-semibold text-gray-900" for="first-day"
-          >First day of the rotation you were injured</label
+      @for (
+        shift of form.controls.shiftPattern.controls.pattern.controls;
+        track shift.id;
+        let i = $index;
+        let first = $first
+      ) {
+        <div
+          class="flex w-full max-w-sm flex-col gap-y-2 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6 md:p-8"
         >
-        <input
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
-          id="first-day"
-          [ngrxFormControlState]="form.controls.shiftPattern.controls.firstDay"
-          type="date"
-        />
-      </div>
+          <div class="flex justify-between">
+            <h3 class="text-sm leading-none text-gray-900">Shift pattern {{ i + 1 }}</h3>
+            <a
+              *ngIf="!first"
+              href="javascript: void(0)"
+              class="text-sm text-blue-500"
+              (click)="remove(i)"
+              >Remove</a
+            >
+          </div>
 
-      <!-- days on and days off-->
+          <hr class="my-2 h-px border-0 bg-gray-200" />
+
+          @if (first) {
+            <label class="block text-sm font-semibold text-gray-900" for="first-day"
+              >First day of the rotation you were injured</label
+            >
+            <input
+              class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+              id="first-day"
+              [ngrxFormControlState]="form.controls.shiftPattern.controls.firstDay"
+              type="date"
+            />
+          }
+
+          <div class="flex gap-x-2">
+            <div class="flex w-1/2 flex-col gap-y-2">
+              <label class="block text-sm font-semibold text-gray-900" [for]="i + '-days-on'"
+                >Number of days on</label
+              >
+              <input
+                class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                [id]="i + '-days-on'"
+                [ngrxFormControlState]="shift.controls.daysOn"
+                type="number"
+              />
+            </div>
+
+            <div class="flex w-1/2 flex-col gap-y-2">
+              <label class="block text-sm font-semibold text-gray-900" [for]="i + '-days-off'"
+                >Number of days off</label
+              >
+              <input
+                class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                [id]="i + '-days-off'"
+                [ngrxFormControlState]="shift.controls.daysOff"
+                type="number"
+              />
+            </div>
+          </div>
+        </div>
+      }
 
       <!-- array of additional days -->
+
+      <div>
+        <a href="javascript: void(0)" class="text-sm text-blue-500" (click)="add()"
+          >Add another shift pattern</a
+        >
+      </div>
     }
   }
 
