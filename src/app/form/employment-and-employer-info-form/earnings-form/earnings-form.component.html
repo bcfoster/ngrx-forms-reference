@@ -1,1 +1,217 @@
-<p>earnings-form works!</p>
+<h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Earnings</h2>
+
+<div class="flex flex-col gap-y-3">
+  <multi-radio-group
+    [control]="form.controls.maintainedFullSalary"
+    [horizontal]="true"
+    label="Did (or will) your employer continue to pay your full wages or salary while you were (or are) untable to work?"
+    [options]="[
+      { key: 'Yes', value: 'Yes' },
+      { key: 'No', value: 'No' },
+      { key: 'NotSure', value: 'Not sure' },
+    ]"
+  />
+
+  @if (form.value.maintainedFullSalary === 'Yes') {
+    <multi-radio-group
+      [control]="form.controls.maintainedFullSalaryLength"
+      label="How long did (or will) they continue to pay your full wages or salary?"
+      [options]="[
+        { key: 'UntilRecovered', value: 'Until I\'ve fully recovered from my injury or condition' },
+        { key: 'LimitedTime', value: 'For a limited time' },
+        { key: 'NotSure', value: 'Not sure' },
+    ]"
+    />
+  }
+
+  <multi-radio-group
+    [control]="form.controls.injuryTimeReceivingBaseSalary"
+    [horizontal]="true"
+    label="At the time of your injury, were you being paid a standard base salary or hourly wage?"
+    [options]="[
+      { key: 'Yes', value: 'Yes' },
+      { key: 'No', value: 'No' },
+      { key: 'NotSure', value: 'Not sure' },
+    ]"
+  />
+
+  @if (form.value.injuryTimeReceivingBaseSalary === 'Yes') {
+    <label class="block text-sm font-semibold text-gray-900" for="injury-time-base-salary-amount"
+      >At the time of your injury, what was your base salary or hourly wage?</label
+    >
+
+    <div class="flex items-center gap-x-2">
+      <div class="w-auto">$</div>
+
+      <div class="flex w-1/2 flex-col gap-y-2">
+        <input
+          class="block h-full w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          id="injury-time-base-salary-amount"
+          [ngrxFormControlState]="form.controls.injuryTimeBaseSalaryAmount"
+          type="number"
+        />
+      </div>
+
+      <div class="flex w-1/2 flex-col gap-y-2">
+        <select-option
+          [control]="form.controls.injuryTimeBaseSalaryPeriod"
+          [options]="[
+            { key: 'Hour', value: 'Per hour' },
+            { key: 'Day', value: 'Per day' },
+            { key: 'Week', value: 'Per week' },
+            { key: 'Month', value: 'Per month' },
+            { key: 'Year', value: 'Per year' },
+        ]"
+        />
+      </div>
+    </div>
+  }
+
+  @let compensations = form.controls.additionalCompenstations.controls;
+
+  <div class="flex flex-col gap-y-3">
+    <label class="block text-sm font-semibold text-gray-900" for="additional-compensations"
+      >Which forms of additional compensation do you receive, if any?
+      <span class="font-normal">(check all that apply)</span>
+    </label>
+    <checkbox [control]="compensations.bonuses" label="Bonuses" />
+    <checkbox [control]="compensations.holidays" label="Holiday or vacation pay" />
+    <checkbox [control]="compensations.livingOutAllowance" label="Living out allowance" />
+    <checkbox [control]="compensations.overtime" label="Regular overtime" />
+    <checkbox [control]="compensations.roomAndBoard" label="Room and board or subsidized rent" />
+    <checkbox
+      [control]="compensations.shiftDifferentialsPremiums"
+      label="Shift differentials or shift premiums"
+    />
+    <checkbox [control]="compensations.tips" label="Tips and gratiuities" />
+    <checkbox [control]="compensations.other" label="Other" />
+    <checkbox [control]="compensations.none" label="None of the above" />
+  </div>
+
+  <label
+    class="block text-sm font-semibold text-gray-900"
+    for="total-earnings-12-weeks-prior-to-injury"
+    >What were your total earnings for this employer in the 12 weeks prior to your injury?
+    <br />
+    <span class="font-normal"
+      >Please provide an amount before deductions (i.e., gross amount).</span
+    >
+  </label>
+  <div class="flex items-center gap-x-2">
+    <div class="w-auto">$</div>
+
+    <div class="flex w-full flex-col gap-y-2">
+      <input
+        class="block h-full w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+        id="total-earnings-12-weeks-prior-to-injury"
+        [ngrxFormControlState]="compensations.totalEarnings12WeeksPriorToInjury"
+        type="number"
+      />
+    </div>
+  </div>
+
+  @if (compensations.holidays.value) {
+    <label class="block text-sm font-semibold text-gray-900" for="holiday-pay-percentage"
+      >What is your holiday or vacation pay percentage?
+      <span class="font-normal">(optional)</span>
+    </label>
+    <div class="flex items-center gap-x-2">
+      <div class="flex w-full flex-col gap-y-2">
+        <input
+          class="block h-full w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          id="holiday-pay-percentage"
+          [ngrxFormControlState]="compensations.holidayPayPercentage"
+          type="number"
+        />
+      </div>
+
+      <div class="w-auto">%</div>
+    </div>
+  }
+
+  @if (compensations.overtime.value) {
+    <label class="block text-sm font-semibold text-gray-900" for="overtime-hours"
+      >How many hours per week or per month do you regularly work overtime?</label
+    >
+
+    <div class="flex items-center gap-x-2">
+      <div class="flex w-1/2 flex-col gap-y-2">
+        <input
+          class="block h-full w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          id="overtime-hours"
+          [ngrxFormControlState]="compensations.overtimeHours"
+          type="number"
+        />
+      </div>
+
+      <div class="flex w-1/2 flex-col gap-y-2">
+        <select-option
+          [control]="compensations.overtimePeriod"
+          [options]="[
+            { key: 'Week', value: 'Per week' },
+            { key: 'Month', value: 'Per month' },
+        ]"
+        />
+      </div>
+    </div>
+
+    @let days = compensations.overtimeRegularDays.controls;
+
+    <label class="block text-sm font-semibold text-gray-900" for="overtime-hours"
+      >Which day(s) do you regularly work overtime?
+      <span class="font-normal">(check all that apply)</span></label
+    >
+    <checkbox [control]="days.monday" label="Monday" />
+    <checkbox [control]="days.tuesday" label="Tuesday" />
+    <checkbox [control]="days.wednesday" label="Wednesday" />
+    <checkbox [control]="days.thursday" label="Thursday" />
+    <checkbox [control]="days.friday" label="Friday" />
+    <checkbox [control]="days.saturday" label="Saturday" />
+    <checkbox [control]="days.sunday" label="Sunday" />
+  }
+
+  @if (compensations.roomAndBoard.value) {
+    <binary-radio-group
+      [control]="compensations.roomAndBoardAffectedByInjury"
+      [horizontal]="true"
+      label="Has the amount of your room and board or subsidized rent been affected because you are unable to work due to your injury?"
+    />
+  }
+
+  @if (compensations.tips.value) {
+    <label class="block text-sm font-semibold text-gray-900" for="overtime-hours"
+      >How much do you normally receive in tips and gratuities?</label
+    >
+
+    <div class="flex items-center gap-x-2">
+      <div class="w-auto">$</div>
+
+      <div class="flex w-1/2 flex-col gap-y-2">
+        <input
+          class="block h-full w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          id="overtime-hours"
+          [ngrxFormControlState]="compensations.tipsAverageAmount"
+          type="number"
+        />
+      </div>
+
+      <div class="flex w-1/2 flex-col gap-y-2">
+        <select-option
+          [control]="compensations.tipsPeriod"
+          [options]="[
+            { key: 'Hour', value: 'Per hour' },
+            { key: 'Week', value: 'Per week' },
+            { key: 'Month', value: 'Per month' },
+        ]"
+        />
+      </div>
+    </div>
+  }
+
+  @if (compensations.other.value) {
+    <text-area
+      [control]="compensations.describeOther"
+      label="What other forms of compensation do you receive?"
+    />
+  }
+</div>

@@ -1,1 +1,193 @@
-<p>return-to-work-form works!</p>
+<h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Return to work</h2>
+
+<div class="flex flex-col gap-y-3">
+  <multi-radio-group
+    [control]="form.controls.missedTimeFromWorkAfterInjury"
+    [horizontal]="true"
+    label="Did you miss time from work after the day (or shift) you were injured from this employer?"
+    [options]="[
+      { key: 'Yes', value: 'Yes' },
+      { key: 'No', value: 'No' },
+      { key: 'NotSure', value: 'Not sure' },
+    ]"
+  />
+
+  @if (form.value.missedTimeFromWorkAfterInjury === 'Yes') {
+    <div class="flex flex-col gap-y-2">
+      <label
+        class="block text-sm font-semibold text-gray-900"
+        for="date-of-first-missed-shift-after-injury"
+        >What is the date of the first shift you missed after you were injured?</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="date-of-first-missed-shift-after-injury"
+        [ngrxFormControlState]="form.controls.dateOfFirstMissedShiftAfterInjury"
+        type="date"
+      />
+    </div>
+
+    <checkbox
+      [control]="form.controls.dateOfFirstMissedShiftAfterInjuryIsApproximate"
+      label="This is an approximate date"
+    />
+
+    <div class="flex flex-col gap-y-2">
+      <label class="block text-sm font-semibold text-gray-900" for="last-day-worked-for-employer"
+        >What is the date of the last day you worked for this employer?</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+        id="last-day-worked-for-employer"
+        [ngrxFormControlState]="form.controls.lastDayWorkedForEmployer"
+        type="date"
+      />
+    </div>
+
+    <checkbox
+      [control]="form.controls.lastDayWorkedForEmployerIsApproximate"
+      label="This is an approximate date"
+    />
+
+    <binary-radio-group
+      [control]="form.controls.workedPastDateOfInjury"
+      [horizontal]="true"
+      label="Did you continue to work past the date of injury?"
+    />
+
+    @if (form.value.workedPastDateOfInjury) {
+      <label class="block text-sm font-semibold text-gray-900" for="last-day-worked-scheduled-hours"
+        >How many hours were you scheduledd to work on the last day you worked?</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+        id="last-day-worked-scheduled-hours"
+        [ngrxFormControlState]="form.controls.lastDayWorkedScheduledHours"
+        type="number"
+      />
+
+      <label class="block text-sm font-semibold text-gray-900" for="last-day-worked-actual-hours"
+        >Number of days off</label
+      >
+      <input
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+        id="last-day-worked-actual-hours"
+        [ngrxFormControlState]="form.controls.lastDayWorkedActualHours"
+        type="number"
+      />
+    }
+
+    <multi-radio-group
+      [control]="form.controls.haveReturnedToWork"
+      label="Have you returned to work in any capacity?"
+      [options]="[
+        { key: 'Yes', value: 'Yes' },
+        { key: 'No', value: 'No' },
+        { key: 'NoJob', value: 'No job to return to' },
+      ]"
+    />
+
+    @if (form.value.haveReturnedToWork === 'Yes') {}
+
+    @if (form.value.haveReturnedToWork === 'No') {
+      <multi-radio-group
+        [control]="form.controls.estimatedReturnToWork"
+        label="When do you think you'll be able to return to your normal work?"
+        [options]="[
+          { key: 'NextShift', value: 'Next scheduled shift' },
+          { key: 'LessThanTwoWeeks', value: 'Less than 2 weeks' },
+          { key: 'TwoToFourWeeks', value: '2 to 4 weeks' },
+          { key: 'MoreThanMonth', value: 'More than a month' },
+          { key: 'Unsure', value: 'Unsure' },
+        ]"
+      />
+
+      @if (form.value.estimatedReturnToWork === 'NextShift') {
+        <div class="flex flex-col gap-y-2">
+          <label class="block text-sm font-semibold text-gray-900" for="next-scheduled-shift-date"
+            >When is your next scheduled shift?</label
+          >
+          <input
+            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+            id="next-scheduled-shift-date"
+            [ngrxFormControlState]="form.controls.nextScheduledShiftDate"
+            type="date"
+          />
+        </div>
+      }
+
+      @if (form.value.estimatedReturnToWork && form.value.estimatedReturnToWork !== 'NextShift') {
+        <binary-radio-group
+          [control]="form.controls.employerOfferedModifiedDuties"
+          [horizontal]="true"
+          label="Has yur employer offered you modified duties?"
+        />
+
+        @if (form.value.employerOfferedModifiedDuties) {
+          <multi-radio-group
+            [control]="form.controls.acceptedModifiedDuties"
+            label="Did you accept the offer?"
+            [options]="[
+              { key: 'Yes', value: 'Yes' },
+              { key: 'No', value: 'No' },
+              { key: 'Undecided', value: 'Undecided' },
+            ]"
+          />
+
+          @if (form.value.acceptedModifiedDuties === 'Yes') {
+            <div class="flex flex-col gap-y-2">
+              <label
+                class="block text-sm font-semibold text-gray-900"
+                for="modified-duties-start-date"
+                >When are you starting the modified duties?
+                <span class="font-normal">(optional)</span></label
+              >
+              <input
+                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+                id="modified-duties-start-date"
+                [ngrxFormControlState]="form.controls.modifiedDutiesStartDate"
+                type="date"
+              />
+            </div>
+
+            <checkbox
+              [control]="form.controls.modifiedDutiesStartDateIsApproximate"
+              label="This is an approximate date"
+            />
+
+            <text-area
+              [control]="form.controls.modifiedDutiesDescription"
+              label="What will your hours and duties be?"
+              [optional]="true"
+            />
+          }
+
+          @if (form.value.acceptedModifiedDuties && form.value.acceptedModifiedDuties !== 'Yes') {
+            <div class="flex flex-col gap-y-2">
+              <label
+                class="block text-sm font-semibold text-gray-900"
+                for="modified-duties-offer-date"
+                >When were the modified duties offered?
+                <span class="font-normal">(optional)</span></label
+              >
+              <input
+                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+                id="modified-duties-offer-date"
+                [ngrxFormControlState]="form.controls.modifiedDutiesOfferDate"
+                type="date"
+              />
+            </div>
+          }
+        }
+      }
+    }
+
+    @if (form.value.haveReturnedToWork === 'NoJob') {
+      <text-area
+        [control]="form.controls.noJobDescription"
+        label="Please tell us a little bit about why there is no job to return to"
+        [optional]="true"
+      />
+    }
+  }
+</div>

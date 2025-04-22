@@ -116,40 +116,41 @@ export interface EarningsForm {
   injuryTimeBaseSalaryAmount: number;
   injuryTimeBaseSalaryPeriod: string;
   additionalCompenstations: {
-    bonuses: boolean | null;
-    holidays: boolean | null;
+    bonuses: boolean;
+    holidays: boolean;
     holidayPayPercentage: number;
-    livingOutAllowance: boolean | null;
-    overtime: boolean | null;
+    livingOutAllowance: boolean;
+    overtime: boolean;
     overtimeHours: number;
     overtimePeriod: string;
     overtimeRegularDays: {
-      monday: boolean | null;
-      tuesday: boolean | null;
-      wednesday: boolean | null;
-      thursday: boolean | null;
-      friday: boolean | null;
-      saturday: boolean | null;
-      sunday: boolean | null;
+      monday: boolean;
+      tuesday: boolean;
+      wednesday: boolean;
+      thursday: boolean;
+      friday: boolean;
+      saturday: boolean;
+      sunday: boolean;
     };
-    roomAndBoard: boolean | null;
+    roomAndBoard: boolean;
     roomAndBoardAffectedByInjury: boolean | null;
-    shiftDifferentialsPremiums: boolean | null;
-    tips: boolean | null;
+    shiftDifferentialsPremiums: boolean;
+    tips: boolean;
     tipsAverageAmount: number;
     tipsPeriod: string;
-    other: boolean | null;
+    other: boolean;
     describeOther: string;
     totalEarnings12WeeksPriorToInjury: number;
+    none: boolean;
   };
 }
 
 export interface ReturnToWorkForm {
   missedTimeFromWorkAfterInjury: string;
   dateOfFirstMissedShiftAfterInjury: string | null;
-  dateOfFirstMissedShiftAfterInjuryIsApproximate: boolean | null;
+  dateOfFirstMissedShiftAfterInjuryIsApproximate: boolean;
   lastDayWorkedForEmployer: string | null;
-  lastDayWorkedForEmployerIsApproximate: boolean | null;
+  lastDayWorkedForEmployerIsApproximate: boolean;
   workedPastDateOfInjury: boolean | null;
   lastDayWorkedScheduledHours: number;
   lastDayWorkedActualHours: number;
@@ -161,11 +162,11 @@ export interface ReturnToWorkForm {
   changesToHoursOrDutiesDescription: string;
   estimatedReturnToWork: string;
   nextScheduledShiftDate: string | null;
-  employerOfferedModifiedDuties: boolean | null;
+  employerOfferedModifiedDuties: boolean;
   acceptedModifiedDuties: string;
   modifiedDutiesOfferDate: string | null;
   modifiedDutiesStartDate: string | null;
-  modifiedDutiesStartDateIsApproximate: boolean | null;
+  modifiedDutiesStartDateIsApproximate: boolean;
   modifiedDutiesDescription: string;
 }
 
@@ -273,39 +274,40 @@ export const initialFormValue: Form = {
     injuryTimeBaseSalaryAmount: 0,
     injuryTimeBaseSalaryPeriod: '',
     additionalCompenstations: {
-      bonuses: null,
-      holidays: null,
+      bonuses: false,
+      holidays: false,
       holidayPayPercentage: 0,
-      livingOutAllowance: null,
-      overtime: null,
+      livingOutAllowance: false,
+      overtime: false,
       overtimeHours: 0,
       overtimePeriod: '',
       overtimeRegularDays: {
-        monday: null,
-        tuesday: null,
-        wednesday: null,
-        thursday: null,
-        friday: null,
-        saturday: null,
-        sunday: null,
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
       },
-      roomAndBoard: null,
+      roomAndBoard: false,
       roomAndBoardAffectedByInjury: null,
-      shiftDifferentialsPremiums: null,
-      tips: null,
+      shiftDifferentialsPremiums: false,
+      tips: false,
       tipsAverageAmount: 0,
       tipsPeriod: '',
-      other: null,
+      other: false,
       describeOther: '',
       totalEarnings12WeeksPriorToInjury: 0,
+      none: false,
     },
   },
   returnToWork: {
     missedTimeFromWorkAfterInjury: '',
     dateOfFirstMissedShiftAfterInjury: null,
-    dateOfFirstMissedShiftAfterInjuryIsApproximate: null,
+    dateOfFirstMissedShiftAfterInjuryIsApproximate: false,
     lastDayWorkedForEmployer: null,
-    lastDayWorkedForEmployerIsApproximate: null,
+    lastDayWorkedForEmployerIsApproximate: false,
     workedPastDateOfInjury: null,
     lastDayWorkedScheduledHours: 0,
     lastDayWorkedActualHours: 0,
@@ -317,11 +319,11 @@ export const initialFormValue: Form = {
     changesToHoursOrDutiesDescription: '',
     estimatedReturnToWork: '',
     nextScheduledShiftDate: null,
-    employerOfferedModifiedDuties: null,
+    employerOfferedModifiedDuties: false,
     acceptedModifiedDuties: '',
     modifiedDutiesOfferDate: null,
     modifiedDutiesStartDate: null,
-    modifiedDutiesStartDateIsApproximate: null,
+    modifiedDutiesStartDateIsApproximate: false,
     modifiedDutiesDescription: '',
   },
   additionalInformation: '',
