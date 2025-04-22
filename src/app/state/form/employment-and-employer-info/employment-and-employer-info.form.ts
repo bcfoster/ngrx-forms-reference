@@ -157,7 +157,7 @@ export interface ReturnToWorkForm {
   haveReturnedToWork: string;
   noJobDescription: string;
   dateReturnedToWork: string | null;
-  dateReturnedToWorkIsApproximate: boolean | null;
+  dateReturnedToWorkIsApproximate: boolean;
   changesToHoursOrDuties: boolean | null;
   changesToHoursOrDutiesDescription: string;
   estimatedReturnToWork: string;
@@ -314,7 +314,7 @@ export const initialFormValue: Form = {
     haveReturnedToWork: '',
     noJobDescription: '',
     dateReturnedToWork: null,
-    dateReturnedToWorkIsApproximate: null,
+    dateReturnedToWorkIsApproximate: false,
     changesToHoursOrDuties: null,
     changesToHoursOrDutiesDescription: '',
     estimatedReturnToWork: '',

@@ -57,7 +57,7 @@
 
     @if (form.value.workedPastDateOfInjury) {
       <label class="block text-sm font-semibold text-gray-900" for="last-day-worked-scheduled-hours"
-        >How many hours were you scheduledd to work on the last day you worked?</label
+        >How many hours were you scheduled to work on the last day you worked?</label
       >
       <input
         class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
@@ -87,7 +87,38 @@
       ]"
     />
 
-    @if (form.value.haveReturnedToWork === 'Yes') {}
+    @if (form.value.haveReturnedToWork === 'Yes') {
+      <div class="flex flex-col gap-y-2">
+        <label class="block text-sm font-semibold text-gray-900" for="date-returned-to-work"
+          >When did you return to work?</label
+        >
+        <input
+          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-gray-400 focus:ring-gray-400"
+          id="date-returned-to-work"
+          [ngrxFormControlState]="form.controls.dateReturnedToWork"
+          type="date"
+        />
+      </div>
+
+      <checkbox
+        [control]="form.controls.dateReturnedToWorkIsApproximate"
+        label="This is an approximate date"
+      />
+
+      <binary-radio-group
+        [control]="form.controls.changesToHoursOrDuties"
+        [horizontal]="true"
+        label="Has there been any change to your hours or duties since you returned to work?"
+      />
+
+      @if (form.value.changesToHoursOrDuties) {
+        <text-area
+          [control]="form.controls.changesToHoursOrDutiesDescription"
+          label="Please describe how your hours and/or duties have changed since your injury"
+          [optional]="true"
+        />
+      }
+    }
 
     @if (form.value.haveReturnedToWork === 'No') {
       <multi-radio-group
