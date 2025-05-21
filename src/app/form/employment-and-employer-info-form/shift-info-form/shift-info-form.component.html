@@ -136,8 +136,6 @@
         </div>
       }
 
-      <!-- array of additional days -->
-
       <div>
         <a href="javascript: void(0)" class="text-sm text-blue-500" (click)="add()"
           >Add another shift pattern</a
@@ -154,7 +152,19 @@
     />
 
     @if (form.value.haveDaysNeverWorked) {
-      <!-- TODO: checkboxes for each day of the week -->
+      @let days = form.controls.daysNeverWorked.controls;
+
+      <label class="block text-sm font-semibold text-gray-900" for="days-never-worked"
+        >Which day(s) of the week do you never work?
+        <span class="font-normal">(check all that apply)</span></label
+      >
+      <checkbox [control]="days.monday" label="Monday" />
+      <checkbox [control]="days.tuesday" label="Tuesday" />
+      <checkbox [control]="days.wednesday" label="Wednesday" />
+      <checkbox [control]="days.thursday" label="Thursday" />
+      <checkbox [control]="days.friday" label="Friday" />
+      <checkbox [control]="days.saturday" label="Saturday" />
+      <checkbox [control]="days.sunday" label="Sunday" />
     }
 
     <text-input

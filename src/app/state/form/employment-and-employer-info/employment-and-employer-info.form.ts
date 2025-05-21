@@ -1,5 +1,13 @@
-import { disable, enable, FormGroupState, setValue, updateGroup } from 'ngrx-forms';
-import { maxLength, minLength, required } from 'ngrx-forms/validation';
+import { disable, enable, FormGroupState, setValue, updateArray, updateGroup } from 'ngrx-forms';
+import {
+  greaterThan,
+  greaterThanOrEqualTo,
+  lessThanOrEqualTo,
+  maxLength,
+  minLength,
+  number,
+  required,
+} from 'ngrx-forms/validation';
 
 import * as formReducer from '../form.reducer';
 import { accountNumber } from '../../ngrx-forms/account-number';
@@ -97,13 +105,13 @@ export interface ShiftInformationForm {
   shiftPattern: ShiftPatternForm;
   haveDaysNeverWorked: boolean | null;
   daysNeverWorked: {
-    monday: boolean | null;
-    tuesday: boolean | null;
-    wednesday: boolean | null;
-    thursday: boolean | null;
-    friday: boolean | null;
-    saturday: boolean | null;
-    sunday: boolean | null;
+    monday: boolean;
+    tuesday: boolean;
+    wednesday: boolean;
+    thursday: boolean;
+    friday: boolean;
+    saturday: boolean;
+    sunday: boolean;
   };
   averageWeeklyWorkHours: string;
   additionalInformation: string;
@@ -256,13 +264,13 @@ export const initialFormValue: Form = {
     },
     haveDaysNeverWorked: null,
     daysNeverWorked: {
-      monday: null,
-      tuesday: null,
-      wednesday: null,
-      thursday: null,
-      friday: null,
-      saturday: null,
-      sunday: null,
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+      saturday: false,
+      sunday: false,
     },
     averageWeeklyWorkHours: '',
     additionalInformation: '',
@@ -361,6 +369,47 @@ export const validator = (form: FormGroupState<formReducer.Form>) =>
           }),
           shiftInformation: updateGroup<ShiftInformationForm>({
             workPattern: validate(required),
+            weekPaidHours: (c, f) =>
+              f.value.workPattern === 'SameShifts'
+                ? updateArray(
+                    c,
+                    updateGroup<WorkDay>({
+                      hours: validate(
+                        required,
+                        number,
+                        greaterThanOrEqualTo(0),
+                        lessThanOrEqualTo(24),
+                      ),
+                      minutes: validate(
+                        required,
+                        number,
+                        greaterThanOrEqualTo(0),
+                        lessThanOrEqualTo(59),
+                      ),
+                    }),
+                  )
+                : c,
+            daysOnOffRotation: (c, f) =>
+              f.value.workPattern === 'RotatingShifts' ? validate(c, required) : c,
+            shiftPattern: (c, f) =>
+              f.value.daysOnOffRotation === 'LessThanSix'
+                ? updateGroup(c, {
+                    firstDay: validate(required), // TODO: validate date
+                    pattern: updateArray(
+                      updateGroup({
+                        daysOn: validate(required, number, greaterThan(0)),
+                        daysOff: validate(required, number, greaterThan(0)),
+                      }),
+                    ),
+                  })
+                : c,
+            haveDaysNeverWorked: (c, f) =>
+              f.value.workPattern === 'NoPattern' ? validate(c, required) : c,
+            // TODO: ensure at least one box is checked
+            daysNeverWorked: (c, f) => (f.value.haveDaysNeverWorked ? c : c),
+            averageWeeklyWorkHours: (c, f) =>
+              f.value.workPattern === 'NoPattern' ? validate(c, required) : c,
+            additionalInformation: optional(),
           }),
           earnings: updateGroup<EarningsForm>({
             maintainedFullSalary: validate(required),

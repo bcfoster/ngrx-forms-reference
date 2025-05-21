@@ -5,7 +5,6 @@ import * as empInfo from '../../../state/form/employment-and-employer-info/emplo
 import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-group/multi-radio-group.component';
 import { CheckboxComponent } from '../../../form-controls/checkbox/checkbox.component';
 import { BinaryRadioGroupComponent } from '../../../form-controls/binary-radio-group/binary-radio-group.component';
-import { TextInputComponent } from '../../../form-controls/text-input/text-input.component';
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
 
 @Component({
@@ -15,7 +14,6 @@ import { TextAreaComponent } from '../../../form-controls/text-area/text-area.co
     NgrxFormsModule,
     CheckboxComponent,
     BinaryRadioGroupComponent,
-    TextInputComponent,
     TextAreaComponent,
   ],
   templateUrl: './return-to-work-form.component.html',

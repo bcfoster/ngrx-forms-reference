@@ -13,6 +13,7 @@ import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-gro
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
 import { TextInputComponent } from '../../../form-controls/text-input/text-input.component';
 import * as empInfo from '../../../state/form/employment-and-employer-info/employment-and-employer-info.form';
+import { CheckboxComponent } from '../../../form-controls/checkbox/checkbox.component';
 
 @Component({
   selector: 'shift-info-form',
@@ -23,6 +24,7 @@ import * as empInfo from '../../../state/form/employment-and-employer-info/emplo
     NgrxFormsModule,
     TextAreaComponent,
     TextInputComponent,
+    CheckboxComponent,
   ],
   templateUrl: './shift-info-form.component.html',
   styles: ``,
