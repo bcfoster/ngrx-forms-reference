@@ -17,16 +17,5 @@
       [ngrxFormControlState]="control"
       type="text"
     />
-    @if (control.isTouched && control.isInvalid) {
-      @if (control.errors.required) {
-        <p class="text-sm text-red-500">{{ label }} is required</p>
-      }
-      @if (control.errors.minLength) {
-        <p class="text-sm text-red-500">
-          {{ label }} must have a minimum length of
-          {{ control.errors.minLength.minLength }}
-        </p>
-      }
-    }
   </div>
 }

@@ -9,6 +9,7 @@ import { SelectOptionComponent } from '../../../form-controls/select-option/sele
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
 import { TextInputComponent } from '../../../form-controls/text-input/text-input.component';
 import * as personalInfo from '../../../state/form//personal-and-contact-info/personal-info.form';
+import { ValidationMessageComponent } from '../../../form-controls/validation-message/validation-message.component';
 
 @Component({
   selector: 'personal-info-form',
@@ -21,6 +22,7 @@ import * as personalInfo from '../../../state/form//personal-and-contact-info/pe
     MultiRadioGroupComponent,
     SelectOptionComponent,
     TextAreaComponent,
+    ValidationMessageComponent,
   ],
   templateUrl: './personal-info-form.component.html',
   styles: ``,

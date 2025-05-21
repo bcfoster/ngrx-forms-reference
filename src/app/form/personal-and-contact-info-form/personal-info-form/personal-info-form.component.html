@@ -1,16 +1,14 @@
 <h2 class="mb-4 text-xl leading-none font-semibold text-yellow-500">Your personal information</h2>
 
 <div class="flex flex-col gap-y-3">
-  <binary-radio-group
-    [control]="form.controls.haveClaimNumber"
-    [horizontal]="true"
-    label="Have claim number?"
-  >
-    <!-- TODO: pass custom template to child for stuff like the label -->
-  </binary-radio-group>
+  @let haveClaimNumber = form.controls.haveClaimNumber;
+  <binary-radio-group [control]="haveClaimNumber" [horizontal]="true" label="Have claim number?" />
+  <validation-message [for]="haveClaimNumber" />
 
   @if (form.value.haveClaimNumber === true) {
-    <text-input [control]="form.controls.claimNumber" label="Claim number" />
+    @let claimNumber = form.controls.claimNumber;
+    <text-input [control]="claimNumber" label="Claim number" />
+    <validation-message [for]="claimNumber" fieldName="Claim number" />
   }
 
   <text-input [control]="form.controls.legalFirstName" label="Legal first name" />
