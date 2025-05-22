@@ -15,8 +15,8 @@ import { draftActions } from '../drafts/drafts.actions';
 import { formActions } from './form.actions';
 
 import { evaluateCompletion } from './form.progress';
-import * as employmentAndEmployer from './employment-and-employer-info/employment-and-employer-info.form';
 import { injuryAndIncidentActions } from './injury-and-incident.actions';
+import * as employmentAndEmployer from './employment-and-employer-info/employment-and-employer-info.form';
 import * as incidentOverview from './injury-and-incident/incident-overview.form';
 import * as injuryAndIncident from './injury-and-incident/injury-and-incident.form';
 import * as injuryDetails from './injury-and-incident/injury-details.form';

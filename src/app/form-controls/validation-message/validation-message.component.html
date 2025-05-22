@@ -1,13 +1,11 @@
-@let control = for;
-
 @if (control) {
   @if (control.errors.required) {
     <p class="text-sm text-red-500">{{ fieldName }} is required</p>
   }
+
   @if (control.errors.minLength) {
     <p class="text-sm text-red-500">
-      {{ fieldName }} must have a minimum length of
-      {{ control.errors.minLength.minLength }}
+      {{ fieldName }} must have a minimum length of {{ control.errors.minLength.minLength }}
     </p>
   }
 }

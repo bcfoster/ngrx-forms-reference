@@ -8,6 +8,6 @@ import { FormControlState, FormControlValueTypes, NgrxFormsModule } from 'ngrx-f
   styles: '',
 })
 export class ValidationMessageComponent {
-  @Input({ required: true }) for: FormControlState<FormControlValueTypes> | null = null;
+  @Input({ required: true }) control: FormControlState<FormControlValueTypes> | null = null;
   @Input() fieldName = 'Field';
 }
