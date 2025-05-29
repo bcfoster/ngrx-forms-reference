@@ -3,12 +3,12 @@
 <div class="flex flex-col gap-y-3">
   @let haveClaimNumber = form.controls.haveClaimNumber;
   <binary-radio-group [control]="haveClaimNumber" [horizontal]="true" label="Have claim number?" />
-  <validation-message [control]="haveClaimNumber" />
+  <validation-errors [control]="haveClaimNumber" />
 
   @if (form.value.haveClaimNumber === true) {
     @let claimNumber = form.controls.claimNumber;
     <text-input [control]="claimNumber" label="Claim number" />
-    <validation-message [control]="claimNumber" fieldName="Claim number" />
+    <validation-errors [control]="claimNumber" fieldName="Claim number" />
   }
 
   <text-input [control]="form.controls.legalFirstName" label="Legal first name" />

@@ -8,21 +8,21 @@ import { MultiRadioGroupComponent } from '../../../form-controls/multi-radio-gro
 import { SelectOptionComponent } from '../../../form-controls/select-option/select-option.component';
 import { TextAreaComponent } from '../../../form-controls/text-area/text-area.component';
 import { TextInputComponent } from '../../../form-controls/text-input/text-input.component';
+import { ValidationErrorsComponent } from '../../../form-controls/validation-errors/validation-errors.component';
 import * as personalInfo from '../../../state/form//personal-and-contact-info/personal-info.form';
-import { ValidationMessageComponent } from '../../../form-controls/validation-message/validation-message.component';
 
 @Component({
   selector: 'personal-info-form',
   imports: [
+    BinaryRadioGroupComponent,
     CommonModule,
     FormsModule,
-    NgrxFormsModule,
-    TextInputComponent,
-    BinaryRadioGroupComponent,
     MultiRadioGroupComponent,
+    NgrxFormsModule,
     SelectOptionComponent,
+    TextInputComponent,
     TextAreaComponent,
-    ValidationMessageComponent,
+    ValidationErrorsComponent,
   ],
   templateUrl: './personal-info-form.component.html',
   styles: ``,

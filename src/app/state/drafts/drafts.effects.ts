@@ -3,9 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { filter, map, tap, withLatestFrom } from 'rxjs';
 
-import { draftActions } from '../drafts/drafts.actions';
-import { formActions } from '../form/form.actions';
+import { draftActions } from './drafts.actions';
 import * as draftSelectors from './drafts.selectors';
+import { formActions } from '../form/form.actions';
 import * as formSelectors from '../form/form.selectors';
 
 @Injectable()
